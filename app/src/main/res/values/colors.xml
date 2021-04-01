@@ -8,4 +8,6 @@
     <color name="basicPurpleColorBackground">#332C62</color>
     <color name="basicWhite">#FFFFFF</color>
     <color name="basicGrey">#B3B3B3</color>
+    <color name="bottom_navigation_item_background_colors">#666666</color>
+    <color name="colorNavDark">#B3B3B3</color>
 </resources>

@@ -3,14 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id"
+    app:startDestination="@id/mainActivity"
     android:id="@+id/nav_controller">
 
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.healtsorsomethingelse.ui.mainScreen.MainActivity"
         android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+        tools:layout="@layout/activity_main" >
+        <action
+            android:id="@+id/action_mainActivity_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_mainActivity_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_mainActivity_to_databaseFragment"
+            app:destination="@id/databaseFragment" />
+    </activity>
     <fragment
         android:id="@+id/databaseFragment"
         android:name="com.example.healtsorsomethingelse.ui.mainScreen.fragments.DatabaseFragment"
@@ -44,10 +54,21 @@
         android:id="@+id/searchScreen"
         android:name="com.example.healtsorsomethingelse.ui.SearchScreen"
         android:label="activity_search_screen"
-        tools:layout="@layout/activity_search_screen" />
+        tools:layout="@layout/activity_search_screen" >
+        <action
+            android:id="@+id/action_searchScreen_to_searchableContent"
+            app:destination="@id/searchableContent" />
+    </activity>
     <activity
         android:id="@+id/searchableContent"
         android:name="com.example.healtsorsomethingelse.ui.SearchableContent"
         android:label="activity_searchable_content"
-        tools:layout="@layout/activity_searchable_content" />
+        tools:layout="@layout/activity_searchable_content" >
+        <action
+            android:id="@+id/action_searchableContent_to_mealViewing"
+            app:destination="@id/mealViewing" />
+        <action
+            android:id="@+id/action_searchableContent_to_fitViewing"
+            app:destination="@id/fitViewing" />
+    </activity>
 </navigation>
