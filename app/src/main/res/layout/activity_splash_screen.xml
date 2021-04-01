@@ -5,7 +5,7 @@
     android:background="@color/basicPurpleColorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SplashScreen"
+    tools:context=".ui.signInScreen.SplashScreen"
     android:orientation="vertical">
 
     <ImageView
@@ -17,6 +17,7 @@
         app:srcCompat="@drawable/ic_healthy" />
 
     <com.google.android.gms.common.SignInButton
+        android:alpha="0"
         android:id="@+id/splash_screen_sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

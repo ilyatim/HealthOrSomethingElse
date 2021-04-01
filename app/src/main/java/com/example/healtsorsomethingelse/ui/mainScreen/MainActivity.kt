@@ -1,4 +1,4 @@
-package com.example.healtsorsomethingelse.ui
+package com.example.healtsorsomethingelse.ui.mainScreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
