@@ -9,12 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SearchableContent"></activity>
-        <activity android:name=".ui.FitViewing" />
-        <activity android:name=".ui.MealViewing" />
-        <activity android:name=".ui.SearchScreen" />
         <activity
-            android:name=".ui.signInScreen.SplashScreen"
+            android:name="com.example.healtsorsomethingelse.ui.splashScreen.SplashScreen"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.mainScreen.MainActivity" />
+        <activity android:name="com.example.healtsorsomethingelse.ui.mainActvity.MainActivity" />
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
     android:background="@color/basicPurpleColorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.signInScreen.SplashScreen"
+    tools:context=".ui.splashScreen.SplashScreen"
     android:orientation="vertical">
 
     <ImageView

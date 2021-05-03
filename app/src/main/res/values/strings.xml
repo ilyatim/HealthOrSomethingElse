@@ -2,5 +2,7 @@
     <string name="app_name">HealtsOrSomethingElse</string>
     <string name="main_icon_of_app">main icon of app</string>
 
-    <string name="home_icon">Домашняя</string>
+    <string name="home_string">Домашняя</string>
+    <string name="profile_string">Профиль</string>
+    <string name="database_string">База знаний</string>
 </resources>
