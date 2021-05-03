@@ -43,6 +43,9 @@ class HomeFragmentViewModel @Inject constructor(private val repo: HomeRepository
     }
 
     private fun initContent() {
-        Log.d("Sometag", "init")
+        _state.value = UiState.Loading
+        launch {
+            _state.value = UiState.Content(4, repo.getAllStatistic())
+        }
     }
 }

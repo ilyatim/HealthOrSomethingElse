@@ -5,9 +5,13 @@
     <color name="colorAccent">#03DAC5</color>
 
     <!--Basic colors-->
+    <color name="blueCardColor">#3625AA</color>
     <color name="basicPurpleColorBackground">#332C62</color>
     <color name="basicWhite">#FFFFFF</color>
     <color name="basicGrey">#B3B3B3</color>
+    <color name="colorGrey_F6F6F6">#F6F6F6</color>
     <color name="bottom_navigation_item_background_colors">#666666</color>
     <color name="colorNavDark">#B3B3B3</color>
+    <color name="colorLightGreen">#94DAA7</color>
+    <color name="colorGrayText_484848">#484848</color>
 </resources>

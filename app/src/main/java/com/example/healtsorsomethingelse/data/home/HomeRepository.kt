@@ -38,4 +38,10 @@ interface HomeRepository {
      * @return [Statistics.SleepStatistics]
      */
     fun getSleepStatistics(): Statistics.SleepStatistics
+
+    /**
+     * Return all statistics for home fragment
+     * @return [List]
+     */
+    suspend fun getAllStatistic(): List<Statistics>
 }

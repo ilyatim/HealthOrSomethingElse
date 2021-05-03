@@ -11,6 +11,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/*
 @EntryPoint
 @InstallIn(SingletonComponent::class)
 interface GoogleSingInEntryPoint {
@@ -22,7 +23,5 @@ interface GoogleSingInEntryPoint {
 abstract class GoogleSingInModule {
     @Binds
     @Singleton
-    fun bindGoogleSingIn(@ApplicationContext context: Context): GoogleSignInAccount? {
-        return GoogleSignIn.getLastSignedInAccount(context)
-    }
-}
+    abstract fun bindGoogleSingIn(@ApplicationContext context: Context): GoogleSignInAccount?
+}*/

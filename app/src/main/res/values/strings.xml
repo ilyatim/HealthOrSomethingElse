@@ -5,4 +5,5 @@
     <string name="home_string">Домашняя</string>
     <string name="profile_string">Профиль</string>
     <string name="database_string">База знаний</string>
+    <string name="helpful_advice_string_res">Полезные советы</string>
 </resources>

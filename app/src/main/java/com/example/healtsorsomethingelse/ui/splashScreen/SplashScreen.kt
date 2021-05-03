@@ -12,7 +12,7 @@ import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.databinding.ActivitySplashScreenBinding
-import com.example.healtsorsomethingelse.ui.mainActvity.MainActivity
+import com.example.healtsorsomethingelse.ui.mainActivity.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -24,7 +24,7 @@ class SplashScreen : AppCompatActivity() {
     private var account: GoogleSignInAccount? = null
 
     private val googleSingInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        Log.d("Sometag", "launcher")
+        Log.d("Sometag", "launcher - ${it.resultCode}")
         if (it.resultCode == Activity.RESULT_OK) {
             startMainActivity(this)
         }
