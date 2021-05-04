@@ -6,15 +6,6 @@ import com.example.healtsorsomethingelse.data.home.Statistics
  * Interface for HomeFragment that provide data
  */
 interface HomeRepository {
-    /*
-    fun getWeekSteps(): Int
-    fun getDaySteps(): Int
-    fun getDayCalories(): Int
-    fun getDayDistance(): Double
-    fun getWeekDistance(): Double
-    fun getDayWorkoutCount(): Int
-    fun getWeekWorkoutCount(): Int
-    */
     /**
      * Return statistics over the day
      * @return [Statistics.DayStatistics]

@@ -1,34 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
+    app:cardElevation="@dimen/card_elevation"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="20dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:background="@color/blueCardColor"
-        android:orientation="vertical"
+    <RelativeLayout
+        android:paddingBottom="20dp"
+        android:paddingEnd="15dp"
+        android:background="@drawable/sleep_card_linear"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="How about u?"
-            android:textColor="@color/basicWhite"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/left_card_margin"
+            android:src="@drawable/sleep_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <RatingBar
-            android:id="@+id/feeling_rating_bar"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:stepSize="1"
-            android:numStars="4"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:text="Хороший сон - залог здоровья" />
+
+        <GridLayout
+            android:rowCount="2"
+            android:columnCount="3"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/colorGrayText_484848"
+                android:text="@string/sleep_time_string_res" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/colorGrayText_484848"
+                android:text="@string/average_sleep_time_string_res" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/colorGrayText_484848"
+                android:textAlignment="center"
+                android:text="@string/recommended_sleep_time_string_res" />
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/sleep_time_text_view"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/white"
+                android:text="Время сна" />
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/average_sleep_time_text_view"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/white"
+                android:text="Время сна" />
+            <TextView
+                android:id="@+id/recommended_sleep_time_text_view"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/white"
+                android:text="Время сна" />
+        </GridLayout>
+    </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

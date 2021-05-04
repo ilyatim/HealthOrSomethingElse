@@ -2,14 +2,18 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="@dimen/card_elevation"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:paddingTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:background="@color/colorGrey_F6F6F6"
-        android:padding="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="120dp">
 
         <ImageView
@@ -20,13 +24,13 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="36dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="36dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/imageView"
-            android:background="@color/colorLightGreen"
+            android:background="@drawable/light_green_text_view_background"
             android:textSize="12sp"
             android:text="+10%" />
 
@@ -39,7 +43,7 @@
             android:layout_marginTop="10dp"
             android:textSize="12sp"
             android:textColor="@color/basicGrey"
-            android:text="Калории" />
+            android:text="@string/calories_string_res" />
 
         <TextView
             android:id="@+id/textView3"
@@ -50,6 +54,6 @@
             android:layout_marginTop="10dp"
             android:textSize="24sp"
             android:textColor="@android:color/black"
-            android:text="1000" />
+            tools:text="1000" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

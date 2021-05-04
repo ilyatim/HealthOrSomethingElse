@@ -9,9 +9,14 @@
     <color name="basicPurpleColorBackground">#332C62</color>
     <color name="basicWhite">#FFFFFF</color>
     <color name="basicGrey">#B3B3B3</color>
+    <color name="basicActivityGrey">#FAFAFA</color>
+    <color name="grey_A6A6A6">#A6A6A6</color>
     <color name="colorGrey_F6F6F6">#F6F6F6</color>
+    <color name="colorGrey_666666">#666666</color>
     <color name="bottom_navigation_item_background_colors">#666666</color>
     <color name="colorNavDark">#B3B3B3</color>
     <color name="colorLightGreen">#94DAA7</color>
     <color name="colorGrayText_484848">#484848</color>
+    <color name="lightRed">#D496A8</color>
+    <color name="ratingBarColorAccent">#FFC107</color>
 </resources>

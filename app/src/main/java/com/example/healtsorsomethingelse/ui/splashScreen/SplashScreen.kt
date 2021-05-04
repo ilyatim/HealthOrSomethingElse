@@ -12,7 +12,7 @@ import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.databinding.ActivitySplashScreenBinding
-import com.example.healtsorsomethingelse.ui.mainActivity.MainActivity
+import com.example.healtsorsomethingelse.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

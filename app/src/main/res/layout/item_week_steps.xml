@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<com.google.android.material.card.MaterialCardView
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/colorGrey_F6F6F6"
+        android:paddingStart="@dimen/left_card_margin"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="@dimen/left_card_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/steps_string_res"
+            android:drawablePadding="20dp"
+            android:gravity="center"
+            android:id="@+id/imageView"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableStartCompat="@drawable/steps" />
+        <GridLayout
+            android:columnCount="2"
+            android:rowCount="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/basicGrey"
+                android:text="@string/in_average_string_res"/>
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:text="7000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:textColor="@color/basicGrey"
+                android:text="@string/all_string_res"/>
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:text="28900"/>
+        </GridLayout>
+
+        <GridLayout
+            android:layout_marginTop="10dp"
+            android:rowCount="1"
+            android:columnCount="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:text="@string/on_string_res" />
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:background="@drawable/light_red_text_view_background"
+                android:text="12% меньше"/>
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:text="@string/last_week_string_res"/>
+        </GridLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

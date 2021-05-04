@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mainActivity.fragments.ProfileFragment">
+    tools:context=".ui.main.fragments.ProfileFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile" />
-
-</FrameLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/header_layout_profile"
+            android:id="@+id/header_layout"/>
+        <TextView
+            android:text="@string/changeable_info_string_res"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <include
+            android:id="user_target_layout"
+            layout="@layout/user_target_layout_profile"/>
+        <include
+            android:id="@+id/distance_layout"
+            layout="@layout/distance_layout_profile"/>
+        <include
+            android:id="@+id/current_parameter"
+            layout="@layout/current_parameter_layout_profile"/>
+        <include
+            android:id="@+id/purposes_layout"
+            layout="@layout/user_purposes_layout_profile"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

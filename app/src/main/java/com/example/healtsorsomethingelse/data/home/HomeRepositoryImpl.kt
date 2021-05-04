@@ -4,14 +4,14 @@ import android.content.Context
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
-    /*@ActivityContext private val context: Context*/
+    @ApplicationContext private val context: Context,
+    val googleSignInAccount: GoogleSignInAccount?
 ) : HomeRepository {
-
-   /* @Inject lateinit */var googleSignInAccount: GoogleSignInAccount? = null/*GoogleSignIn.getLastSignedInAccount(context)*/
 
     override suspend fun getDayStatistics(): Statistics.DayStatistics {
         return Statistics.DayStatistics(listOf(
@@ -36,12 +36,6 @@ class HomeRepositoryImpl @Inject constructor(
             getDayStatistics(),
             getWeekStatistics(),
             getSleepStatistics(),
-            getSleepStatistics(),
-            getSleepStatistics(),
-            getSleepStatistics(),
-            Statistics.Advice(getHelpfulAdvice()),
-            Statistics.Advice(getHelpfulAdvice()),
-            Statistics.Advice(getHelpfulAdvice()),
             Statistics.Advice(getHelpfulAdvice()),
         )
     }

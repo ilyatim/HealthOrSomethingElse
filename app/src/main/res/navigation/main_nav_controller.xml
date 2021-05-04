@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.healtsorsomethingelse.ui.mainActivity.fragments.ProfileFragment"
+        android:name="com.example.healtsorsomethingelse.ui.main.fragments.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
     <fragment
         android:id="@+id/navigation_database"
-        android:name="com.example.healtsorsomethingelse.ui.mainActivity.fragments.DatabaseFragment"
+        android:name="com.example.healtsorsomethingelse.ui.main.fragments.DatabaseFragment"
         android:label="database_fragment"
         tools:layout="@layout/database_fragment" />
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.healtsorsomethingelse.ui.mainActivity.fragments.HomeFragment"
+        android:name="com.example.healtsorsomethingelse.ui.main.fragments.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" />
 </navigation>

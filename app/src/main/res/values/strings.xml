@@ -6,4 +6,41 @@
     <string name="profile_string">Профиль</string>
     <string name="database_string">База знаний</string>
     <string name="helpful_advice_string_res">Полезные советы</string>
+    <string name="feeling_string_res">Как вы себя сегодня чувствуете?</string>
+    <string name="calories_string_res">Калории</string>
+    <string name="distance_string_res">Дистанция</string>
+    <string name="day_statistics_string_res">Статистика за день</string>
+    <string name="workout_string_res">Тренировки</string>
+    <string name="sleep_time_string_res">Время сна</string>
+    <string name="average_sleep_time_string_res">Среднее время сна</string>
+    <string name="recommended_sleep_time_string_res">
+        Рекомендуемое \n
+        время для сна
+    </string>
+    <string name="in_average_string_res">В среднем</string>
+    <string name="all_string_res">Всего</string>
+    <string name="on_string_res">На </string>
+    <string name="last_week_string_res">чем на прошлой неделе</string>
+    <string name="week_statistics_string_res">Статистика за неделю</string>
+    <string name="steps_string_res">Шаги</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="title_activity_notification">Уведомления</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="no_notification">Упс, похоже здесь пусто</string>
+    <string name="exercises">Упражнения</string>
+    <string name="changeable_info_string_res">Настраиваемая информация</string>
 </resources>

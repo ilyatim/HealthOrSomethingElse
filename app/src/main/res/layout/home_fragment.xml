@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.mainActivity.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progress_bar"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,7 +22,7 @@
             android:layout_height="match_parent">
             <include
                 android:id="@+id/header_layout"
-                layout="@layout/header_layout"/>
+                layout="@layout/header_layout_home"/>
             <include
                 android:id="@+id/feeling_layout"
                 layout="@layout/feeling_layout"/>
@@ -28,4 +33,4 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+</RelativeLayout>

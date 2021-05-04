@@ -11,7 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.healtsorsomethingelse.ui.splashScreen.SplashScreen"
+            android:label="@string/exercises"
+            android:name=".ui.workout.WorkoutActivity"/>
+        <activity
+            android:name=".ui.notification.NotificationActivity"
+            android:label="@string/title_activity_notification"
+            android:theme="@style/NotificationActivityTheme" />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/SettingActivityTheme" />
+        <activity
+            android:name=".ui.splashScreen.SplashScreen"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.healtsorsomethingelse.ui.mainActivity.MainActivity" />
+        <activity android:name=".ui.main.MainActivity" />
     </application>
 
 </manifest>

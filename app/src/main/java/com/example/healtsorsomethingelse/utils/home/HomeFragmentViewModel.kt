@@ -2,7 +2,7 @@ package com.example.healtsorsomethingelse.utils.home
 
 import android.util.Log
 import com.example.healtsorsomethingelse.data.home.HomeRepository
-import com.example.healtsorsomethingelse.data.home.Intent
+import com.example.healtsorsomethingelse.data.home.HomeIntent
 import com.example.healtsorsomethingelse.data.home.UiState
 import com.example.healtsorsomethingelse.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,13 +20,13 @@ class HomeFragmentViewModel @Inject constructor(private val repo: HomeRepository
     val state: StateFlow<UiState>
         get() = _state
 
-    private val intent: Channel<Intent> = Channel(Channel.UNLIMITED)
+    private val intent: Channel<HomeIntent> = Channel(Channel.UNLIMITED)
 
     init {
         handleIntent()
     }
 
-    fun sendIntent(intent: Intent) {
+    fun sendIntent(intent: HomeIntent) {
         launch {
             this@HomeFragmentViewModel.intent.send(intent)
         }
@@ -36,7 +36,7 @@ class HomeFragmentViewModel @Inject constructor(private val repo: HomeRepository
         launch {
             intent.consumeAsFlow().collect {
                 when (it) {
-                    Intent.InitLoading -> initContent()
+                    HomeIntent.InitLoading -> initContent()
                 }
             }
         }

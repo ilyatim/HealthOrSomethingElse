@@ -7,6 +7,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="cardViewStyle">@style/CardView</item>
+        <item name="android:statusBarColor">@color/basicActivityGrey</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="SettingActivityTheme" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/colorLightGreen</item>
+    </style>
+
+    <style name="NotificationActivityTheme" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/colorLightGreen</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -20,6 +32,10 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="RatingBar" parent="@style/Base.Widget.AppCompat.RatingBar">
+        <item name="android:progressTint">@color/ratingBarColorAccent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="Theme.AppCompat.Light.NoActionBar"/>
