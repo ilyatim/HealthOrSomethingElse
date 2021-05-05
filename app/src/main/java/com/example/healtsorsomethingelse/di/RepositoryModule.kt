@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.core.app.ActivityCompat
 import com.example.healtsorsomethingelse.data.home.HomeRepository
 import com.example.healtsorsomethingelse.data.home.HomeRepositoryImpl
+import com.example.healtsorsomethingelse.data.profile.ProfileRepository
+import com.example.healtsorsomethingelse.data.profile.ProfileRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,4 +22,9 @@ abstract class RepositoryModule {
     @Binds
     @ViewModelScoped
     abstract fun bindRepository(impl: HomeRepositoryImpl): HomeRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindRepository(impl: ProfileRepositoryImpl): ProfileRepository
 }
+

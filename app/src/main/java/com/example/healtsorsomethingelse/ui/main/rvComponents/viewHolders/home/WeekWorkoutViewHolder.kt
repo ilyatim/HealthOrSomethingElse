@@ -1,15 +1,15 @@
-package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders
+package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.home.WeekStatisticsItem
-import com.example.healtsorsomethingelse.databinding.ItemWeekDistanceBinding
+import com.example.healtsorsomethingelse.databinding.ItemWeekWorkoutBinding
 
-class WeekDistanceViewHolder(
+class WeekWorkoutViewHolder(
     layoutInflater: LayoutInflater,
     parent: ViewGroup,
-    private val binding: ItemWeekDistanceBinding =
-        ItemWeekDistanceBinding.inflate(
+    private val binding: ItemWeekWorkoutBinding =
+        ItemWeekWorkoutBinding.inflate(
             layoutInflater,
             parent,
             false

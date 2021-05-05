@@ -1,15 +1,15 @@
-package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders
+package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.home.DayStatisticsItem
-import com.example.healtsorsomethingelse.databinding.ItemDayCaloriesBinding
+import com.example.healtsorsomethingelse.databinding.ItemDayWorkoutBinding
 
-class DayCaloriesViewHolder(
+class DayWorkoutViewHolder(
     layoutInflater: LayoutInflater,
     parent: ViewGroup,
-    private val binding: ItemDayCaloriesBinding =
-        ItemDayCaloriesBinding.inflate(
+    private val binding: ItemDayWorkoutBinding =
+        ItemDayWorkoutBinding.inflate(
             layoutInflater,
             parent,
             false

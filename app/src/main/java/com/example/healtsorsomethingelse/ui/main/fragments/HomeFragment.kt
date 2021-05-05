@@ -12,7 +12,7 @@ import com.example.healtsorsomethingelse.data.home.UiState
 import com.example.healtsorsomethingelse.databinding.HomeFragmentBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
-import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.Adapter
+import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.home.Adapter
 import com.example.healtsorsomethingelse.ui.notification.NotificationActivity
 import com.example.healtsorsomethingelse.ui.settings.SettingsActivity
 import com.example.healtsorsomethingelse.ui.workout.WorkoutActivity

@@ -1,4 +1,4 @@
-package com.example.healtsorsomethingelse.ui.main.fragments
+package com.example.healtsorsomethingelse.utils
 
 import com.example.healtsorsomethingelse.utils.BaseViewModel
 

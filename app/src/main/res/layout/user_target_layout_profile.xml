@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="45dp"
+    android:layout_marginEnd="45dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:text="@string/motive_string_res"
+        android:textStyle="bold"
+        android:textColor="@color/colorGrey_666666"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RadioGroup
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:text="Сбросить вес"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:button="@null"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/radio_selector"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+        <RadioButton
+            android:text="Набрать вес"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:button="@null"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/radio_selector"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+        <RadioButton
+            android:text="Зафиксировать вес"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:button="@null"
+            android:background="@drawable/radio_selector"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+    </RadioGroup>
+</LinearLayout>

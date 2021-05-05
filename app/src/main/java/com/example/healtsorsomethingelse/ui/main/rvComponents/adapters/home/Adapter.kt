@@ -1,4 +1,4 @@
-package com.example.healtsorsomethingelse.ui.main.rvComponents.adapters
+package com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healtsorsomethingelse.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.data.home.Statistics
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.AbsViewHolder
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.WeekStatViewHolder
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.AdviceViewHolder
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.DayStatViewHolder
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.SleepViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.AbsViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.WeekStatViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.AdviceViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.DayStatViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.SleepViewHolder
 
 class Adapter(
     private val layoutInflater: LayoutInflater,

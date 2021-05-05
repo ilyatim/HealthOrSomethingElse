@@ -6,6 +6,7 @@ import com.example.healtsorsomethingelse.data.home.HomeIntent
 import com.example.healtsorsomethingelse.data.home.UiState
 import com.example.healtsorsomethingelse.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,6 +24,7 @@ class HomeFragmentViewModel @Inject constructor(private val repo: HomeRepository
     private val intent: Channel<HomeIntent> = Channel(Channel.UNLIMITED)
 
     init {
+        Log.d("Sometag", "init view model")
         handleIntent()
     }
 

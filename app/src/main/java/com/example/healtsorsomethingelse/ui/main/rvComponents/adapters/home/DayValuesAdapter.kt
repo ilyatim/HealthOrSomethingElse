@@ -1,10 +1,10 @@
-package com.example.healtsorsomethingelse.ui.main.rvComponents.adapters
+package com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healtsorsomethingelse.data.home.DayStatisticsItem
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.*
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.*
 
 class DayValuesAdapter(
     private val layoutInflater: LayoutInflater,

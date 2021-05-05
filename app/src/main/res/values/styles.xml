@@ -9,6 +9,11 @@
         <item name="cardViewStyle">@style/CardView</item>
         <item name="android:statusBarColor">@color/basicActivityGrey</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+    </style>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_slab</item>
     </style>
 
     <style name="SettingActivityTheme" parent="AppTheme">

@@ -8,17 +8,22 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <include
             layout="@layout/header_layout_profile"
             android:id="@+id/header_layout"/>
         <TextView
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginStart="40dp"
+            android:textColor="@color/colorGrey_666666"
             android:text="@string/changeable_info_string_res"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <include
-            android:id="user_target_layout"
+            android:id="@+id/user_target_layout"
             layout="@layout/user_target_layout_profile"/>
         <include
             android:id="@+id/distance_layout"

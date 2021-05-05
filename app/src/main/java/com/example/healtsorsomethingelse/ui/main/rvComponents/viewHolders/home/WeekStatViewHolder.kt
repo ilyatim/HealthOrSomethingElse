@@ -1,10 +1,10 @@
-package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders
+package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.home.Statistics
 import com.example.healtsorsomethingelse.databinding.ItemWeekStatisticsBinding
-import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.WeekValuesAdapter
+import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.home.WeekValuesAdapter
 
 class WeekStatViewHolder(
     private val layoutInflater: LayoutInflater,

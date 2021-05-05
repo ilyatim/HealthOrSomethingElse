@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.healtsorsomethingelse.databinding.DatabaseFragmentBinding
+import com.example.healtsorsomethingelse.utils.DatabaseViewModel
 
 class DatabaseFragment : Fragment() {
 

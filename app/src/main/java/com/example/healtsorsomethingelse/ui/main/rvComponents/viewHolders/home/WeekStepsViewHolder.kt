@@ -1,4 +1,4 @@
-package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders
+package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

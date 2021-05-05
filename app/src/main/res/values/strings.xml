@@ -43,4 +43,6 @@
     <string name="no_notification">Упс, похоже здесь пусто</string>
     <string name="exercises">Упражнения</string>
     <string name="changeable_info_string_res">Настраиваемая информация</string>
+    <string name="motive_string_res">Какая ваша цель?</string>
+    <string name="current_parameters">Текущие показатели</string>
 </resources>

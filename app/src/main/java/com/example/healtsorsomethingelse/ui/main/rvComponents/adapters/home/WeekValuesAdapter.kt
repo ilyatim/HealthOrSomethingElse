@@ -1,13 +1,13 @@
-package com.example.healtsorsomethingelse.ui.main.rvComponents.adapters
+package com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healtsorsomethingelse.data.home.WeekStatisticsItem
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.AbsWeekViewHolder
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.WeekDistanceViewHolder
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.WeekStepsViewHolder
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.WeekWorkoutViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.AbsWeekViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.WeekDistanceViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.WeekStepsViewHolder
+import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.WeekWorkoutViewHolder
 
 class WeekValuesAdapter(
     private val layoutInflater: LayoutInflater,
