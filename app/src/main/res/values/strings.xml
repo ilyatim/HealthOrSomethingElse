@@ -45,4 +45,9 @@
     <string name="changeable_info_string_res">Настраиваемая информация</string>
     <string name="motive_string_res">Какая ваша цель?</string>
     <string name="current_parameters">Текущие показатели</string>
+    <string name="purposes">Цели</string>
+    <string name="add_new_purpose_string_res">Добавить новую цель</string>
+    <string name="all_recipes_string_res">Все рецепты</string>
+    <string name="categories_string_res">Категории</string>
+    <string name="favorite_string_res">Избранное</string>
 </resources>

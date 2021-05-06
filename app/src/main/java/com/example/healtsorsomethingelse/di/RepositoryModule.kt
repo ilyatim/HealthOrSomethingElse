@@ -2,6 +2,8 @@ package com.example.healtsorsomethingelse.di
 
 import android.content.Context
 import androidx.core.app.ActivityCompat
+import com.example.healtsorsomethingelse.data.database.FoodRepository
+import com.example.healtsorsomethingelse.data.database.FoodRepositoryImpl
 import com.example.healtsorsomethingelse.data.home.HomeRepository
 import com.example.healtsorsomethingelse.data.home.HomeRepositoryImpl
 import com.example.healtsorsomethingelse.data.profile.ProfileRepository
@@ -21,10 +23,14 @@ import dagger.hilt.android.scopes.ViewModelScoped
 abstract class RepositoryModule {
     @Binds
     @ViewModelScoped
-    abstract fun bindRepository(impl: HomeRepositoryImpl): HomeRepository
+    abstract fun bindHomeRepository(impl: HomeRepositoryImpl): HomeRepository
 
     @Binds
     @ViewModelScoped
-    abstract fun bindRepository(impl: ProfileRepositoryImpl): ProfileRepository
+    abstract fun bindProfileRepository(impl: ProfileRepositoryImpl): ProfileRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindFoodRepository(impl: FoodRepositoryImpl): FoodRepository
 }
 
