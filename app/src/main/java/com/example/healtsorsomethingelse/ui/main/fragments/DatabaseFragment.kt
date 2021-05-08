@@ -21,8 +21,6 @@ class DatabaseFragment : Fragment() {
     private var _binding: DatabaseFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: DatabaseViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +37,7 @@ class DatabaseFragment : Fragment() {
                 binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
             }
         })
-
+        binding.viewPager.isUserInputEnabled = false
         binding.tabLayout.addOnTabSelectedListener(object : CustomOnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 binding.viewPager.currentItem = (tab?.position ?: return)

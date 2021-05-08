@@ -8,7 +8,7 @@ import com.example.healtsorsomethingelse.ui.main.fragments.FoodFragment
 
 class FragmentAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
-    private val NUM_PAGES = 3
+    private val NUM_PAGES = 2
 
     override fun getItemCount(): Int = NUM_PAGES
 

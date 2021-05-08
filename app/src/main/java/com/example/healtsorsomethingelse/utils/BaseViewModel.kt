@@ -7,5 +7,4 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import javax.inject.Inject
 
-/*@HiltViewModel*/
-open class BaseViewModel /*@Inject constructor()*/ : ViewModel(), CoroutineScope by MainScope()
+abstract class BaseViewModel : ViewModel(), CoroutineScope by MainScope()

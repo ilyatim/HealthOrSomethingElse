@@ -21,20 +21,15 @@
             app:elevation="0dp"
             app:tabIndicatorFullWidth="false"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.tabs.TabItem
-                android:text="@string/all_recipes_string_res"
+                android:text="Рецепты"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <com.google.android.material.tabs.TabItem
-                android:text="@string/categories_string_res"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-            <com.google.android.material.tabs.TabItem
-                android:text="@string/favorite_string_res"
+                android:text="Тренировки"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </com.google.android.material.tabs.TabLayout>

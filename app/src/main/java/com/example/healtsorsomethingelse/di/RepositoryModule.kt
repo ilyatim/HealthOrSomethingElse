@@ -17,6 +17,8 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -28,9 +30,13 @@ abstract class RepositoryModule {
     @Binds
     @ViewModelScoped
     abstract fun bindProfileRepository(impl: ProfileRepositoryImpl): ProfileRepository
+}
 
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class FoodRepositoryModule {
     @Binds
-    @ViewModelScoped
+    @Singleton
     abstract fun bindFoodRepository(impl: FoodRepositoryImpl): FoodRepository
 }
 

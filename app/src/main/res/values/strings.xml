@@ -50,4 +50,5 @@
     <string name="all_recipes_string_res">Все рецепты</string>
     <string name="categories_string_res">Категории</string>
     <string name="favorite_string_res">Избранное</string>
+    <string name="vegetarian_string_res">Вегетерианское</string>
 </resources>

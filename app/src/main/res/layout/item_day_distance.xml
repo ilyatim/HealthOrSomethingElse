@@ -34,7 +34,7 @@
             android:text="+10%" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/grams_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"
@@ -45,10 +45,10 @@
             android:text="@string/distance_string_res" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/protein_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
+            android:layout_below="@+id/grams_hint"
             android:layout_alignParentStart="true"
             android:layout_marginTop="10dp"
             android:textSize="24sp"

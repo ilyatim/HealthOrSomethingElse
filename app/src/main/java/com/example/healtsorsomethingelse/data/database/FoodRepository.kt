@@ -1,5 +1,11 @@
 package com.example.healtsorsomethingelse.data.database
 
+/**
+ * Interface for FoodFragment that provide data
+ */
 interface FoodRepository {
-    fun getRecipes(): List<RecipeCell>
+    /**
+     * Return recipes by type
+     */
+    fun getRecipes(type: RecipesType): List<RecipeCell>
 }

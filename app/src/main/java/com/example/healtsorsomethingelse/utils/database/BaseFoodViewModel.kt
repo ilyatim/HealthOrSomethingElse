@@ -1,7 +1,7 @@
 package com.example.healtsorsomethingelse.utils.database
 
 import com.example.healtsorsomethingelse.data.database.FoodRepository
-import com.example.healtsorsomethingelse.data.database.RecipesType
+import com.example.healtsorsomethingelse.data.database.FoodRepositoryImpl
 import com.example.healtsorsomethingelse.data.database.UiAction
 import com.example.healtsorsomethingelse.data.database.UiState
 import com.example.healtsorsomethingelse.utils.BaseViewModel
@@ -14,10 +14,8 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/*@HiltViewModel*/
-class FoodViewModel /*@Inject constructor*/(/*private val repo: FoodRepository*/) : BaseViewModel() {
-
-    /*private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
+abstract class BaseFoodViewModel(protected val repo: FoodRepository) : BaseViewModel() {
+    protected val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
     val state: StateFlow<UiState>
         get() = _state
 
@@ -28,23 +26,20 @@ class FoodViewModel /*@Inject constructor*/(/*private val repo: FoodRepository*/
     }
 
     fun sendAction(action: UiAction) {
-        launch { this@FoodViewModel.action.send(action) }
+        launch { this@BaseFoodViewModel.action.send(action) }
     }
 
     private fun handleIntent() {
         launch {
             action.consumeAsFlow().collect {
                 when (it) {
-                    is UiAction.Loading -> loadContent(it.type)
+                    UiAction.Loading -> loadContent()
+                    is UiAction.ShowBottomSheet -> showBottomSheetFragment(it.id)
                 }
             }
         }
     }
 
-    private fun loadContent(type: RecipesType) {
-        _state.value = UiState.Loading
-        launch {
-            _state.value = UiState.Content(repo.getRecipes(type))
-        }
-    }*/
+    abstract fun showBottomSheetFragment(id: Int)
+    abstract fun loadContent()
 }
