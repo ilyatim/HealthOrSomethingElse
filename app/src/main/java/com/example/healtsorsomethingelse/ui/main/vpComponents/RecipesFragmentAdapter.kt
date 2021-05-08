@@ -15,8 +15,8 @@ class RecipesFragmentAdapter(fragmentActivity: FragmentActivity) : FragmentState
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            1 -> AllRecipesFragment.newInstance()
-            2 -> FavoriteRecipesFragment.newInstance()
+            0 -> AllRecipesFragment.newInstance()
+            1 -> FavoriteRecipesFragment.newInstance()
             else -> VegetarianRecipesFragment.newInstance()
         }
     }

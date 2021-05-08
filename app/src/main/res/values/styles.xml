@@ -9,8 +9,17 @@
         <item name="cardViewStyle">@style/CardView</item>
         <item name="android:statusBarColor">@color/basicWhite</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="bottomSheetDialogTheme">@style/BottomDialogStyle</item>
         <!--Можно подумать надо стилем шрифтов-->
         <!--<item name="android:textViewStyle">@style/RobotoTextViewStyle</item>-->
+    </style>
+
+    <style name="BottomDialogStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
     <style name="TabTextBaseStyle" parent="@android:style/TextAppearance.Widget.TabWidget">

@@ -13,6 +13,7 @@ import com.example.healtsorsomethingelse.databinding.AllRecipesFragmentBinding
 import com.example.healtsorsomethingelse.databinding.ListWithProgressBarLayoutBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
+import com.example.healtsorsomethingelse.ui.DialogHelper
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.database.OnRecipeItemListener
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.database.RecipesAdapter
 import com.example.healtsorsomethingelse.ui.main.vpComponents.RecipesFragmentAdapter
@@ -38,7 +39,9 @@ class AllRecipesFragment : BaseFragment() {
     }
 
     private fun showBottomSheetDialog(id: Int) {
-
+        activity?.let {
+            DialogHelper.showBottomSheetDialogFragment(it.supportFragmentManager)
+        }
     }
 
     override fun onCreateView(
@@ -68,9 +71,16 @@ class AllRecipesFragment : BaseFragment() {
                     is UiState.Content -> {
                         fetchContent(it.items)
                     }
+                    is UiState.Error -> {
+                        handleError(it.error)
+                    }
                 }
             }
         }
+    }
+
+    private fun handleError(error: String?) {
+
     }
 
     private fun fetchContent(items: List<RecipeCell>) {

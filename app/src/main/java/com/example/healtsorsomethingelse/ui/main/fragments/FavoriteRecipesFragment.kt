@@ -50,6 +50,7 @@ class FavoriteRecipesFragment : BaseFragment() {
                     is UiState.Content -> {}
                     UiState.Idle -> {}
                     UiState.Loading -> {}
+                    is UiState.Error -> {}
                 }
             }
         }
