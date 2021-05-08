@@ -42,6 +42,7 @@ class FoodRepositoryImpl @Inject constructor() : FoodRepository {
     private fun getMockRecipe(): RecipeCell {
         return RecipeCell(
             "Кофе для Максима",
+            1001,
             "https://i1.wallbox.ru/wallpapers/main/201547/18a7c1c34ac29f8.jpg",
             "Любимое",
             12,
