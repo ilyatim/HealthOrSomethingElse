@@ -1,6 +1,5 @@
 package com.example.healtsorsomethingelse.utils.database
 
-import android.app.Dialog
 import com.example.healtsorsomethingelse.data.database.DialogAction
 import com.example.healtsorsomethingelse.data.database.DialogRepository
 import com.example.healtsorsomethingelse.data.database.DialogUiState
@@ -46,7 +45,11 @@ class BottomDialogViewModel @Inject constructor(private val repo: DialogReposito
     private fun initLoading(id: Int) {
         _state.value = DialogUiState.Loading
         launch {
-            _state.value = DialogUiState.Content(repo.getDialogInfoById(id))/*TODO: Impl Handle error*/
+            _state.value = try {
+                DialogUiState.Content(repo.getRecipeByID(id))
+            } catch (e: Exception) {
+                DialogUiState.Error(e.message)
+            }
         }
     }
 

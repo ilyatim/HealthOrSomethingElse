@@ -1,14 +1,16 @@
 package com.example.healtsorsomethingelse.data.database
 
-import android.util.Log
+import com.example.healtsorsomethingelse.network.DatabaseApiServiceHelper
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
-class FoodRepositoryImpl @Inject constructor() : FoodRepository {
+class FoodRepositoryImpl @Inject constructor(
+    private val networkServiceHelper: DatabaseApiServiceHelper
+) : FoodRepository {
 
-    override fun getRecipes(type: RecipesType): List<RecipeCell> {
+    override suspend fun getRecipes(type: RecipesType): List<RecipeCell> {
         return when (type) {
             RecipesType.All -> getAllRecipes()
             RecipesType.Favorite -> getFavoriteRecipes()
@@ -16,38 +18,32 @@ class FoodRepositoryImpl @Inject constructor() : FoodRepository {
         }
     }
 
-    private fun getAllRecipes(): List<RecipeCell> {
-        return listOf(
-            getMockRecipe(),
-            getMockRecipe(),
-            getMockRecipe(),
-            getMockRecipe(),
-            getMockRecipe(),
-            getMockRecipe(),
-        )
+    private suspend fun getAllRecipes(): List<RecipeCell> {
+        val recipes = networkServiceHelper.getRecipes()
+        return convertToCellData(recipes)
     }
 
-    private fun getFavoriteRecipes(): List<RecipeCell> {
-        return listOf(
-
-        )
+    private suspend fun getFavoriteRecipes(): List<RecipeCell> {
+        val recipes = networkServiceHelper.getFavoriteRecipes()
+        return convertToCellData(recipes)
     }
 
-    private fun getVegetarianRecipes(): List<RecipeCell> {
-        return listOf(
-
-        )
+    private suspend fun getVegetarianRecipes(): List<RecipeCell> {
+        val recipes = networkServiceHelper.getVegetarianRecipes()
+        return convertToCellData(recipes)
     }
 
-    private fun getMockRecipe(): RecipeCell {
-        return RecipeCell(
-            "Кофе для Максима",
-            1001,
-            "https://i1.wallbox.ru/wallpapers/main/201547/18a7c1c34ac29f8.jpg",
-            "Любимое",
-            12,
-            2000,
-            2
-        )
+    private fun convertToCellData(recipes: List<Recipe>): List<RecipeCell> {
+        return recipes.map {
+            RecipeCell(
+                id = it.id,
+                name = it.name,
+                imageUrl = it.imageUrl,
+                category = it.category,
+                likes = it.likes,
+                cookingTime = it.cookingTime,
+                portion = it.portion
+            )
+        }
     }
 }

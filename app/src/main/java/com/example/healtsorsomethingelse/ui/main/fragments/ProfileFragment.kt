@@ -68,7 +68,7 @@ class ProfileFragment : BaseFragment() {
                 hideKeyboard()
             }
             //Set button state to default
-            setDoneButtonState(inputText)
+            setDoneButtonState(null)
             //Send intent to save new purpose if it not empty
             if (inputText.isNotEmpty()) {
                 viewModel.sendAction(UiAction.AddNewPurpose(inputText))

@@ -1,11 +1,13 @@
 package com.example.healtsorsomethingelse.ui.main.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.example.healtsorsomethingelse.data.database.RecipeCell
 import com.example.healtsorsomethingelse.data.database.UiAction
 import com.example.healtsorsomethingelse.data.database.UiState
@@ -40,7 +42,7 @@ class AllRecipesFragment : BaseFragment() {
 
     private fun showBottomSheetDialog(id: Int) {
         activity?.let {
-            DialogHelper.showBottomSheetDialogFragment(it.supportFragmentManager)
+            DialogHelper.showBottomSheetDialogFragment(it.supportFragmentManager, id)
         }
     }
 
@@ -80,7 +82,10 @@ class AllRecipesFragment : BaseFragment() {
     }
 
     private fun handleError(error: String?) {
-
+        binding.errorTextView.text = error
+        binding.recyclerView.gone()
+        binding.progressBar.gone()
+        binding.errorTextView.visible()
     }
 
     private fun fetchContent(items: List<RecipeCell>) {
@@ -88,14 +93,17 @@ class AllRecipesFragment : BaseFragment() {
             adapter.updateList(items)
         } else {
             adapter = RecipesAdapter(layoutInflater, onItemClickListener, items.toMutableList())
+            binding.recyclerView.itemAnimator = DefaultItemAnimator()
             binding.recyclerView.adapter = adapter
         }
 
         binding.recyclerView.visible()
+        binding.errorTextView.gone()
         binding.progressBar.gone()
     }
 
     private fun handleLoading() {
+        binding.errorTextView.gone()
         binding.recyclerView.gone()
         binding.progressBar.visible()
     }

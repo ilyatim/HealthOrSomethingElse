@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.database.RecipeCell
 import com.example.healtsorsomethingelse.databinding.ItemRecipeBinding
@@ -58,6 +61,10 @@ class RecipesAdapter(
             Glide.with(binding.root)
                 .load(item.imageUrl)
                 .placeholder(R.color.colorLightGreen)
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.centerInside()
+                /*.transform(RoundedCorners(20))*/
                 .into(binding.imageView)
             binding.likeTextView.text = item.likes.toString()
             binding.categoryTextView.text = item.category
@@ -66,7 +73,7 @@ class RecipesAdapter(
             binding.numberOfPortion.text = item.portion.toString()
 
             binding.root.setOnClickListener {
-                this.listener.onRecipeClick(bindingAdapterPosition)
+                this.listener.onRecipeClick(item.id)
             }
         }
 

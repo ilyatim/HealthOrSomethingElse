@@ -16,8 +16,8 @@ object DialogHelper {
         bottomSheetDialog.show()
     }
 
-    fun showBottomSheetDialogFragment(supportFragmentManager: FragmentManager) {
-        val bottomSheetDialog = RecipeBottomSheetDialog.newInstance()
+    fun showBottomSheetDialogFragment(supportFragmentManager: FragmentManager, id: Int) {
+        val bottomSheetDialog = RecipeBottomSheetDialog.newInstance(id)
         bottomSheetDialog.show(supportFragmentManager, "bottom sheet tag")
     }
 }

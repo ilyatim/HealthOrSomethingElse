@@ -1,9 +1,16 @@
 package com.example.healtsorsomethingelse.data.database
 
+import com.example.healtsorsomethingelse.network.DatabaseApiServiceHelper
 import javax.inject.Inject
 
-class DialogRepositoryImpl @Inject constructor() : DialogRepository {
-    override suspend fun getDialogInfoById(id: Int): DialogData {
-        TODO("Not yet implemented")
+class DialogRepositoryImpl @Inject constructor(
+    private val networkServiceHelper: DatabaseApiServiceHelper
+) : DialogRepository {
+    override suspend fun getRecipeByID(id: Int): Recipe {
+        return networkServiceHelper.getRecipeById(id)
+    }
+
+    override suspend fun getRecipes(): List<Recipe> {
+        return networkServiceHelper.getRecipes()
     }
 }

@@ -6,21 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.database.DialogAction
-import com.example.healtsorsomethingelse.data.database.DialogData
 import com.example.healtsorsomethingelse.data.database.DialogUiState
+import com.example.healtsorsomethingelse.data.database.Recipe
 import com.example.healtsorsomethingelse.databinding.RecipeBottomSheetDialogBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
+import com.example.healtsorsomethingelse.extensions.ViewExtensions.invisible
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
 import com.example.healtsorsomethingelse.utils.TimeUtils
 import com.example.healtsorsomethingelse.utils.database.BottomDialogViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by MainScope() {
 
     private val viewModel: BottomDialogViewModel by viewModels()
@@ -54,39 +58,42 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
                 when (it) {
                     DialogUiState.Idle -> initLoading()
                     DialogUiState.Loading -> handleLoading()
-                    is DialogUiState.Content -> fetchContent(it.dialogData)
+                    is DialogUiState.Content -> fetchContent(it.recipe)
                     is DialogUiState.Error -> handleError(it.message)
                 }
             }
         }
     }
 
-    private fun handleError(message: String) {
-        //TODO: handle
+    private fun handleError(message: String?) {
+        dismiss()
     }
 
-    private fun fetchContent(dialogData: DialogData) {
+    private fun fetchContent(recipe: Recipe) {
         binding.progressBar.gone()
         binding.mainLayout.visible()
 
         Glide.with(binding.root)
-            .load(dialogData.imageUrl)
+            .load(recipe.imageUrl)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .centerCrop()
+            .placeholder(R.color.colorLightGreen)
             .into(binding.imageView)
-        binding.nameTextView.text = dialogData.name
-        binding.descriptionTextView.text = dialogData.description
-        binding.carbohydratesTextView.text = dialogData.carbohydrates.toString()
-        binding.fatsTextView.text = dialogData.fats.toString()
-        binding.proteinTextView.text = dialogData.protein.toString()
-        binding.gramsTextView.text = dialogData.grams.toString()
-        binding.caloriesTextView.text = dialogData.calories.toString()
-        binding.likeTextView.text = dialogData.likes.toString()
-        binding.timeTextView.text = TimeUtils.getCookingTime(dialogData.cookingTime)
-        binding.numberOfPortion.text = dialogData.portion.toString() //TODO: обработку окончаний
+        binding.nameTextView.text = recipe.name
+        binding.descriptionTextView.text = recipe.description
+        binding.carbohydratesTextView.text = recipe.carbohydrates.toString()
+        binding.fatsTextView.text = recipe.fats.toString()
+        binding.proteinTextView.text = recipe.protein.toString()
+        binding.gramsTextView.text = recipe.grams.toString()
+        binding.caloriesTextView.text = recipe.calories.toString()
+        binding.likeTextView.text = recipe.likes.toString()
+        binding.timeTextView.text = TimeUtils.getCookingTime(recipe.cookingTime)
+        binding.numberOfPortion.text = recipe.portion.toString() //TODO: обработку окончаний
     }
 
     private fun handleLoading() {
         binding.progressBar.visible()
-        binding.mainLayout.gone()
+        binding.mainLayout.invisible()
     }
 
     private fun initLoading() {

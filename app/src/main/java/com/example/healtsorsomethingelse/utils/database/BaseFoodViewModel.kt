@@ -34,12 +34,10 @@ abstract class BaseFoodViewModel(protected val repo: FoodRepository) : BaseViewM
             action.consumeAsFlow().collect {
                 when (it) {
                     UiAction.Loading -> loadContent()
-                    is UiAction.ShowBottomSheet -> showBottomSheetFragment(it.id)
                 }
             }
         }
     }
 
-    abstract fun showBottomSheetFragment(id: Int)
     abstract fun loadContent()
 }

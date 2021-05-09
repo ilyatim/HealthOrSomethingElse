@@ -14,9 +14,6 @@ import javax.inject.Inject
 class AllRecipesViewModel @Inject constructor(repo: FoodRepository) : BaseFoodViewModel(repo) {
 
     private val allItemsList: MutableList<RecipeCell> = mutableListOf()
-    override fun showBottomSheetFragment(id: Int) {
-        //_state.value = UiState.
-    }
 
     override fun loadContent() {
         _state.value = UiState.Loading

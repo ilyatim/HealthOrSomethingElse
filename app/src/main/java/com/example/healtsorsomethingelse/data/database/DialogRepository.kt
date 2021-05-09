@@ -5,5 +5,17 @@ package com.example.healtsorsomethingelse.data.database
  * in database fragment
  */
 interface DialogRepository {
-    suspend fun getDialogInfoById(id: Int): DialogData
+
+    /**
+     * Return recipe by id
+     * @param id id of recipe
+     * @return [Recipe]
+     */
+    suspend fun getRecipeByID(id: Int): Recipe
+
+    /**
+     * Return all recipes
+     * @return [List]
+     */
+    suspend fun getRecipes(): List<Recipe>
 }

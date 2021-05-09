@@ -14,10 +14,6 @@ class FavoriteRecipesViewModel @Inject constructor(repo: FoodRepository) : BaseF
 
     private val favItemsList: MutableList<RecipeCell> = mutableListOf()
 
-    override fun showBottomSheetFragment(id: Int) {
-
-    }
-
     override fun loadContent() {
         _state.value = UiState.Loading
         launch {

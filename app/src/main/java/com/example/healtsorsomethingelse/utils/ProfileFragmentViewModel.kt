@@ -48,7 +48,9 @@ class ProfileFragmentViewModel @Inject constructor(private val repo: ProfileRepo
     }
 
     private fun addNewPurpose(purpose: String) {
-        repo.addNewPurpose(purpose)
+        launch {
+            repo.addNewPurpose(purpose)
+        }
         addPurpose(purpose)
     }
 
@@ -60,7 +62,9 @@ class ProfileFragmentViewModel @Inject constructor(private val repo: ProfileRepo
     }
 
     private fun completePurpose(purpose: String, listPosition: Int) {
-        repo.savePurposes(purpose)
+        launch {
+            repo.savePurposes(purpose)
+        }
         removePurpose(listPosition)
     }
 

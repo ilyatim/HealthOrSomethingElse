@@ -14,10 +14,6 @@ class VegetarianRecipesViewModel @Inject constructor(repo: FoodRepository) : Bas
 
     private val vegItemsList: MutableList<RecipeCell> = mutableListOf()
 
-    override fun showBottomSheetFragment(id: Int) {
-
-    }
-
     override fun loadContent() {
         _state.value = UiState.Loading
         launch {

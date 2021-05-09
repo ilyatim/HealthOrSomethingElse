@@ -7,5 +7,5 @@ interface FoodRepository {
     /**
      * Return recipes by type
      */
-    fun getRecipes(type: RecipesType): List<RecipeCell>
+    suspend fun getRecipes(type: RecipesType): List<RecipeCell>
 }
