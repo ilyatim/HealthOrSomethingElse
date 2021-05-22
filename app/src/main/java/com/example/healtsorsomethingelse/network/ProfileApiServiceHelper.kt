@@ -25,7 +25,7 @@ interface ProfileApiServiceHelper {
      * @param userId user ID
      * @return token [String]
      */
-    suspend fun getUserWeightPurpose(userId: String): String
+    suspend fun getUserWeightPurpose(userId: String): Int
 
     /**
      * Return user height

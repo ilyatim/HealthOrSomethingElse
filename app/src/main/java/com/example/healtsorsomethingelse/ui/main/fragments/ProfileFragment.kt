@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
@@ -19,6 +21,7 @@ import com.example.healtsorsomethingelse.data.profile.ProfileData
 import com.example.healtsorsomethingelse.data.profile.UiAction
 import com.example.healtsorsomethingelse.data.profile.UiState
 import com.example.healtsorsomethingelse.databinding.ProfileFragmentBinding
+import com.example.healtsorsomethingelse.extensions.ContextExtensions.showLongToast
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.hideKeyboard
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
@@ -110,9 +113,15 @@ class ProfileFragment : BaseFragment() {
                     UiState.Idle -> viewModel.sendAction(UiAction.Loading)
                     UiState.Loading -> handleLoading()
                     is UiState.Content -> fetchContent(it.content)
+                    is UiState.Error -> fetchError(it.message)
                 }
             }
         }
+    }
+
+    private fun fetchError(e: String?) {
+        binding.progressBar.gone()
+        requireActivity().showLongToast(e)
     }
 
     private fun setupRecyclerView() {
@@ -130,6 +139,28 @@ class ProfileFragment : BaseFragment() {
             (binding.purposesLayout.recyclerView.adapter as ConcatAdapter).addAdapter(0, adapter)
             binding.purposesLayout.recyclerView.scrollToPosition(0)
         }
+        when (content.weightPurpose) {
+            0 -> {
+                setCheckRadioButtonState(R.id.lose_weight)
+            }
+            1 -> {
+                setCheckRadioButtonState(R.id.gain_weight)
+            }
+            2 -> {
+                setCheckRadioButtonState(R.id.fix_the_weight)
+            }
+        }
+
+        with (binding.currentParameter) {
+            editTextTextPersonHeight.setText(content.height.toString(), TextView.BufferType.EDITABLE)
+            editTextTextPersonWeight.setText(content.weight.toString(), TextView.BufferType.EDITABLE)
+            editTextTextPersonFat.setText(content.fatPercentage.toString(), TextView.BufferType.EDITABLE)
+        }
+
+    }
+
+    private fun setCheckRadioButtonState(@IdRes id: Int ) {
+        binding.userTargetLayout.radioGroup.check(id)
     }
 
     private fun handleLoading() {

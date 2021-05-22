@@ -16,11 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <RadioGroup
+        android:id="@+id/radio_group"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RadioButton
+            android:id="@+id/lose_weight"
             android:text="Сбросить вес"
             android:textAlignment="center"
             android:textSize="18sp"
@@ -30,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"/>
         <RadioButton
+            android:id="@+id/gain_weight"
             android:text="Набрать вес"
             android:textAlignment="center"
             android:textSize="18sp"
@@ -40,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"/>
         <RadioButton
+            android:id="@+id/fix_the_weight"
             android:text="Зафиксировать вес"
             android:textAlignment="center"
             android:textSize="18sp"

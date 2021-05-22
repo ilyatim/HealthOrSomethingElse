@@ -4,7 +4,7 @@ data class ProfileData(
     val name: String?,
     val email: String?,
     val imageUrl: String?,
-    val weightPurpose: String,
+    val weightPurpose: Int,
     val height: Int,
     val weight: Double,
     val fatPercentage: Double,

@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -78,8 +79,12 @@ class ProfileFragmentViewModel @Inject constructor(private val repo: ProfileRepo
     private fun initContent() {
         _state.value = UiState.Loading
         launch {
-            profileData = repo.getProfileData()
-            _state.value = UiState.Content(profileData)
+            _state.value = try {
+                profileData = repo.getProfileData()
+                UiState.Content(profileData)
+            } catch (e: Exception) {
+                UiState.Error(e.message)
+            }
         }
     }
 }

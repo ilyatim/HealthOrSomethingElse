@@ -14,7 +14,7 @@ class ProfileApiServiceHelperImpl @Inject constructor(
         return apiService.addCompletedPurpose(purpose, userId)
     }
 
-    override suspend fun getUserWeightPurpose(userId: String): String {
+    override suspend fun getUserWeightPurpose(userId: String): Int {
         return apiService.getUserWeightPurpose(userId)
     }
 

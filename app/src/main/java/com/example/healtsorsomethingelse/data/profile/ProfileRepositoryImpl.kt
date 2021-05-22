@@ -20,11 +20,11 @@ class ProfileRepositoryImpl @Inject constructor(
             val name = googleSignInAccount.familyName
             val email = googleSignInAccount.email
             val imageUri = googleSignInAccount.photoUrl
-            val weightPurpose: String = "Набрать вес"//networkServiceHelper.getUserWeightPurpose(userId)
-            val height = 192//networkServiceHelper.getUserHeight(userId)
-            val weight = 192.1//networkServiceHelper.getUserWeight(userId)
-            val fatPercentage = 12.3//networkServiceHelper.getUserFatPercentage(userId)
-            val purposes: List<String> = listOf()//networkServiceHelper.getUserPurposes(userId)
+            val weightPurpose: Int = networkServiceHelper.getUserWeightPurpose(userId)
+            val height = networkServiceHelper.getUserHeight(userId)
+            val weight = networkServiceHelper.getUserWeight(userId)
+            val fatPercentage = networkServiceHelper.getUserFatPercentage(userId)
+            val purposes: List<String> = networkServiceHelper.getUserPurposes(userId)
 
             return ProfileData(
                 name,
