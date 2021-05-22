@@ -34,13 +34,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabaseApiService(retrofit: Retrofit): DatabaseApiService {
-        return retrofit.create(DatabaseApiService::class.java)
+    fun provideRecipesApiService(retrofit: Retrofit): RecipesApiService {
+        return retrofit.create(RecipesApiService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideDatabaseNetworkServiceHelper(impl: DatabaseApiServiceHelperImpl): DatabaseApiServiceHelper {
+    fun provideRecipesNetworkServiceHelper(impl: RecipesApiServiceHelperImpl): RecipesApiServiceHelper {
         return impl
     }
 
@@ -54,6 +54,18 @@ object AppModule {
     @Singleton
     fun provideProfileNetworkServiceHelper(impl: ProfileApiServiceHelperImpl): ProfileApiServiceHelper {
         return impl
+    }
+
+    @Provides
+    @Singleton
+    fun provideWorkoutNetworkServiceHelper(impl: WorkoutApiServiceHelperImpl): WorkoutApiServiceHelper {
+        return impl
+    }
+
+    @Provides
+    @Singleton
+    fun provideWorkoutApiService(retrofit: Retrofit): WorkoutApiService {
+        return retrofit.create(WorkoutApiService::class.java)
     }
 
 }

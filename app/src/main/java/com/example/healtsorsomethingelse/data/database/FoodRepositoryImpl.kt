@@ -1,13 +1,15 @@
 package com.example.healtsorsomethingelse.data.database
 
-import com.example.healtsorsomethingelse.network.DatabaseApiServiceHelper
+import com.example.healtsorsomethingelse.network.RecipesApiServiceHelper
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
 class FoodRepositoryImpl @Inject constructor(
-    private val networkServiceHelper: DatabaseApiServiceHelper
+    private val networkServiceHelper: RecipesApiServiceHelper,
+    private val googleSignInAccount: GoogleSignInAccount?
 ) : FoodRepository {
 
     override suspend fun getRecipes(type: RecipesType): List<RecipeCell> {
@@ -24,7 +26,7 @@ class FoodRepositoryImpl @Inject constructor(
     }
 
     private suspend fun getFavoriteRecipes(): List<RecipeCell> {
-        val recipes = networkServiceHelper.getFavoriteRecipes()
+        val recipes = networkServiceHelper.getFavoriteRecipes(googleSignInAccount?.id ?: "-1")
         return convertToCellData(recipes)
     }
 

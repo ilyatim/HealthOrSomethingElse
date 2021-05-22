@@ -15,16 +15,16 @@ class ProfileRepositoryImpl @Inject constructor(
 
     override suspend fun getProfileData(): ProfileData {
         googleSignInAccount?.let { googleSignInAccount ->
-            val userId = googleSignInAccount.id?.toInt() ?: throwNullPointer()
+            val userId = googleSignInAccount.id ?: throwNullPointer()
 
             val name = googleSignInAccount.familyName
             val email = googleSignInAccount.email
             val imageUri = googleSignInAccount.photoUrl
-            val weightPurpose: String = networkServiceHelper.getUserWeightPurpose(userId)
-            val height = networkServiceHelper.getUserHeight(userId)
-            val weight = networkServiceHelper.getUserWeight(userId)
-            val fatPercentage = networkServiceHelper.getUserFatPercentage(userId)
-            val purposes: List<String> = networkServiceHelper.getUserPurposes(userId)
+            val weightPurpose: String = "Набрать вес"//networkServiceHelper.getUserWeightPurpose(userId)
+            val height = 192//networkServiceHelper.getUserHeight(userId)
+            val weight = 192.1//networkServiceHelper.getUserWeight(userId)
+            val fatPercentage = 12.3//networkServiceHelper.getUserFatPercentage(userId)
+            val purposes: List<String> = listOf()//networkServiceHelper.getUserPurposes(userId)
 
             return ProfileData(
                 name,
@@ -46,11 +46,11 @@ class ProfileRepositoryImpl @Inject constructor(
     }
 
     override suspend fun savePurposes(purpose: String) {
-        networkServiceHelper.addCompletedPurpose(purpose, googleSignInAccount?.id?.toInt() ?: return)
+        networkServiceHelper.addCompletedPurpose(purpose, googleSignInAccount?.id ?: "-1")
     }
 
     override suspend fun addNewPurpose(purpose: String) {
-        networkServiceHelper.addNewPurpose(purpose, googleSignInAccount?.id?.toInt() ?: return)
+        networkServiceHelper.addNewPurpose(purpose, googleSignInAccount?.id ?: "-1")
     }
 
 }

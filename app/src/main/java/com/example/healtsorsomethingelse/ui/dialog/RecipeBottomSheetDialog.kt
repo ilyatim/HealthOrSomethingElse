@@ -87,8 +87,8 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
         binding.gramsTextView.text = recipe.grams.toString()
         binding.caloriesTextView.text = recipe.calories.toString()
         binding.likeTextView.text = recipe.likes.toString()
-        binding.timeTextView.text = TimeUtils.getCookingTime(recipe.cookingTime)
-        binding.numberOfPortion.text = recipe.portion.toString() //TODO: обработку окончаний
+        binding.timeTextView.text = "${TimeUtils.getCookingTime(recipe.cookingTime)}'"
+        binding.numberOfPortion.text = "${recipe.portion} порции"//TODO: обработку окончаний
     }
 
     private fun handleLoading() {

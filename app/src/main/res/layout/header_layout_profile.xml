@@ -23,15 +23,15 @@
             android:textSize="22sp"
             android:layout_marginBottom="10dp"
             android:id="@+id/name_text_view"
-            android:text="Фамилия имя"/>
+            android:text="Тимофеев Илья"/>
         <TextView
             android:textSize="16sp"
             android:id="@+id/mail_text_view"
-            android:text="почта@mail.ru"/>
-        <TextView
+            android:text="ilyatimofeev12@gmail.com"/>
+        <!--<TextView
             android:textSize="16sp"
             android:id="@+id/sex_text_view"
-            android:text="пол - мужской"/>
+            android:text="пол - мужской"/>-->
     </GridLayout>
 
     <Space
