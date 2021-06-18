@@ -19,4 +19,10 @@
     <color name="colorGrayText_484848">#484848</color>
     <color name="lightRed">#D496A8</color>
     <color name="ratingBarColorAccent">#FFC107</color>
+
+    <color name="colorBlack10">#19000000</color>
+    <color name="colorGray25">#41808080</color>
+    <color name="colorGrayTitleText">#5b5b5b</color>
+    <color name="colorBlack87">#DE000000</color>
+    <color name="colorBlack60">#99000000</color>
 </resources>

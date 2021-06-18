@@ -9,8 +9,6 @@
     tools:context=".ui.notification.NotificationActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
-
-        android:background="@color/basicActivityGrey"
         android:fitsSystemWindows="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -46,13 +44,20 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <TextView
         android:layout_gravity="center"
         android:text="@string/no_notification"
-        android:id="@+id/no_notification_text_view"
+        android:id="@+id/message_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

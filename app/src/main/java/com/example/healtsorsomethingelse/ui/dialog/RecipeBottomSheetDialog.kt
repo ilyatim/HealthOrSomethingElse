@@ -43,6 +43,8 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
             container,
             false
         )
+        //After few click throw NPE
+        //TODO: fix NPE
         return binding.root
     }
 

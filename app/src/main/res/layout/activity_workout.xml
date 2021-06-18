@@ -9,8 +9,6 @@
     tools:context=".ui.workout.WorkoutActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
-
-        android:background="@color/basicActivityGrey"
         android:fitsSystemWindows="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

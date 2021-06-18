@@ -14,8 +14,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BottomDialogViewModel @Inject constructor(private val repo: DialogRepository): BaseViewModel() {
-
+class BottomDialogViewModel @Inject constructor(): BaseViewModel() {
+    @Inject
+    lateinit var repo: DialogRepository
     private val actions: Channel<DialogAction> = Channel(Channel.UNLIMITED)
 
     private val _state: MutableStateFlow<DialogUiState> = MutableStateFlow(DialogUiState.Idle)

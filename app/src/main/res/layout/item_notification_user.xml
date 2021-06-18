@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        tools:src="@color/colorPrimaryDark"
+        android:id="@+id/user_icon_image_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="64dp"
+        android:layout_height="64dp"/>
+
+    <TextView
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack87"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/topic_text_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/user_icon_image_view"
+        tools:text="Title text some some"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textColor="@color/colorBlack60"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_marginStart="16dp"
+        android:gravity="bottom"
+        android:id="@+id/text_view_holder"
+        app:layout_constraintStart_toEndOf="@id/user_icon_image_view"
+        app:layout_constraintTop_toBottomOf="@id/topic_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="text text text text text text text text text text some some som some some some"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textColor="@color/colorBlack60"
+        android:id="@+id/date_text_view"
+        android:layout_marginStart="16dp"
+        android:gravity="bottom"
+        app:layout_constraintStart_toEndOf="@id/user_icon_image_view"
+        app:layout_constraintTop_toBottomOf="@id/text_view_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="9 october 19:21"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+    <View
+        android:background="@color/colorGray25"
+        android:id="@+id/divider"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/date_text_view"
+        app:layout_constraintTop_toBottomOf="@id/date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
