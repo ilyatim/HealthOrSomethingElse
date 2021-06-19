@@ -1,30 +1,65 @@
 package com.example.healtsorsomethingelse.utils.notifications
 
 import androidx.lifecycle.ViewModel
-import com.example.healtsorsomethingelse.data.notification.Actions
-import com.example.healtsorsomethingelse.data.notification.Idle
-import com.example.healtsorsomethingelse.data.notification.UiState
+import com.example.healtsorsomethingelse.data.notification.*
+import com.example.healtsorsomethingelse.utils.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ViewModelScoped
-class NotificationViewModel @Inject constructor() : ViewModel(), CoroutineScope by MainScope() {
+@HiltViewModel
+class NotificationViewModel @Inject constructor(
+    private val repository: NotificationRepository,
+    private val repositoryHelper: NotificationRepositoryHelper
+) : BaseViewModel() {
 
-    private var _state: MutableStateFlow<UiState> = MutableStateFlow(Idle)
+    //@Inject lateinit var repository: NotificationRepository
+    //@Inject lateinit var repositoryHelper: NotificationRepositoryHelper
+
+    private var _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
     val state: StateFlow<UiState>
         get() = _state
 
     private val actions: Channel<Actions> = Channel(Channel.UNLIMITED)
 
+    init {
+        handleActions()
+    }
+
     fun sendAction(action: Actions) {
         launch {
             this@NotificationViewModel.actions.send(action)
+        }
+    }
+
+    private fun handleActions() {
+        launch {
+            actions.consumeAsFlow().collect {
+                when (it) {
+                    Load -> initLoading()
+                }
+            }
+        }
+    }
+
+    private fun initLoading() {
+        _state.value = UiState.Loading
+        launch {
+            _state.value = try {
+                val notifications: MutableList<Notifications> = repository.getUserNotification().toMutableList()
+                repositoryHelper.addDateToNotification(notifications)
+                UiState.Content(notifications)
+            } catch (e: Exception) {
+                UiState.Error(repository.getErrorMessage(e.message))
+            }
         }
     }
 }

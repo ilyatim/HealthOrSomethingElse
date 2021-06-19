@@ -2,6 +2,7 @@ package com.example.healtsorsomethingelse.ui.notification.viewHolders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.healtsorsomethingelse.data.notification.Notifications
 import com.example.healtsorsomethingelse.data.notification.UserNotification
 import com.example.healtsorsomethingelse.databinding.ItemNotificationUserBinding
@@ -26,6 +27,10 @@ class UserNotificationViewHolder(
         binding.textViewHolder.text = cell.topic
         binding.dateTextView.text = TimeUtils.parseNotificationDate(cell.date)
 
+        Glide.with(binding.userIconImageView)
+            .load(cell.imageUrl)
+            .circleCrop()
+            .into(binding.userIconImageView)
         //Handle Image
     }
 }

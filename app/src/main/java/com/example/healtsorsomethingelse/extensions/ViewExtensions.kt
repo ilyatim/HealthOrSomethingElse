@@ -3,6 +3,10 @@ package com.example.healtsorsomethingelse.extensions
 import android.app.Activity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 
 
 object ViewExtensions {
@@ -17,6 +21,14 @@ object ViewExtensions {
 
     fun View?.invisible() {
         this?.visibility = View.INVISIBLE
+    }
+
+    @ExperimentalCoroutinesApi
+    fun View.click(): Flow<Unit> = callbackFlow {
+        setOnClickListener {
+            offer(Unit)
+        }
+        awaitClose { setOnClickListener(null) }
     }
 
     fun View?.hideKeyboard() {

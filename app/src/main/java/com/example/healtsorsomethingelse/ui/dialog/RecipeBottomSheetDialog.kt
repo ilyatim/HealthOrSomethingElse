@@ -43,12 +43,11 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
             container,
             false
         )
-        //After few click throw NPE
-        //TODO: fix NPE
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        handleLoading()
         recipeId = arguments?.getInt("id") ?: -1
         handleUiState()
         super.onViewCreated(view, savedInstanceState)
@@ -57,6 +56,7 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
     private fun handleUiState() {
         launch {
             viewModel.state.collect {
+                if (_binding == null) return@collect
                 when (it) {
                     DialogUiState.Idle -> initLoading()
                     DialogUiState.Loading -> handleLoading()

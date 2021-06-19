@@ -66,6 +66,12 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideNotificationServiceHelper(impl: NotificationApiServiceHelperImpl): NotificationApiServiceHelper {
+        return impl
+    }
+
+    @Provides
+    @Singleton
     fun provideWorkoutApiService(retrofit: Retrofit): WorkoutApiService {
         return retrofit.create(WorkoutApiService::class.java)
     }

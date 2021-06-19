@@ -1,5 +1,6 @@
 package com.example.healtsorsomethingelse.network
 
+import com.example.healtsorsomethingelse.data.notification.UserNotification
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -20,4 +21,6 @@ interface ProfileApiService {
     suspend fun getUserFatPercentage(@Path("user_id")userId: String): Double
     @GET("/profile/{user_id}/user_purposes")
     suspend fun getUserPurposes(@Path("user_id")userId: String): List<String>
+    @GET("/profile/{user_id}/get_all_notifications")
+    suspend fun getUserNotification(@Path("user_id")userId: String): List<UserNotification>
 }

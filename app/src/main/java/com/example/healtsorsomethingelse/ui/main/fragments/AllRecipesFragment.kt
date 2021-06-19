@@ -1,8 +1,6 @@
 package com.example.healtsorsomethingelse.ui.main.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +10,11 @@ import com.example.healtsorsomethingelse.data.database.RecipeCell
 import com.example.healtsorsomethingelse.data.database.UiAction
 import com.example.healtsorsomethingelse.data.database.UiState
 import com.example.healtsorsomethingelse.databinding.AllRecipesFragmentBinding
-import com.example.healtsorsomethingelse.databinding.ListWithProgressBarLayoutBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
 import com.example.healtsorsomethingelse.ui.DialogHelper
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.database.OnRecipeItemListener
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.database.RecipesAdapter
-import com.example.healtsorsomethingelse.ui.main.vpComponents.RecipesFragmentAdapter
 import com.example.healtsorsomethingelse.utils.BaseFragment
 import com.example.healtsorsomethingelse.utils.database.AllRecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint

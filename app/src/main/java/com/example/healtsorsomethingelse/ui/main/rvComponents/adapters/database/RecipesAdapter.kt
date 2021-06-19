@@ -11,7 +11,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.database.RecipeCell
 import com.example.healtsorsomethingelse.databinding.ItemRecipeBinding
+import com.example.healtsorsomethingelse.extensions.ViewExtensions.click
 import com.example.healtsorsomethingelse.utils.DiffUtilImpl
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -72,9 +76,12 @@ class RecipesAdapter(
             binding.timeTextView.text = getActuallyCookingTime(item.cookingTime)
             binding.numberOfPortion.text = item.portion.toString()
 
-            binding.root.setOnClickListener {
+            binding.root.click()
+                .onEach { this.listener.onRecipeClick(item.id) }
+                .launchIn(MainScope())
+            /*binding.root.setOnClickListener {
                 this.listener.onRecipeClick(item.id)
-            }
+            }*/
         }
 
         private fun getActuallyCookingTime(value: Long): String {

@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.notification.*
 import com.example.healtsorsomethingelse.databinding.ActivityNotificationBinding
+import com.example.healtsorsomethingelse.extensions.ContextExtensions.showLongToast
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
 import com.example.healtsorsomethingelse.utils.AnimationHelper
@@ -28,7 +31,7 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
     lateinit var animationHelper: AnimationHelper
     private lateinit var binding: ActivityNotificationBinding
     private lateinit var adapter: NotificationAdapter
-    private val viewModel: NotificationViewModel by viewModels()
+    private val viewModel by viewModels<NotificationViewModel>()
 
     /**
      * Start observing on UI state
@@ -37,13 +40,13 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
         launch {
             viewModel.state.collect {
                 when (it) {
-                    Idle -> initLoading()
-                    Loading -> handleLoading()
-                    is Error -> {
+                    UiState.Idle -> initLoading()
+                    UiState.Loading -> handleLoading()
+                    is UiState.Error -> {
                         hideContent()
                         showMessage(it.text)
                     }
-                    is Content -> {
+                    is UiState.Content -> {
                         showContent()
                         fetchContent(it.notifications)
                     }
@@ -52,6 +55,9 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
         }
     }
 
+    private fun setupTouchHelper() {
+
+    }
     /**
      * Remove content, progress, message from the screen
      */

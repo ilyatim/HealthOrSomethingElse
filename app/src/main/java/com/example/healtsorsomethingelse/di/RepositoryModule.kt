@@ -8,6 +8,8 @@ import com.example.healtsorsomethingelse.data.database.FoodRepository
 import com.example.healtsorsomethingelse.data.database.FoodRepositoryImpl
 import com.example.healtsorsomethingelse.data.home.HomeRepository
 import com.example.healtsorsomethingelse.data.home.HomeRepositoryImpl
+import com.example.healtsorsomethingelse.data.notification.NotificationRepository
+import com.example.healtsorsomethingelse.data.notification.NotificationRepositoryImpl
 import com.example.healtsorsomethingelse.data.profile.ProfileRepository
 import com.example.healtsorsomethingelse.data.profile.ProfileRepositoryImpl
 import dagger.Binds
@@ -36,6 +38,10 @@ abstract class RepositoryModule {
     @Binds
     @ViewModelScoped
     abstract fun bindDialogRepository(impl: DialogRepositoryImpl): DialogRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindNotificationRepository(impl: NotificationRepositoryImpl): NotificationRepository
 }
 
 @Module
