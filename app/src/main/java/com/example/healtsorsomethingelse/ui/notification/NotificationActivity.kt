@@ -16,6 +16,7 @@ import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
 import com.example.healtsorsomethingelse.utils.AnimationHelper
 import com.example.healtsorsomethingelse.utils.AppBarStateChangeListener
 import com.example.healtsorsomethingelse.utils.notifications.NotificationViewModel
+import com.example.healtsorsomethingelse.utils.notifications.OnSwipeCallback
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -32,6 +33,9 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
     private lateinit var binding: ActivityNotificationBinding
     private lateinit var adapter: NotificationAdapter
     private val viewModel by viewModels<NotificationViewModel>()
+    private val swipeCallback = OnSwipeCallback { pos, id ->
+        viewModel.sendAction(RemoveNotification(id))
+    }
 
     /**
      * Start observing on UI state
@@ -71,10 +75,22 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
      * Draw notifications list on the screen
      */
     private fun fetchContent(list: List<Notifications>) {
+        if (list.isEmpty()) {
+            showMessage(getString(R.string.no_notification))
+        } else {
+            fetchList(list)
+        }
+    }
+
+    private fun fetchList(list: List<Notifications>) {
         if (this::adapter.isInitialized) {
             adapter.updateList(list)
         } else {
-            adapter = NotificationAdapter(layoutInflater, list.toMutableList())
+            adapter = NotificationAdapter(
+                layoutInflater,
+                list.toMutableList(),
+                swipeCallback
+            )
             binding.recyclerView.adapter = adapter
         }
     }

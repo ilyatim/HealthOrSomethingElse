@@ -29,6 +29,7 @@ class NotificationViewModel @Inject constructor(
         get() = _state
 
     private val actions: Channel<Actions> = Channel(Channel.UNLIMITED)
+    private val notifications: MutableList<UserNotification> = mutableListOf()
 
     init {
         handleActions()
@@ -45,16 +46,28 @@ class NotificationViewModel @Inject constructor(
             actions.consumeAsFlow().collect {
                 when (it) {
                     Load -> initLoading()
+                    is RemoveNotification -> removeNotification(it.id)
                 }
             }
         }
+    }
+
+    private fun removeNotification(id: String) {
+        this@NotificationViewModel.notifications.removeIf { it.id == id }
+        val notifications: MutableList<Notifications> = mutableListOf()
+        notifications.addAll(this@NotificationViewModel.notifications)
+        repositoryHelper.addDateToNotification(notifications)
+        _state.value = UiState.Content(notifications)
     }
 
     private fun initLoading() {
         _state.value = UiState.Loading
         launch {
             _state.value = try {
-                val notifications: MutableList<Notifications> = repository.getUserNotification().toMutableList()
+                this@NotificationViewModel.notifications.clear()
+                this@NotificationViewModel.notifications.addAll(repository.getUserNotification().toMutableList())
+                val notifications: MutableList<Notifications> = mutableListOf()
+                notifications.addAll(this@NotificationViewModel.notifications)
                 repositoryHelper.addDateToNotification(notifications)
                 UiState.Content(notifications)
             } catch (e: Exception) {

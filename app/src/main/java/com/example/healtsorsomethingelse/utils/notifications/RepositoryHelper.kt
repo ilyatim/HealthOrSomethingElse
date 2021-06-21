@@ -23,6 +23,7 @@ class NotificationRepositoryHelperImpl @Inject constructor(
 ) : NotificationRepositoryHelper {
 
     override fun addDateToNotification(list: MutableList<Notifications>) {
+        if (list.isEmpty()) return
         val dateMap: MutableMap<Int, NotificationTopic> = mutableMapOf()
         list.forEachIndexed { index, notification ->
             if (index == 0 && notification is UserNotification) {

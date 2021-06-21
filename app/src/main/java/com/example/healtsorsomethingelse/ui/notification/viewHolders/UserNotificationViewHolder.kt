@@ -1,6 +1,7 @@
 package com.example.healtsorsomethingelse.ui.notification.viewHolders
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.healtsorsomethingelse.data.notification.Notifications
@@ -19,6 +20,14 @@ class UserNotificationViewHolder(
             false
         )
 ) : AbsNotificationViewHolder(binding.root) {
+
+    fun getForegroundView(): View {
+        return binding.viewForeground
+    }
+
+    fun getBackgroundView(): View {
+        return binding.viewBackground
+    }
 
     override fun bind(cell: Notifications) {
         cell as UserNotification

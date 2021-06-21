@@ -3,6 +3,7 @@ package com.example.healtsorsomethingelse.data.notification
 sealed class Notifications
 
 data class UserNotification(
+    val id: String,
     val imageUrl: String,
     val userName: String,
     val date: Long,

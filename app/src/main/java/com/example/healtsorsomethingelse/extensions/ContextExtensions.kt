@@ -7,4 +7,7 @@ object ContextExtensions {
     fun Context?.showLongToast(message: String?) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
+    fun Context?.showShortToast(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }

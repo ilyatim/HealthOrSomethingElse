@@ -20,11 +20,11 @@ class NotificationRepositoryImpl @Inject constructor(
 
     override suspend fun getUserNotification(): List<UserNotification> {
         return listOf(
-            UserNotification("https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis(), "Да да, я - сосу Бибу"),
-            UserNotification("https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis(), "Да да, я - сосу Бибу"),
-            UserNotification("https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis(), "Да да, я - сосу Бибу"),
-            UserNotification("https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis() - 60 * 60 * 24 * 1000, "Да да, я - сосу Бибу"),
-            UserNotification("https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis() - 6 * 60 * 60 * 24 * 1000, "Да да, я - сосу Бибу")
+            UserNotification("1000001", "https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis(), "Да да, я - сосу Бибу"),
+            UserNotification("1000002", "https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis(), "Да да, я - сосу Бибу"),
+            UserNotification("1000003", "https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis(), "Да да, я - сосу Бибу"),
+            UserNotification("1000004", "https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis() - 60 * 60 * 24 * 1000, "Да да, я - сосу Бибу"),
+            UserNotification("1000005", "https://sun9-12.userapi.com/impf/c851128/v851128814/16940d/2zddRMW33fM.jpg?size=839x777&quality=96&sign=e5acb9d395c2e44ac496ecad5aea8695&type=album", "Ясосу Бибу", System.currentTimeMillis() - 6 * 60 * 60 * 24 * 1000, "Да да, я - сосу Бибу")
         )
         //return networkServiceHelper.getUserNotification(googleSingIn.id ?: "-1")
     }

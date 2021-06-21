@@ -59,4 +59,5 @@
     <string name="yesterday">Вчера</string>
     <string name="last_week">На прошлой неделе</string>
     <string name="last_month">В прошлой месяце</string>
+    <string name="delete">УДАЛИТЬ</string>
 </resources>

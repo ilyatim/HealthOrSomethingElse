@@ -26,10 +26,10 @@ class NotificationTests {
     fun fillList () {
         helper = NotificationRepositoryHelperImpl(InstrumentationRegistry.getInstrumentation().targetContext)
         //hiltRule.inject()
-        testList.add(UserNotification("ff", "ff", System.currentTimeMillis(), "ff"))
-        testList.add(UserNotification("ff", "ff", System.currentTimeMillis() - 60 * 60 * 24 * 1000, "ff"))
-        testList.add(UserNotification("ff", "ff", System.currentTimeMillis() - 6 * 60 * 60 * 24 * 1000, "ff"))
-        testList.add(UserNotification("ff", "ff", System.currentTimeMillis() - 20 * 60 * 60 * 24 * 1000, "ff"))
+        testList.add(UserNotification("1000001", "ff", "ff", System.currentTimeMillis(), "ff"))
+        testList.add(UserNotification("1000001", "ff", "ff", System.currentTimeMillis() - 60 * 60 * 24 * 1000, "ff"))
+        testList.add(UserNotification("1000001", "ff", "ff", System.currentTimeMillis() - 6 * 60 * 60 * 24 * 1000, "ff"))
+        testList.add(UserNotification("1000001", "ff", "ff", System.currentTimeMillis() - 20 * 60 * 60 * 24 * 1000, "ff"))
 
         expectedList.addAll(testList)
         expectedList.add(0, NotificationTopic("Сегодня"))
