@@ -15,6 +15,7 @@ import com.example.healtsorsomethingelse.utils.CustomOnTabSelectedListener
 import com.example.healtsorsomethingelse.utils.database.DatabaseViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.transition.MaterialSharedAxis
 
 class DatabaseFragment : Fragment() {
 
@@ -45,6 +46,13 @@ class DatabaseFragment : Fragment() {
         })
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
     }
 
     override fun onDestroyView() {

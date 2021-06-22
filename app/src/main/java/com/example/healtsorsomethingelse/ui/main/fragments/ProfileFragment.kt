@@ -31,6 +31,7 @@ import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.profile.P
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.profile.PurposesListener
 import com.example.healtsorsomethingelse.utils.BaseFragment
 import com.example.healtsorsomethingelse.utils.ProfileFragmentViewModel
+import com.google.android.material.transition.MaterialSharedAxis
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -109,6 +110,7 @@ class ProfileFragment : BaseFragment() {
     private fun handleUiState() {
         launch {
             viewModel.state.collect {
+                if (_binding == null) return@collect
                 when (it) {
                     UiState.Idle -> viewModel.sendAction(UiAction.Loading)
                     UiState.Loading -> handleLoading()
@@ -165,6 +167,13 @@ class ProfileFragment : BaseFragment() {
 
     private fun handleLoading() {
         binding.progressBar.visible()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
     }
 
     override fun onCreateView(

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.Window
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +14,13 @@ import com.example.healtsorsomethingelse.databinding.ActivityNotificationBinding
 import com.example.healtsorsomethingelse.extensions.ContextExtensions.showLongToast
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
+import com.example.healtsorsomethingelse.ui.NotificationInfoActivity
 import com.example.healtsorsomethingelse.utils.AnimationHelper
 import com.example.healtsorsomethingelse.utils.AppBarStateChangeListener
 import com.example.healtsorsomethingelse.utils.notifications.NotificationViewModel
 import com.example.healtsorsomethingelse.utils.notifications.OnSwipeCallback
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -35,6 +38,9 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
     private val viewModel by viewModels<NotificationViewModel>()
     private val swipeCallback = OnSwipeCallback { pos, id ->
         viewModel.sendAction(RemoveNotification(id))
+    }
+    private val onClickCallback = OnClickCallback { id, view ->
+        NotificationInfoActivity.startActivity(this, id, view)
     }
 
     /**
@@ -89,7 +95,8 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
             adapter = NotificationAdapter(
                 layoutInflater,
                 list.toMutableList(),
-                swipeCallback
+                swipeCallback,
+                onClickCallback
             )
             binding.recyclerView.adapter = adapter
         }
@@ -135,6 +142,11 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+        window.sharedElementsUseOverlay = false
+        //
         super.onCreate(savedInstanceState)
         binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)

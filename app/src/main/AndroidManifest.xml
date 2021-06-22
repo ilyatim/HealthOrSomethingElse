@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.healtsorsomethingelse">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -12,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.NotificationInfoActivity"></activity>
         <activity
-            android:label="@string/exercises"
-            android:name=".ui.workout.WorkoutActivity"/>
+            android:name=".ui.workout.WorkoutActivity"
+            android:label="@string/exercises" />
         <activity
             android:name=".ui.notification.NotificationActivity"
             android:label="@string/title_activity_notification"
@@ -33,8 +34,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:windowSoftInputMode="adjustPan"
-            android:name=".ui.main.MainActivity" />
+            android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="preloaded_fonts"

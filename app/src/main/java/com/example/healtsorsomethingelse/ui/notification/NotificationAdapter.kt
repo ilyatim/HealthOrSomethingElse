@@ -19,7 +19,8 @@ import com.example.healtsorsomethingelse.utils.notifications.UserNotificationSim
 class NotificationAdapter(
     private val layoutInflater: LayoutInflater,
     private val list: MutableList<Notifications>,
-    private val callback: OnSwipeCallback
+    private val callback: OnSwipeCallback,
+    private val onClickCallback: OnClickCallback
 ) : RecyclerView.Adapter<AbsNotificationViewHolder>() {
 
     private lateinit var diffUtils: DiffUtilImpl<Notifications>
@@ -62,7 +63,8 @@ class NotificationAdapter(
             ViewType.USER -> {
                 UserNotificationViewHolder(
                     layoutInflater,
-                    parent
+                    parent,
+                    onClickCallback
                 )
             }
         }
@@ -94,6 +96,10 @@ class NotificationAdapter(
 
 abstract class AbsNotificationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     abstract fun bind(cell: Notifications)
+}
+
+fun interface OnClickCallback {
+    fun onNotificationClick(notificationId: String, view: View)
 }
 
 

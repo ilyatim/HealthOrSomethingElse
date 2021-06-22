@@ -7,6 +7,7 @@ import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
+import kotlin.random.Random
 
 class HomeRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
@@ -45,5 +46,9 @@ class HomeRepositoryImpl @Inject constructor(
             getSleepStatistics(),
             Statistics.Advice(getHelpfulAdvice()),
         )
+    }
+
+    override suspend fun checkNotificationAvailability(): Boolean {
+        return Random.nextBoolean()
     }
 }

@@ -35,4 +35,6 @@ interface HomeRepository {
      * @return [List]
      */
     suspend fun getAllStatistic(): List<Statistics>
+
+    suspend fun checkNotificationAvailability(): Boolean
 }

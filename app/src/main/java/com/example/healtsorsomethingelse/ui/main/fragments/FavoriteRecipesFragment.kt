@@ -65,6 +65,7 @@ class FavoriteRecipesFragment : BaseFragment() {
     private fun handleUiState() {
         launch {
             viewModel.state.collect {
+                if (_binding == null) return@collect
                 when (it) {
                     UiState.Idle -> {
                         initLoading()

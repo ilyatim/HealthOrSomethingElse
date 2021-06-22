@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.NotificationInfoActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:transitionName="notification_element_container"
+            android:id="@+id/view_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/basicWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/user_icon_image_view"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/rounded_image_view_with_default_color" />
+
+            <TextView
+                android:id="@+id/topic_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/colorBlack87"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/user_icon_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Title text some some" />
+
+            <TextView
+                android:id="@+id/text_view_holder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="bottom"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textColor="@color/colorBlack60"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/user_icon_image_view"
+                app:layout_constraintTop_toBottomOf="@id/topic_text_view"
+                android:text="text text text text text text text text text text some some som some some some" />
+
+            <TextView
+                android:id="@+id/date_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="bottom"
+                android:textColor="@color/colorBlack60"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/user_icon_image_view"
+                app:layout_constraintTop_toBottomOf="@id/text_view_holder"
+                android:text="9 october 19:21" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:backgroundTint="@color/colorLightGreen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:minHeight="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

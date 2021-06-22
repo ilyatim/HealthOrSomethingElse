@@ -24,7 +24,6 @@ class HomeFragmentViewModel @Inject constructor(private val repo: HomeRepository
     private val intent: Channel<HomeIntent> = Channel(Channel.UNLIMITED)
 
     init {
-        Log.d("Sometag", "init view model")
         handleIntent()
     }
 
@@ -47,7 +46,7 @@ class HomeFragmentViewModel @Inject constructor(private val repo: HomeRepository
     private fun initContent() {
         _state.value = UiState.Loading
         launch {
-            _state.value = UiState.Content(4, repo.getAllStatistic())
+            _state.value = UiState.Content(4, repo.getAllStatistic(), repo.checkNotificationAvailability())
         }
     }
 }
