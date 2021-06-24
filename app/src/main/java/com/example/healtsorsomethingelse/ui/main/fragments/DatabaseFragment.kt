@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.healtsorsomethingelse.R
@@ -21,6 +22,7 @@ class DatabaseFragment : Fragment() {
 
     private var _binding: DatabaseFragmentBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: DatabaseViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +33,7 @@ class DatabaseFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.viewPager.adapter = FragmentAdapter(this.requireActivity())
+        /*binding.viewPager.adapter = FragmentAdapter(this.requireActivity())
         binding.appBarLayout.outlineProvider = null
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -43,7 +45,7 @@ class DatabaseFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 binding.viewPager.currentItem = (tab?.position ?: return)
             }
-        })
+        })*/
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -51,8 +53,8 @@ class DatabaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
+        /*exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)*/
     }
 
     override fun onDestroyView() {

@@ -6,10 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.example.healtsorsomethingelse.R
-import com.example.healtsorsomethingelse.data.database.RecipeCell
+import com.example.healtsorsomethingelse.data.database.recipes.RecipeCell
 import com.example.healtsorsomethingelse.databinding.ItemRecipeBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.click
 import com.example.healtsorsomethingelse.utils.DiffUtilImpl

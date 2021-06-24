@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
-import com.example.healtsorsomethingelse.data.database.RecipeCell
-import com.example.healtsorsomethingelse.data.database.UiAction
-import com.example.healtsorsomethingelse.data.database.UiState
+import com.example.healtsorsomethingelse.data.database.recipes.RecipeCell
+import com.example.healtsorsomethingelse.data.database.recipes.UiAction
+import com.example.healtsorsomethingelse.data.database.recipes.UiState
 import com.example.healtsorsomethingelse.databinding.AllRecipesFragmentBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class AllRecipesFragment : BaseFragment() {
 
-    private val viewModel: AllRecipesViewModel by viewModels()
+    private val viewModel: AllRecipesViewModel by activityViewModels()
 
     private var _binding: AllRecipesFragmentBinding? = null
     private val binding

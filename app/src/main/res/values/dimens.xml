@@ -4,4 +4,6 @@
     <dimen name="card_corner_radius">15dp</dimen>
     <dimen name="text_view_corner">10dp</dimen>
     <dimen name="left_card_margin">24dp</dimen>
+
+    <dimen name="card_corner_database">9dp</dimen>
 </resources>

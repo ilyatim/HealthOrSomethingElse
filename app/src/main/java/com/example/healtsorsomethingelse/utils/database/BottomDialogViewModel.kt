@@ -1,8 +1,8 @@
 package com.example.healtsorsomethingelse.utils.database
 
-import com.example.healtsorsomethingelse.data.database.DialogAction
+import com.example.healtsorsomethingelse.data.database.recipes.DialogAction
 import com.example.healtsorsomethingelse.data.database.DialogRepository
-import com.example.healtsorsomethingelse.data.database.DialogUiState
+import com.example.healtsorsomethingelse.data.database.recipes.DialogUiState
 import com.example.healtsorsomethingelse.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel

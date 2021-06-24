@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +44,7 @@ class ProfileFragment : BaseFragment() {
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ProfileFragmentViewModel by viewModels()
+    private val viewModel: ProfileFragmentViewModel by activityViewModels()
     private lateinit var adapter: Adapter
     private lateinit var plusAdapter: PlusAdapter
 
@@ -172,8 +173,8 @@ class ProfileFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
+        /*exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)*/
     }
 
     override fun onCreateView(

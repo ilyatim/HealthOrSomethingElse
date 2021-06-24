@@ -1,4 +1,4 @@
-package com.example.healtsorsomethingelse.data.database
+package com.example.healtsorsomethingelse.data.database.recipes
 
 data class RecipeCell(
     val id: Int,

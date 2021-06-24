@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.home.HomeIntent
@@ -33,7 +34,7 @@ class HomeFragment : BaseFragment() {
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HomeFragmentViewModel by viewModels()
+    private val viewModel: HomeFragmentViewModel by activityViewModels()
 
     private lateinit var adapter: Adapter
 
@@ -50,8 +51,8 @@ class HomeFragment : BaseFragment() {
         handleUiState()
         super.onCreate(savedInstanceState)
 
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
+        /*exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)*/
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

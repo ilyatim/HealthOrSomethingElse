@@ -1,6 +1,6 @@
 package com.example.healtsorsomethingelse.network
 
-import com.example.healtsorsomethingelse.data.database.Recipe
+import com.example.healtsorsomethingelse.data.database.recipes.Recipe
 import javax.inject.Inject
 
 class RecipesApiServiceHelperImpl @Inject constructor(

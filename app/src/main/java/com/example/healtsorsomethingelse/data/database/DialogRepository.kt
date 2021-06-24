@@ -1,5 +1,7 @@
 package com.example.healtsorsomethingelse.data.database
 
+import com.example.healtsorsomethingelse.data.database.recipes.Recipe
+
 /**
  * Interface that provide data to bottom dialog sheet
  * in database fragment

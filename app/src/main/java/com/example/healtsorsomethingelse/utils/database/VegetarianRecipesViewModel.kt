@@ -1,10 +1,9 @@
 package com.example.healtsorsomethingelse.utils.database
 
-import androidx.lifecycle.ViewModel
-import com.example.healtsorsomethingelse.data.database.FoodRepository
-import com.example.healtsorsomethingelse.data.database.RecipeCell
-import com.example.healtsorsomethingelse.data.database.RecipesType
-import com.example.healtsorsomethingelse.data.database.UiState
+import com.example.healtsorsomethingelse.data.database.recipes.FoodRepository
+import com.example.healtsorsomethingelse.data.database.recipes.RecipeCell
+import com.example.healtsorsomethingelse.data.database.recipes.RecipesType
+import com.example.healtsorsomethingelse.data.database.recipes.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

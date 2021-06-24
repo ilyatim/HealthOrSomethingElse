@@ -1,32 +1,21 @@
 package com.example.healtsorsomethingelse.ui.dialog
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.os.Bundle
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.animation.doOnEnd
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.viewModels
-import androidx.transition.Transition
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.healtsorsomethingelse.R
-import com.example.healtsorsomethingelse.data.database.DialogAction
-import com.example.healtsorsomethingelse.data.database.DialogUiState
-import com.example.healtsorsomethingelse.data.database.Recipe
+import com.example.healtsorsomethingelse.data.database.recipes.DialogAction
+import com.example.healtsorsomethingelse.data.database.recipes.DialogUiState
+import com.example.healtsorsomethingelse.data.database.recipes.Recipe
 import com.example.healtsorsomethingelse.databinding.RecipeBottomSheetDialogBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
-import com.example.healtsorsomethingelse.extensions.ViewExtensions.invisible
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
 import com.example.healtsorsomethingelse.utils.TimeUtils
 import com.example.healtsorsomethingelse.utils.database.BottomDialogViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -101,7 +90,9 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
         binding.timeTextView.text = "${TimeUtils.getCookingTime(recipe.cookingTime)}'"
         binding.numberOfPortion.text = "${recipe.portion} порции"//TODO: обработку окончаний
 
-        //binding.mainLayout.visible()
+        binding.mainLayout.visible()
+
+
         val nHeight = binding.nestedScrollView.height
         val rHeight = binding.root.height
         val pHeihgt = binding.progressBar.height
@@ -144,7 +135,6 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
     private fun handleLoading() {
         binding.progressBar.visible()
         binding.mainLayout.gone()
-        //binding.mainLayout.maxHeight = 0
     }
 
     private fun initLoading() {

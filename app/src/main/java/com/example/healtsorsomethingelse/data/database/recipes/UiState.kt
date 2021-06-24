@@ -1,4 +1,4 @@
-package com.example.healtsorsomethingelse.data.database
+package com.example.healtsorsomethingelse.data.database.recipes
 
 sealed class UiState {
     object Idle : UiState()

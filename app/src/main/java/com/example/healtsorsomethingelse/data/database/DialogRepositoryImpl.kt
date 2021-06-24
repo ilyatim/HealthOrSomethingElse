@@ -1,5 +1,6 @@
 package com.example.healtsorsomethingelse.data.database
 
+import com.example.healtsorsomethingelse.data.database.recipes.Recipe
 import com.example.healtsorsomethingelse.network.RecipesApiServiceHelper
 import javax.inject.Inject
 

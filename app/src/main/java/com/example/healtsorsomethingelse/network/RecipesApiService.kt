@@ -1,7 +1,6 @@
 package com.example.healtsorsomethingelse.network
 
-import com.example.healtsorsomethingelse.data.database.Recipe
-import com.google.gson.annotations.SerializedName
+import com.example.healtsorsomethingelse.data.database.recipes.Recipe
 import retrofit2.http.*
 
 interface RecipesApiService {

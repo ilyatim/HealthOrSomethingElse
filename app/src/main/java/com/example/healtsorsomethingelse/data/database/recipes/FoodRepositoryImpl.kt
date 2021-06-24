@@ -1,4 +1,4 @@
-package com.example.healtsorsomethingelse.data.database
+package com.example.healtsorsomethingelse.data.database.recipes
 
 import com.example.healtsorsomethingelse.network.RecipesApiServiceHelper
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
