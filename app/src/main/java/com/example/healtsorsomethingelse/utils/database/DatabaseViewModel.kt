@@ -25,6 +25,12 @@ class DatabaseViewModel @Inject constructor(private val repo: DatabaseRepository
         handleActions()
     }
 
+    fun sendAction(action: Actions) {
+        launch {
+            actions.send(action)
+        }
+    }
+
     private fun handleActions() {
         launch {
             actions.consumeAsFlow().collect {
@@ -39,5 +45,6 @@ class DatabaseViewModel @Inject constructor(private val repo: DatabaseRepository
 
     private fun loadContent() {
         //
+        _state.value = UiState.Error("Unknown error")
     }
 }

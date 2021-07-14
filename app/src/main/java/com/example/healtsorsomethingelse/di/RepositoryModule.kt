@@ -2,6 +2,8 @@ package com.example.healtsorsomethingelse.di
 
 import com.example.healtsorsomethingelse.data.database.DialogRepository
 import com.example.healtsorsomethingelse.data.database.DialogRepositoryImpl
+import com.example.healtsorsomethingelse.data.database.mainScreen.DatabaseRepository
+import com.example.healtsorsomethingelse.data.database.mainScreen.DatabaseRepositoryImpl
 import com.example.healtsorsomethingelse.data.database.recipes.FoodRepository
 import com.example.healtsorsomethingelse.data.database.recipes.FoodRepositoryImpl
 import com.example.healtsorsomethingelse.data.home.HomeRepository
@@ -36,6 +38,10 @@ abstract class RepositoryModule {
     @Binds
     @ViewModelScoped
     abstract fun bindNotificationRepository(impl: NotificationRepositoryImpl): NotificationRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindDatabaseRepository(impl: DatabaseRepositoryImpl): DatabaseRepository
 }
 
 @Module

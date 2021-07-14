@@ -4,23 +4,28 @@ import com.example.healtsorsomethingelse.data.database.recipes.FoodRepository
 import com.example.healtsorsomethingelse.data.database.recipes.RecipeCell
 import com.example.healtsorsomethingelse.data.database.recipes.RecipesType
 import com.example.healtsorsomethingelse.data.database.recipes.UiState
+import com.example.healtsorsomethingelse.utils.ErrorHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.logging.ErrorManager
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteRecipesViewModel @Inject constructor(repo: FoodRepository) : BaseFoodViewModel(repo) {
+class FavoriteRecipesViewModel @Inject constructor(
+    repo: FoodRepository,
+    private val errorHandler: ErrorHandler
+) : BaseFoodViewModel(repo) {
 
     private val favItemsList: MutableList<RecipeCell> = mutableListOf()
 
     override fun loadContent() {
-        _state.value = UiState.Loading
+        stateData.value = UiState.Loading
         launch {
-            _state.value = try {
+            stateData.value = try {
                 favItemsList.addAll(repo.getRecipes(RecipesType.Favorite))
                 UiState.Content(favItemsList)
             } catch (e: Exception) {
-                UiState.Error(e.message)
+                UiState.Error(errorHandler.getErrorMessage(e.message))
             }
         }
     }

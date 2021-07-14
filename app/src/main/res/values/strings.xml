@@ -60,4 +60,8 @@
     <string name="last_week">На прошлой неделе</string>
     <string name="last_month">В прошлой месяце</string>
     <string name="delete">УДАЛИТЬ</string>
+    <string name="category">Категории</string>
+    <string name="recipes">Рецепты</string>
+    <string name="workout">Упражнения</string>
+    <string name="advices">Советы</string>
 </resources>

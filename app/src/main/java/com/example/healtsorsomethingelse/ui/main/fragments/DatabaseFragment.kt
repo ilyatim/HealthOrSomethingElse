@@ -10,13 +10,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.healtsorsomethingelse.R
+import com.example.healtsorsomethingelse.data.database.mainScreen.Actions
+import com.example.healtsorsomethingelse.data.database.mainScreen.UiState
 import com.example.healtsorsomethingelse.databinding.DatabaseFragmentBinding
+import com.example.healtsorsomethingelse.extensions.ContextExtensions.showShortToast
+import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
+import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
 import com.example.healtsorsomethingelse.ui.main.vpComponents.FragmentAdapter
 import com.example.healtsorsomethingelse.utils.CustomOnTabSelectedListener
 import com.example.healtsorsomethingelse.utils.database.DatabaseViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.transition.MaterialSharedAxis
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class DatabaseFragment : Fragment() {
 
@@ -32,29 +41,32 @@ class DatabaseFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        /*binding.viewPager.adapter = FragmentAdapter(this.requireActivity())
-        binding.appBarLayout.outlineProvider = null
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
-            }
-        })
-        binding.viewPager.isUserInputEnabled = false
-        binding.tabLayout.addOnTabSelectedListener(object : CustomOnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                binding.viewPager.currentItem = (tab?.position ?: return)
-            }
-        })*/
-
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.state.collect {
+                when (it) {
+                    UiState.Idle -> { viewModel.sendAction(Actions.LoadContent) }
+                    UiState.Loading -> { handleLoading() }
+                    is UiState.Error -> {
+                        showToast(it.message)
+                        binding.recyclerView.gone()
+                        binding.progressBar.gone()
+                    }
+                }
+            }
+        }
+            /*exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)*/
+    }
 
-        /*exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)*/
+    private fun showToast(message: String) {
+        requireActivity().showShortToast(message)
+    }
+
+    private fun handleLoading() {
+        binding.recyclerView.gone()
+        binding.progressBar.visible()
     }
 
     override fun onDestroyView() {

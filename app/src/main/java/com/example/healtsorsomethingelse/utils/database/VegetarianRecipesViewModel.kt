@@ -14,9 +14,9 @@ class VegetarianRecipesViewModel @Inject constructor(repo: FoodRepository) : Bas
     private val vegItemsList: MutableList<RecipeCell> = mutableListOf()
 
     override fun loadContent() {
-        _state.value = UiState.Loading
+        stateData.value = UiState.Loading
         launch {
-            _state.value = try {
+            stateData.value = try {
                 vegItemsList.addAll(repo.getRecipes(RecipesType.Vegetarian))
                 UiState.Content(vegItemsList)
             } catch (e: Exception) {
