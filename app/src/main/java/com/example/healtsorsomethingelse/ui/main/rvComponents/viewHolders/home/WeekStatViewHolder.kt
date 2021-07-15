@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.home.Statistics
 import com.example.healtsorsomethingelse.databinding.ItemWeekStatisticsBinding
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.home.WeekValuesAdapter
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class WeekStatViewHolder(
     private val layoutInflater: LayoutInflater,
@@ -15,9 +16,9 @@ class WeekStatViewHolder(
             parent,
             false
         )
-) : AbsViewHolder(binding.root) {
-    override fun bind(item: Statistics) {
-        item as Statistics.WeekStatistics
-        binding.recyclerView.adapter = WeekValuesAdapter(layoutInflater, item.items.toMutableList())
+) : AbsViewHolder<Statistics>(binding.root) {
+    override fun bind(cell: Statistics) {
+        cell as Statistics.WeekStatistics
+        binding.recyclerView.adapter = WeekValuesAdapter(layoutInflater, cell.items.toMutableList())
     }
 }

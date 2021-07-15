@@ -12,6 +12,7 @@ import com.example.healtsorsomethingelse.data.notification.Notifications
 import com.example.healtsorsomethingelse.data.notification.UserNotification
 import com.example.healtsorsomethingelse.ui.notification.viewHolders.TopicNotificationViewHolder
 import com.example.healtsorsomethingelse.ui.notification.viewHolders.UserNotificationViewHolder
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 import com.example.healtsorsomethingelse.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.utils.notifications.OnSwipeCallback
 import com.example.healtsorsomethingelse.utils.notifications.UserNotificationSimpleCallback
@@ -21,7 +22,7 @@ class NotificationAdapter(
     private val list: MutableList<Notifications>,
     private val callback: OnSwipeCallback,
     private val onClickCallback: OnClickCallback
-) : RecyclerView.Adapter<AbsNotificationViewHolder>() {
+) : RecyclerView.Adapter<AbsViewHolder<Notifications>>() {
 
     private lateinit var diffUtils: DiffUtilImpl<Notifications>
     private val viewTypeValues = ViewType.values()
@@ -52,7 +53,7 @@ class NotificationAdapter(
         return list[position].viewType.ordinal
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsNotificationViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder<Notifications> {
         return when (viewTypeValues[viewType]) {
             ViewType.TOPIC -> {
                 TopicNotificationViewHolder(
@@ -70,7 +71,7 @@ class NotificationAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: AbsNotificationViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AbsViewHolder<Notifications>, position: Int) {
         holder.bind(list[position])
     }
 
@@ -94,9 +95,9 @@ class NotificationAdapter(
     }
 }
 
-abstract class AbsNotificationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+/*abstract class AbsNotificationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     abstract fun bind(cell: Notifications)
-}
+}*/
 
 fun interface OnClickCallback {
     fun onNotificationClick(notificationId: String, view: View)

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.home.WeekStatisticsItem
 import com.example.healtsorsomethingelse.databinding.ItemWeekWorkoutBinding
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class WeekWorkoutViewHolder(
     layoutInflater: LayoutInflater,
@@ -14,8 +15,8 @@ class WeekWorkoutViewHolder(
             parent,
             false
         )
-) : AbsWeekViewHolder(binding.root) {
-    override fun bind(item: WeekStatisticsItem) {
+) : AbsViewHolder<WeekStatisticsItem>(binding.root) {
+    override fun bind(cell: WeekStatisticsItem) {
         //TODO: inflate
     }
 }

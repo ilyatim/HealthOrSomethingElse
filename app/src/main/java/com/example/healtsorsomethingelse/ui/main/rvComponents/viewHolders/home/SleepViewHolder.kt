@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.home.Statistics
 import com.example.healtsorsomethingelse.databinding.ItemSleepBinding
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class SleepViewHolder(
     layoutInflater: LayoutInflater,
@@ -14,8 +15,8 @@ class SleepViewHolder(
             parent,
             false
         )
-) : AbsViewHolder(binding.root) {
-    override fun bind(item: Statistics) {
+) : AbsViewHolder<Statistics>(binding.root) {
+    override fun bind(cell: Statistics) {
         //TODO: inflate
     }
 }

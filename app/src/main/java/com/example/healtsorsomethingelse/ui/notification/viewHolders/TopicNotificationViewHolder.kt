@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.notification.NotificationTopic
 import com.example.healtsorsomethingelse.data.notification.Notifications
 import com.example.healtsorsomethingelse.databinding.ItemNotificationTopicBinding
-import com.example.healtsorsomethingelse.ui.notification.AbsNotificationViewHolder
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class TopicNotificationViewHolder(
     layoutInflater: LayoutInflater,
@@ -17,7 +17,7 @@ class TopicNotificationViewHolder(
             parent,
             false
         )
-) : AbsNotificationViewHolder(binding.root) {
+) : AbsViewHolder<Notifications>(binding.root) {
     override fun bind(cell: Notifications) {
         cell as NotificationTopic
         binding.topicTextView.text = cell.text

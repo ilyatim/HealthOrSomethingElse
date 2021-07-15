@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healtsorsomethingelse.data.home.WeekStatisticsItem
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.AbsWeekViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.WeekDistanceViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.WeekStepsViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.WeekWorkoutViewHolder
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class WeekValuesAdapter(
     private val layoutInflater: LayoutInflater,
     private val list: MutableList<WeekStatisticsItem>
-) : RecyclerView.Adapter<AbsWeekViewHolder>() {
+) : RecyclerView.Adapter<AbsViewHolder<WeekStatisticsItem>>() {
 
     private val viewTypeValues = ViewType.values()
     private val WeekStatisticsItem.viewType: ViewType
@@ -26,7 +26,7 @@ class WeekValuesAdapter(
         return list[position].viewType.ordinal
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsWeekViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder<WeekStatisticsItem> {
         return when (viewTypeValues[viewType]) {
             ViewType.STEPS -> WeekStepsViewHolder(layoutInflater, parent)
             ViewType.DISTANCE -> WeekDistanceViewHolder(layoutInflater, parent)
@@ -34,7 +34,7 @@ class WeekValuesAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: AbsWeekViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AbsViewHolder<WeekStatisticsItem>, position: Int) {
         holder.bind(list[position])
     }
 

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.home.DayStatisticsItem
 import com.example.healtsorsomethingelse.databinding.ItemDayCaloriesBinding
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class DayCaloriesViewHolder(
     layoutInflater: LayoutInflater,
@@ -14,8 +15,8 @@ class DayCaloriesViewHolder(
             parent,
             false
         )
-) : AbsDayViewHolder(binding.root) {
-    override fun bind(item: DayStatisticsItem) {
+) : AbsViewHolder<DayStatisticsItem>(binding.root) {
+    override fun bind(cell: DayStatisticsItem) {
         //TODO: inflate
     }
 }

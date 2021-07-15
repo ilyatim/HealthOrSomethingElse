@@ -8,4 +8,5 @@ data class Workout(
     val authorId: Int,
     val difficulty: Short,
     val duration: Long,
+    val imageUrls: List<String>,
 )

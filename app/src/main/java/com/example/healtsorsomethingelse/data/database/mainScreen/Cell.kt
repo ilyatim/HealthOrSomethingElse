@@ -1,25 +1,33 @@
 package com.example.healtsorsomethingelse.data.database.mainScreen
 
-sealed class Cell {
+sealed class Cell () {
     //data class Topic(val topicType: Int)
     /**
      * List type
-     * 1 - Recommendation
-     * 2 - Popular
-     * 3 - Workout
      */
-    data class Content(val listType: Int, val content: List<SubCell>)
+    data class SubRecyclerCell(val listType: Int, val content: List<SubCell>) : Cell()
+    data class ChapterCell(
+        val id: Int,
+        val topic: String,
+        val imageUrl: String
+    ) : Cell()
 }
 
 sealed class SubCell {
 
-    data class Recommendation(
+    data class RecyclerSubCell(
         val id: Int,
         val topic: String,
         val imageUrl: String
     ) : SubCell()
+/*
+    data class ChapterCell(
+        val id: Int,
+        val topic: String,
+        val icon: String,
+    )*/
 
-    data class Popular(
+    /*data class Popular(
         val id: Int,
         val topic: String,
         val imageUrl: String
@@ -30,5 +38,5 @@ sealed class SubCell {
         val workoutType: Int,
         val topic: String,
         val imageFile: String
-    ) : SubCell()
+    ) : SubCell()*/
 }

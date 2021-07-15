@@ -5,6 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import javax.inject.Inject
 
 /**
  * Interface that help us handle request on the server to get Workout's
@@ -54,4 +55,29 @@ interface WorkoutApiServiceHelper {
 /**
  * The number of exercises returned from the server
  */
-private val WORKOUT_COUNT_BY_DEFAULT = 20
+private const val WORKOUT_COUNT_BY_DEFAULT = 20
+
+class WorkoutApiServiceHelperImpl @Inject constructor(
+    private val apiService: WorkoutApiService
+): WorkoutApiServiceHelper {
+
+    override suspend fun getAllWorkout(number: Int): List<Workout> {
+        return apiService.getAllWorkout(number)
+    }
+
+    override suspend fun getWorkoutById(id: Int): Workout {
+        return apiService.getWorkoutById(id)
+    }
+
+    override suspend fun getWorkoutByDifficult(difficult: Int, number: Int): List<Workout> {
+        return apiService.getWorkoutByDifficult(difficult, number)
+    }
+
+    override suspend fun getSavedWorkout(id: String, number: Int): List<Workout> {
+        return apiService.getSavedWorkout(id, number)
+    }
+
+    override suspend fun addWorkout(workout: Workout): String {
+        return apiService.addWorkout(workout)
+    }
+}

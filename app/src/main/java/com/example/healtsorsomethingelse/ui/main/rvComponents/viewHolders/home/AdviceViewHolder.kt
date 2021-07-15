@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.healtsorsomethingelse.data.home.Statistics
 import com.example.healtsorsomethingelse.databinding.ItemAdviceBinding
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class AdviceViewHolder(
     layoutInflater: LayoutInflater,
@@ -14,9 +15,9 @@ class AdviceViewHolder(
             parent,
             false
         )
-) : AbsViewHolder(binding.root) {
-    override fun bind(item: Statistics) {
-        item as Statistics.Advice
-        binding.adviceTextView.text = item.advice
+) : AbsViewHolder<Statistics>(binding.root) {
+    override fun bind(cell: Statistics) {
+        cell as Statistics.Advice
+        binding.adviceTextView.text = cell.advice
     }
 }

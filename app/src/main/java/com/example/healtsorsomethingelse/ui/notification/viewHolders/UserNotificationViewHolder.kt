@@ -8,8 +8,8 @@ import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.notification.Notifications
 import com.example.healtsorsomethingelse.data.notification.UserNotification
 import com.example.healtsorsomethingelse.databinding.ItemNotificationUserBinding
-import com.example.healtsorsomethingelse.ui.notification.AbsNotificationViewHolder
 import com.example.healtsorsomethingelse.ui.notification.OnClickCallback
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 import com.example.healtsorsomethingelse.utils.TimeUtils
 
 class UserNotificationViewHolder(
@@ -22,7 +22,7 @@ class UserNotificationViewHolder(
             parent,
             false
         )
-) : AbsNotificationViewHolder(binding.root) {
+) : AbsViewHolder<Notifications>(binding.root) {
 
     fun getForegroundView(): View {
         return binding.viewForeground

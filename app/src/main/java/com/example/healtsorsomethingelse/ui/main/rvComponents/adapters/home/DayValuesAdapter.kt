@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healtsorsomethingelse.data.home.DayStatisticsItem
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.*
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class DayValuesAdapter(
     private val layoutInflater: LayoutInflater,
     private val list: MutableList<DayStatisticsItem>
-) : RecyclerView.Adapter<AbsDayViewHolder>() {
+) : RecyclerView.Adapter<AbsViewHolder<DayStatisticsItem>>() {
 
     private val viewTypeValues = ViewType.values()
     private val DayStatisticsItem.viewType: ViewType
@@ -20,7 +21,7 @@ class DayValuesAdapter(
             is DayStatisticsItem.Workout -> ViewType.WORKOUT
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsDayViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder<DayStatisticsItem> {
         return when(viewTypeValues[viewType]) {
             ViewType.STEPS -> DayStepsViewHolder(layoutInflater, parent)
             ViewType.CALORIES -> DayCaloriesViewHolder(layoutInflater, parent)
@@ -29,7 +30,7 @@ class DayValuesAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: AbsDayViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AbsViewHolder<DayStatisticsItem>, position: Int) {
         holder.bind(list[position])
     }
 

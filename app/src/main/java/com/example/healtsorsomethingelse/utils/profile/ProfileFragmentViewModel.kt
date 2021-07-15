@@ -1,6 +1,5 @@
-package com.example.healtsorsomethingelse.utils
+package com.example.healtsorsomethingelse.utils.profile
 
-import android.util.Log
 import com.example.healtsorsomethingelse.data.profile.ProfileData
 import com.example.healtsorsomethingelse.data.profile.ProfileRepository
 import com.example.healtsorsomethingelse.data.profile.UiAction

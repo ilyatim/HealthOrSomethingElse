@@ -3,20 +3,15 @@ package com.example.healtsorsomethingelse.ui.main.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.profile.ProfileData
 import com.example.healtsorsomethingelse.data.profile.UiAction
@@ -31,12 +26,10 @@ import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.profile.A
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.profile.PlusAdapter
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.profile.PurposesListener
 import com.example.healtsorsomethingelse.utils.BaseFragment
-import com.example.healtsorsomethingelse.utils.ProfileFragmentViewModel
-import com.google.android.material.transition.MaterialSharedAxis
+import com.example.healtsorsomethingelse.utils.profile.ProfileFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment() {

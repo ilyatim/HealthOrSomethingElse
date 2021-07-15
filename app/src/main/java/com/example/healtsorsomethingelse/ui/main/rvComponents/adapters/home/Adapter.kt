@@ -6,16 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healtsorsomethingelse.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.data.home.Statistics
-import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.AbsViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.WeekStatViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.AdviceViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.DayStatViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.SleepViewHolder
+import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class Adapter(
     private val layoutInflater: LayoutInflater,
     private val list: MutableList<Statistics>
-) : RecyclerView.Adapter<AbsViewHolder>() {
+) : RecyclerView.Adapter<AbsViewHolder<Statistics>>() {
 
     private val viewTypeValues = ViewType.values()
     private val Statistics.viewType: ViewType
@@ -40,7 +40,7 @@ class Adapter(
         return list[position].viewType.ordinal
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder<Statistics> {
         return when(viewTypeValues[viewType]) {
             ViewType.ADVICE -> AdviceViewHolder(layoutInflater, parent)
             ViewType.DAY -> DayStatViewHolder(layoutInflater, parent)
@@ -49,7 +49,7 @@ class Adapter(
         }
     }
 
-    override fun onBindViewHolder(holder: AbsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AbsViewHolder<Statistics>, position: Int) {
         holder.bind(list[position])
     }
 
