@@ -1,17 +1,28 @@
 package com.example.healtsorsomethingelse.network
 
-import com.example.healtsorsomethingelse.data.database.mainScreen.Cell
+import com.example.healtsorsomethingelse.data.database.mainScreen.UserDatabaseContent
 import javax.inject.Inject
 
 interface DatabaseApiServiceHelper {
-    fun getMainPageContent(userId: Int): List<Cell>
+    /**
+     * Return list of blocks for main page
+     */
+    suspend fun getMainPageBlockContent(userId: String): List<UserDatabaseContent.Block>
+
+    /**
+     * Return list of sublist for main page
+     */
+    suspend fun getMainPageSublistContent(userId: String): List<UserDatabaseContent.ContentList>
 }
 
 class DatabaseApiServiceHelperImpl @Inject constructor(
-    private val databaseApiService: DatabaseApiService
+    private val databaseApiService: DatabaseApiService,
 ) : DatabaseApiServiceHelper {
-    override fun getMainPageContent(userId: Int): List<Cell> {
-        TODO("Not yet implemented")
+    override suspend fun getMainPageBlockContent(userId: String): List<UserDatabaseContent.Block> {
+        return databaseApiService.getDatabaseMainPageBlockList(userId = userId)
     }
 
+    override suspend fun getMainPageSublistContent(userId: String): List<UserDatabaseContent.ContentList> {
+        return databaseApiService.getDatabaseMainPageSublist(userId = userId)
+    }
 }

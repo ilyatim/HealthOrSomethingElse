@@ -43,6 +43,7 @@
         android:id="@+id/recycler_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:layout_width="match_parent"

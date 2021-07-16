@@ -54,6 +54,18 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideDatabaseApiService(retrofit: Retrofit): DatabaseApiService {
+        return retrofit.create(DatabaseApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabaseApiServiceHelper(impl: DatabaseApiServiceHelperImpl): DatabaseApiServiceHelper {
+        return impl
+    }
+
+    @Provides
+    @Singleton
     fun provideProfileNetworkServiceHelper(impl: ProfileApiServiceHelperImpl): ProfileApiServiceHelper {
         return impl
     }

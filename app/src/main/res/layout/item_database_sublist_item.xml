@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="4dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardCornerRadius="@dimen/card_corner_database"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_view"
+            android:src="@drawable/healthy_icon_foreground"
+            android:maxWidth="120dp"
+            android:maxHeight="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/topic_text_view"
+        app:layout_constraintStart_toStartOf="@id/card_view"
+        app:layout_constraintTop_toBottomOf="@id/card_view"
+        tools:text="some subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

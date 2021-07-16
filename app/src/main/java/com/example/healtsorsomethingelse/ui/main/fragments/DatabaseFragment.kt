@@ -8,13 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.database.mainScreen.Actions
-import com.example.healtsorsomethingelse.data.database.mainScreen.Cell
 import com.example.healtsorsomethingelse.data.database.mainScreen.UiState
+import com.example.healtsorsomethingelse.data.database.mainScreen.UserDatabaseContent
 import com.example.healtsorsomethingelse.databinding.DatabaseFragmentBinding
 import com.example.healtsorsomethingelse.extensions.ContextExtensions.showShortToast
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
@@ -34,10 +35,17 @@ import kotlinx.coroutines.launch
 
 class DatabaseFragment : Fragment() {
 
+    private var searchBarHeight: Int = 0
     private var _binding: DatabaseFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DatabaseViewModel by activityViewModels()
     private lateinit var adapter: DatabaseAdapter
+
+    private val onGlobalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
+        if (_binding == null) return@OnGlobalLayoutListener
+        searchBarHeight = binding.searchView.height + 30
+    }
+
     private val clickListener = object : DatabaseListener {
         override fun onSubRecyclerTopicClick() {
             TODO("Not yet implemented")
@@ -67,7 +75,12 @@ class DatabaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupVoiceSearch()
+        setViewLayoutListener()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setViewLayoutListener() {
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
     }
 
     private fun setupVoiceSearch() {
@@ -102,11 +115,12 @@ class DatabaseFragment : Fragment() {
         binding.recyclerView.visible()
     }
 
-    private fun fetchContent(content: List<Cell>) {
+    private fun fetchContent(content: List<UserDatabaseContent>) {
         if (this::adapter.isInitialized) {
             adapter.updateList(content)
         } else {
             adapter = DatabaseAdapter(layoutInflater, content.toMutableList(), clickListener)
+            adapter.setTopMargin(searchBarHeight)
             binding.recyclerView.adapter = adapter
         }
     }
@@ -119,6 +133,7 @@ class DatabaseFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.root.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
         _binding = null
     }
 

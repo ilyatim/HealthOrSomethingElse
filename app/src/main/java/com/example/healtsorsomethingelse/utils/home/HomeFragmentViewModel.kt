@@ -24,7 +24,6 @@ class HomeFragmentViewModel @Inject constructor(private val repo: HomeRepository
     private val intent: Channel<HomeIntent> = Channel(Channel.UNLIMITED)
 
     init {
-        Log.d("Sometag", "init home view model")
         handleIntent()
     }
 

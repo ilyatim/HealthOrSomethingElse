@@ -4,27 +4,35 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.healtsorsomethingelse.data.database.mainScreen.Cell
+import com.example.healtsorsomethingelse.data.database.mainScreen.UserDatabaseContent
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.database.ChapterViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.database.SubListViewHolder
 import com.example.healtsorsomethingelse.utils.AbsViewHolder
 import com.example.healtsorsomethingelse.utils.DiffUtilImpl
+import com.example.healtsorsomethingelse.utils.UiUtils.setHolderBottomMargin
+import com.example.healtsorsomethingelse.utils.UiUtils.setHolderTopMargin
 
 class DatabaseAdapter(
     private val layoutInflater: LayoutInflater,
-    private val content: MutableList<Cell>,
+    private val content: MutableList<UserDatabaseContent>,
     private val listener: DatabaseListener,
-) : RecyclerView.Adapter<AbsViewHolder<Cell>>() {
+) : RecyclerView.Adapter<AbsViewHolder<UserDatabaseContent>>() {
 
-    private lateinit var diffUtilImpl: DiffUtilImpl<Cell>
+    private var topMargin: Int = 180
+
+    private lateinit var diffUtilImpl: DiffUtilImpl<UserDatabaseContent>
     private val viewTypeValues = ViewType.values()
-    private val Cell.viewType: ViewType
+    private val UserDatabaseContent.viewType: ViewType
         get() = when (this) {
-            is Cell.ChapterCell -> ViewType.CHAPTER
-            is Cell.SubRecyclerCell -> ViewType.SUBRECYCLER
+            is UserDatabaseContent.Block -> ViewType.CHAPTER
+            is UserDatabaseContent.ContentList -> ViewType.SUBRECYCLER
         }
 
-    fun updateList(newList: List<Cell>) {
+    fun setTopMargin(margin: Int) {
+        this.topMargin = margin
+    }
+
+    fun updateList(newList: List<UserDatabaseContent>) {
         diffUtilImpl = DiffUtilImpl(content, newList)
         val diffUtilsResult = DiffUtil.calculateDiff(diffUtilImpl)
         diffUtilsResult.dispatchUpdatesTo(this)
@@ -33,7 +41,7 @@ class DatabaseAdapter(
         content.addAll(newList)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder<Cell> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder<UserDatabaseContent> {
         return when (viewTypeValues[viewType]) {
             ViewType.SUBRECYCLER -> SubListViewHolder(
                 layoutInflater,
@@ -48,9 +56,27 @@ class DatabaseAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: AbsViewHolder<Cell>, position: Int) {
+    override fun onBindViewHolder(holder: AbsViewHolder<UserDatabaseContent>, position: Int) {
+        //Если верхний элемент, смещаем его на позицию searchbar
+        if (position == 0) {
+            setHolderTopMargin(holder, topMargin)
+        } else {
+            //Если идет 2 раза подряд блоки, делаем отступы между ними минимальными
+            if (content[position] is UserDatabaseContent.Block
+                && content[position - 1] is UserDatabaseContent.Block
+            ) {
+                setHolderTopMargin(holder, 0)
+            }
+            //Если позиция элемента последняя, делаем отступ снизу
+            if (position == content.lastIndex) {
+                setHolderBottomMargin(holder, 20)
+            }
+        }
+
         holder.bind(content[position])
     }
+
+
 
     override fun getItemViewType(position: Int): Int {
         return content[position].viewType.ordinal

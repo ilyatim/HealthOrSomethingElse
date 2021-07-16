@@ -1,5 +1,6 @@
 package com.example.healtsorsomethingelse.utils
 
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 
 class DiffUtilImpl<T>(
@@ -15,6 +16,18 @@ class DiffUtilImpl<T>(
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList[oldItemPosition] == newList[newItemPosition]
+    }
+
+}
+
+class DiffUtilCallbackImpl<T> : DiffUtil.ItemCallback<T>() {
+    override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
+        return oldItem == newItem
+    }
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
+        return oldItem == newItem
     }
 
 }
