@@ -1,15 +1,11 @@
 package com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.database
 
-import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.marginLeft
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.database.mainScreen.ContentItem
-import com.example.healtsorsomethingelse.databinding.ItemDatabaseSublistBinding
 import com.example.healtsorsomethingelse.databinding.ItemDatabaseSublistItemBinding
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseListener
 import com.example.healtsorsomethingelse.utils.DiffUtilCallbackImpl
