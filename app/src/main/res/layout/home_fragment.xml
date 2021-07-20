@@ -28,7 +28,6 @@
                 android:id="@+id/header_layout"
                 layout="@layout/header_layout_home"/>
             <include
-
                 android:id="@+id/feeling_layout"
                 layout="@layout/feeling_layout"/>
             <include

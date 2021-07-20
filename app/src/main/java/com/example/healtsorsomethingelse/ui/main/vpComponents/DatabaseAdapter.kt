@@ -56,6 +56,11 @@ class DatabaseAdapter(
         }
     }
 
+    override fun onViewDetachedFromWindow(holder: AbsViewHolder<UserDatabaseContent>) {
+        (holder as? DatabaseViewHolder)?.saveState()
+        super.onViewDetachedFromWindow(holder)
+    }
+
     override fun onBindViewHolder(holder: AbsViewHolder<UserDatabaseContent>, position: Int) {
         //Если верхний элемент, смещаем его на позицию searchbar
         if (position == 0) {
@@ -69,7 +74,11 @@ class DatabaseAdapter(
             }
             //Если позиция элемента последняя, делаем отступ снизу
             if (position == content.lastIndex) {
-                setHolderBottomMargin(holder, 20)
+                if (holder is ChapterViewHolder) {
+                    setHolderBottomMargin(holder, 20)
+                } else if (holder is SubListViewHolder) {
+                    setHolderBottomMargin(holder, 10)
+                }
             }
         }
 
@@ -94,4 +103,8 @@ interface DatabaseListener {
     fun onSubRecyclerTopicClick()
     fun onChapterClick()
     fun onSubRecyclerCellClick()
+}
+
+interface DatabaseViewHolder {
+    fun saveState()
 }

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    android:layout_marginStart="16dp"
+    android:layout_marginStart="8dp"
     android:layout_marginTop="4dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,10 +20,8 @@
         <ImageView
             android:id="@+id/image_view"
             android:src="@drawable/healthy_icon_foreground"
-            android:maxWidth="120dp"
-            android:maxHeight="120dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="115dp"
+            android:layout_height="115dp"/>
     </androidx.cardview.widget.CardView>
     <TextView
         android:layout_marginTop="8dp"

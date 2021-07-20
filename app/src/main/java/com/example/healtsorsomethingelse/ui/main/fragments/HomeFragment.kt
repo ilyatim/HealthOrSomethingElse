@@ -97,12 +97,17 @@ class HomeFragment : BaseFragment() {
             viewModel.state.collect {
                 if (_binding == null) return@collect
                 when (it) {
-                    UiState.Idle -> viewModel.sendIntent(HomeIntent.InitLoading)
+                    UiState.Idle -> {}
                     UiState.Loading -> handleLoading()
                     is UiState.Content -> fetchContent(it.todayRate, it.list, it.availabilityOfNotifications)
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        viewModel.sendIntent(HomeIntent.InitLoading)
+        super.onResume()
     }
 
     private fun fetchContent(todayRate: Int, list: List<Statistics>, availabilityOfNotification: Boolean) {
@@ -113,6 +118,9 @@ class HomeFragment : BaseFragment() {
             adapter.updateList(list)
         } else {
             adapter = Adapter(layoutInflater, list.toMutableList())
+        }
+
+        if (binding.recyclerViewLayout.recyclerView.adapter == null) {
             binding.recyclerViewLayout.recyclerView.adapter = adapter
         }
     }

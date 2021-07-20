@@ -30,4 +30,13 @@ object UiUtils {
         params.marginEnd = marginEnd
         holder.itemView.layoutParams = params
     }
+
+    fun setHolderStartMargin(
+        holder: RecyclerView.ViewHolder,
+        marginStart: Int
+    ) {
+        val params = holder.itemView.layoutParams as RecyclerView.LayoutParams
+        params.marginStart = marginStart
+        holder.itemView.layoutParams = params
+    }
 }
