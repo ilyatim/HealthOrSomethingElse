@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.profile.ProfileData
@@ -20,6 +21,7 @@ import com.example.healtsorsomethingelse.databinding.ProfileFragmentBinding
 import com.example.healtsorsomethingelse.extensions.ContextExtensions.showLongToast
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.hideKeyboard
+import com.example.healtsorsomethingelse.extensions.ViewExtensions.isKeyboardVisible
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.profile.Adapter
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.profile.AddPurposeListener
@@ -29,7 +31,6 @@ import com.example.healtsorsomethingelse.utils.BaseFragment
 import com.example.healtsorsomethingelse.utils.profile.ProfileFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
@@ -38,8 +39,8 @@ class ProfileFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ProfileFragmentViewModel by activityViewModels()
-    private lateinit var adapter: Adapter
-    private lateinit var plusAdapter: PlusAdapter
+    private var adapter: Adapter? = null
+    private var plusAdapter: PlusAdapter? = null
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -51,7 +52,7 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private val plusListener = AddPurposeListener {
+    private val plusClickListener = AddPurposeListener {
         binding.addNewPurposeLayout.root.visible()
         binding.addNewPurposeLayout.buttonDone.setOnClickListener { view ->
             //Hide layout
@@ -63,7 +64,9 @@ class ProfileFragment : BaseFragment() {
                 inputText = binding.addNewPurposeLayout.editText.text.toString()
                 text.clear()
                 clearFocus()
-                hideKeyboard()
+                if (isKeyboardVisible) {
+                    hideKeyboard()
+                }
             }
             //Set button state to default
             setDoneButtonState(null)
@@ -102,9 +105,8 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun handleUiState() {
-        launch {
+        lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
-                if (_binding == null) return@collect
                 when (it) {
                     UiState.Idle -> viewModel.sendAction(UiAction.Loading)
                     UiState.Loading -> handleLoading()
@@ -121,20 +123,19 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView() {
-        plusAdapter = PlusAdapter(layoutInflater, plusListener)
+        plusAdapter = PlusAdapter(layoutInflater, plusClickListener)
         binding.purposesLayout.recyclerView.adapter = ConcatAdapter(plusAdapter)
     }
 
     private fun fetchContent(content: ProfileData) {
         binding.progressBar.gone()
 
-        if (this::adapter.isInitialized) {
-            adapter.updateList(content.purposes)
-        } else {
+        adapter?.updateList(content.purposes) ?: run {
             adapter = Adapter(layoutInflater, content.purposes.toMutableList(), purposeListener)
-            (binding.purposesLayout.recyclerView.adapter as ConcatAdapter).addAdapter(0, adapter)
+            (binding.purposesLayout.recyclerView.adapter as ConcatAdapter).addAdapter(0, adapter!!)
             binding.purposesLayout.recyclerView.scrollToPosition(0)
         }
+
         when (content.weightPurpose) {
             0 -> {
                 setCheckRadioButtonState(R.id.lose_weight)
@@ -188,5 +189,6 @@ class ProfileFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        adapter = null
     }
 }

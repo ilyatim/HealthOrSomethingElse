@@ -2,6 +2,7 @@ package com.example.healtsorsomethingelse.ui.main.fragments
 
 import android.app.SearchManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.database.mainScreen.Actions
@@ -35,16 +37,10 @@ import kotlinx.coroutines.launch
 
 class DatabaseFragment : Fragment() {
 
-    private var searchBarHeight: Int = 0
     private var _binding: DatabaseFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DatabaseViewModel by activityViewModels()
-    private lateinit var adapter: DatabaseAdapter
-
-    private val onGlobalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
-        if (_binding == null) return@OnGlobalLayoutListener
-        searchBarHeight = binding.searchView.height + 30
-    }
+    private var adapter: DatabaseAdapter? = null
 
     private val clickListener = object : DatabaseListener {
         override fun onSubRecyclerTopicClick() {
@@ -80,7 +76,12 @@ class DatabaseFragment : Fragment() {
     }
 
     private fun setViewLayoutListener() {
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                viewModel.sendAction(Actions.SetBarHeight(binding.searchView.height + 30))
+                binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        })
     }
 
     private fun setupVoiceSearch() {
@@ -89,15 +90,14 @@ class DatabaseFragment : Fragment() {
     }
 
     private fun handleUiState() {
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
-                if (_binding == null) return@collect
                 when (it) {
                     UiState.Idle -> { viewModel.sendAction(Actions.LoadContent) }
                     UiState.Loading -> { handleLoading() }
                     is UiState.Content -> {
                         stopLoading()
-                        fetchContent(it.content)
+                        fetchContent(it.content, it.height)
                     }
                     is UiState.Error -> {
                         binding.errorMessage.text = it.message
@@ -115,12 +115,10 @@ class DatabaseFragment : Fragment() {
         binding.recyclerView.visible()
     }
 
-    private fun fetchContent(content: List<UserDatabaseContent>) {
-        if (this::adapter.isInitialized) {
-            adapter.updateList(content)
-        } else {
+    private fun fetchContent(content: List<UserDatabaseContent>, height: Int) {
+        adapter?.updateList(content) ?: kotlin.run {
             adapter = DatabaseAdapter(layoutInflater, content.toMutableList(), clickListener)
-            adapter.setTopMargin(searchBarHeight)
+            adapter?.setTopMargin(height)
             binding.recyclerView.adapter = adapter
         }
     }
@@ -133,7 +131,7 @@ class DatabaseFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.root.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
+        adapter = null
         _binding = null
     }
 

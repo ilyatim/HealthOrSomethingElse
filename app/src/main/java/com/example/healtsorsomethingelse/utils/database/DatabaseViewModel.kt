@@ -29,6 +29,8 @@ class DatabaseViewModel @Inject constructor(private val repo: DatabaseRepository
 
     private val actions: Channel<Actions> = Channel(Channel.UNLIMITED)
 
+    private var height: Int = 0
+
     init {
         handleActions()
     }
@@ -46,6 +48,7 @@ class DatabaseViewModel @Inject constructor(private val repo: DatabaseRepository
                     Actions.LoadContent -> {
                         loadContent()
                     }
+                    is Actions.SetBarHeight -> height = it.height
                 }
             }
         }
@@ -54,7 +57,7 @@ class DatabaseViewModel @Inject constructor(private val repo: DatabaseRepository
     private fun loadContent() {
         CoroutineScope(Dispatchers.IO).launch {
             _state.value = try {
-                UiState.Content(repo.getContent())
+                UiState.Content(repo.getContent(), height)
             } catch (e: GoogleNotFountException) {
                 Log.d(TAG, "google not found exception")
                 UiState.Error(e.message)

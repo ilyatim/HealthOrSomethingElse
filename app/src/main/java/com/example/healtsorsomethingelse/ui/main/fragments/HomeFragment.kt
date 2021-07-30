@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.home.HomeIntent
 import com.example.healtsorsomethingelse.data.home.Statistics
@@ -25,7 +26,10 @@ import com.example.healtsorsomethingelse.utils.BaseFragment
 import com.example.healtsorsomethingelse.utils.home.HomeFragmentViewModel
 import com.google.android.material.transition.MaterialSharedAxis
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -36,7 +40,7 @@ class HomeFragment : BaseFragment() {
 
     private val viewModel: HomeFragmentViewModel by activityViewModels()
 
-    private lateinit var adapter: Adapter
+    private var adapter: Adapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,9 +97,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun handleUiState() {
-        launch {
+        lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
-                if (_binding == null) return@collect
                 when (it) {
                     UiState.Idle -> {}
                     UiState.Loading -> handleLoading()
@@ -114,9 +117,8 @@ class HomeFragment : BaseFragment() {
         binding.progressBar.gone()
         binding.feelingLayout.feelingRatingBar.rating = todayRate.toFloat()
         binding.headerLayout.notificationImageButton.setImageDrawable(getNotificationDrawable(availabilityOfNotification))
-        if (this::adapter.isInitialized) {
-            adapter.updateList(list)
-        } else {
+
+        adapter?.updateList(list) ?: kotlin.run {
             adapter = Adapter(layoutInflater, list.toMutableList())
         }
 
@@ -141,5 +143,6 @@ class HomeFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        adapter = null
     }
 }

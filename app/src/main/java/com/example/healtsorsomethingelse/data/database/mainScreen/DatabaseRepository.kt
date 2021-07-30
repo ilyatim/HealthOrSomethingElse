@@ -30,6 +30,7 @@ class DatabaseRepositoryImpl @Inject constructor(
     override suspend fun getContent(): List<UserDatabaseContent> {
         account?.let {
             val id = it.id ?: "-1"
+            //Можно попробовать использовать Flow emit()
             val blocks = networkServiceHelper.getMainPageBlockContent(id).toMutableList()
             val sublist = networkServiceHelper.getMainPageSublistContent(id)
             return mergeLists(blocks, sublist)

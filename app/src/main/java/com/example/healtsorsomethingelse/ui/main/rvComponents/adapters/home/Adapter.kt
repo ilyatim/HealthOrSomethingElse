@@ -18,6 +18,7 @@ class Adapter(
 ) : RecyclerView.Adapter<AbsViewHolder<Statistics>>() {
 
     private val viewTypeValues = ViewType.values()
+
     private val Statistics.viewType: ViewType
         get() = when (this@viewType) {
             is Statistics.Advice -> ViewType.ADVICE
@@ -25,6 +26,7 @@ class Adapter(
             is Statistics.SleepStatistics -> ViewType.SLEEP
             is Statistics.WeekStatistics -> ViewType.WEEK
         }
+
     private lateinit var diffUtil: DiffUtilImpl<Statistics>
 
     fun updateList(newList: List<Statistics>) {
