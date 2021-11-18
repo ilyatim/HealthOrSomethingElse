@@ -12,8 +12,8 @@
         android:id="@+id/splash_screen_imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/main_icon_of_app"
         android:layout_centerHorizontal="true"
+        android:contentDescription="@string/main_icon_of_app"
         app:srcCompat="@drawable/ic_healthy" />
 
     <com.google.android.gms.common.SignInButton

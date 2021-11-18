@@ -75,6 +75,9 @@ class DatabaseAdapter(
             //Если позиция элемента последняя, делаем отступ снизу
             if (position == content.lastIndex) {
                 if (holder is ChapterViewHolder) {
+                    //По неведомой причине, последний элемент может иметь отступ сверху около 181
+                    //Ставим отступ 0, чтобы избежать этой ситуации
+                    setHolderTopMargin(holder, 0)
                     setHolderBottomMargin(holder, 20)
                 } else if (holder is SubListViewHolder) {
                     setHolderBottomMargin(holder, 10)

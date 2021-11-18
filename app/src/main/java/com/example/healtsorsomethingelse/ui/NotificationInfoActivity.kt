@@ -12,11 +12,12 @@ import com.example.healtsorsomethingelse.databinding.ActivityNotificationInfoBin
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
-class NotificationInfoActivity : AppCompatActivity() {
+class NotificationInfoActivity : Activity() {
 
     private lateinit var binding: ActivityNotificationInfoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         //
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         findViewById<View>(android.R.id.content).transitionName = "notification_element_container"
@@ -31,7 +32,6 @@ class NotificationInfoActivity : AppCompatActivity() {
             duration = 250L
         }*/
         //
-        super.onCreate(savedInstanceState)
         binding = ActivityNotificationInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
