@@ -45,6 +45,7 @@ class HorizontalSublistAdapter(
             )
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(cell: ContentItem) {
+            binding.root.setOnClickListener { listener.onSubRecyclerCellClick(cell.itemId) }
             binding.topicTextView.text = cell.subTitle
             /*Glide.with(binding.imageView)
                 .load(cell.foregroundImage)

@@ -5,17 +5,42 @@
       <map>
         <entry key="../../Library/Android/sdk/platforms/android-31/data/res/layout/auto_complete_list.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25076923076923074" />
+        <entry key="app/src/main/res/drawable/bottom_sheet_dialog_background.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_healthy.xml" value="0.2546875" />
         <entry key="app/src/main/res/drawable/ic_healthy_72dp.xml" value="0.2546875" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/ic_splash_background.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/ic_splash_foreground.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/ic_workout_icon_72.xml" value="0.25076923076923074" />
+        <entry key="app/src/main/res/drawable/notification.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/radio_normal.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/radio_selector.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1157548125633232" />
+        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/activity_notification_info.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/activity_workout.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/feeling_layout.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/header_layout_home.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_advice.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/item_chapter_database.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_database_sublist_item.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_day_calories.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_day_distance.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_day_steps.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_day_workout.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_notification_user.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_sleep.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_week_distance.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_week_statistics.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_week_steps.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/item_week_workout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/recipe_bottom_sheet_dialog.xml" value="0.1897644927536232" />
+        <entry key="app/src/main/res/layout/recycler_view_layout.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/user_target_layout_profile.xml" value="0.1897644927536232" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.15070921985815602" />
       </map>
     </option>

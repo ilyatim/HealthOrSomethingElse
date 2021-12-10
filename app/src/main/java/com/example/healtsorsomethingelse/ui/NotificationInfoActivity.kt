@@ -12,7 +12,7 @@ import com.example.healtsorsomethingelse.databinding.ActivityNotificationInfoBin
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
-class NotificationInfoActivity : Activity() {
+class NotificationInfoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNotificationInfoBinding
 
@@ -20,7 +20,7 @@ class NotificationInfoActivity : Activity() {
         super.onCreate(savedInstanceState)
         //
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
-        findViewById<View>(android.R.id.content).transitionName = "notification_element_container"
+        //findViewById<View>(android.R.id.content).transitionName = "notification_element_container"
         setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
         window.sharedElementEnterTransition = MaterialContainerTransform().apply {
             addTarget(android.R.id.content)

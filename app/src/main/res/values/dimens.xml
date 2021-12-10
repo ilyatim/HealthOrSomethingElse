@@ -6,4 +6,5 @@
     <dimen name="left_card_margin">24dp</dimen>
 
     <dimen name="card_corner_database">9dp</dimen>
+    <dimen name="padding_top_bottom_sheet">20dp</dimen>
 </resources>

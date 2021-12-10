@@ -105,7 +105,7 @@ class DatabaseAdapter(
 interface DatabaseListener {
     fun onSubRecyclerTopicClick()
     fun onChapterClick()
-    fun onSubRecyclerCellClick()
+    fun onSubRecyclerCellClick(itemId: Int)
 }
 
 interface DatabaseViewHolder {

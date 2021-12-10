@@ -32,6 +32,13 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
     private val binding: RecipeBottomSheetDialogBinding
         get() = _binding!!
 
+    /*override fun onCreate(savedInstanceState: Bundle?) {
+        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun getTheme() = R.style.CustomBottomSheetDialogTheme*/
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,7 +54,7 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         handleLoading()
-        recipeId = arguments?.getInt("id") ?: -1
+        recipeId = arguments?.getInt(ITEM_ID) ?: -1
         handleUiState()
         super.onViewCreated(view, savedInstanceState)
     }
@@ -147,6 +154,8 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
     }
 
     companion object {
+        private const val ITEM_ID: String = "id"
+
         fun newInstance(): RecipeBottomSheetDialog {
             return RecipeBottomSheetDialog()
         }
@@ -154,7 +163,7 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
         fun newInstance(id: Int): RecipeBottomSheetDialog {
             return RecipeBottomSheetDialog().apply {
                 val args = Bundle()
-                args.putInt("id", id)
+                args.putInt(ITEM_ID, id)
                 this.arguments = args
             }
         }

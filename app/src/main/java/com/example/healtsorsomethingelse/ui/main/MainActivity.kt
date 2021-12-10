@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private val googleSingInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         LogUtils.log("google sign in result ${it.resultCode}", Log.INFO, TAG)
+        //TODO("добавить логику обработки проспуска авторизации")
         if (it.resultCode == Activity.RESULT_OK) {
             //startMainActivity(this)
         }

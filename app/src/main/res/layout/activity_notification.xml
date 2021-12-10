@@ -17,13 +17,13 @@
             android:id="@+id/collapsingToolbar"
             app:collapsedTitleGravity="start"
             app:titleEnabled="true"
-            app:title="@string/title_activity_notification"
+            android:background="@color/basicActivityGrey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                app:title="@string/title_activity_notification"
+                android:background="@color/basicActivityGrey"
                 app:layout_collapseMode="pin"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">

@@ -40,7 +40,7 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
         viewModel.sendAction(RemoveNotification(id))
     }
     private val onClickCallback = OnClickCallback { id, view ->
-        NotificationInfoActivity.startActivity(this, id, view)
+        //NotificationInfoActivity.startActivity(this, id, view)
     }
 
     /**

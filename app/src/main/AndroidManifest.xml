@@ -12,11 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MySplash">
-        <activity
-            android:name=".ui.NotificationInfoActivity">
 
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".ui.NotificationInfoActivity">
         </activity>
         <activity
+            android:theme="@style/AppTheme"
             android:name=".ui.workout.WorkoutActivity"
             android:label="@string/exercises" />
         <activity

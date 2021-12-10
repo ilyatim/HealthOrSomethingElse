@@ -1,46 +1,45 @@
 package com.example.healtsorsomethingelse.ui.main.fragments
 
-import android.app.SearchManager
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
-import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.database.mainScreen.Actions
 import com.example.healtsorsomethingelse.data.database.mainScreen.UiState
 import com.example.healtsorsomethingelse.data.database.mainScreen.UserDatabaseContent
 import com.example.healtsorsomethingelse.databinding.DatabaseFragmentBinding
-import com.example.healtsorsomethingelse.extensions.ContextExtensions.showShortToast
+import com.example.healtsorsomethingelse.databinding.HomeFragmentBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
+import com.example.healtsorsomethingelse.ui.BaseBindingFragment
+import com.example.healtsorsomethingelse.ui.DialogHelper
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseAdapter
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseListener
-import com.example.healtsorsomethingelse.ui.main.vpComponents.FragmentAdapter
-import com.example.healtsorsomethingelse.utils.CustomOnTabSelectedListener
+import com.example.healtsorsomethingelse.utils.BindingInflater
 import com.example.healtsorsomethingelse.utils.database.DatabaseViewModel
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.transition.MaterialSharedAxis
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.example.healtsorsomethingelse.utils.throttleFirst
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
-class DatabaseFragment : Fragment() {
+class DatabaseFragment : BaseBindingFragment<DatabaseFragmentBinding>() {
 
-    private var _binding: DatabaseFragmentBinding? = null
-    private val binding get() = _binding!!
+    override val bindingInflater: BindingInflater<DatabaseFragmentBinding>
+        get() = BindingInflater { layoutInflater, container, attachToParent ->
+            DatabaseFragmentBinding.inflate(layoutInflater, container, false)
+        }
+
     private val viewModel: DatabaseViewModel by activityViewModels()
     private var adapter: DatabaseAdapter? = null
+
+    private val buttonClickHandler: (Int) -> Unit = throttleFirst(
+        500,
+        MainScope(),
+        this::showBottomSheetDialog
+    )
 
     private val clickListener = object : DatabaseListener {
         override fun onSubRecyclerTopicClick() {
@@ -51,17 +50,13 @@ class DatabaseFragment : Fragment() {
             TODO("Not yet implemented")
         }
 
-        override fun onSubRecyclerCellClick() {
-            TODO("Not yet implemented")
+        override fun onSubRecyclerCellClick(itemId: Int) {
+            activity?.let { buttonClickHandler(itemId) }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = DatabaseFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+    private fun showBottomSheetDialog(itemId: Int) {
+        DialogHelper.showBottomSheetDialogFragment(activity!!.supportFragmentManager, itemId)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,8 +127,7 @@ class DatabaseFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         adapter = null
-        _binding = null
+        //_binding = null
     }
-
 }
 
