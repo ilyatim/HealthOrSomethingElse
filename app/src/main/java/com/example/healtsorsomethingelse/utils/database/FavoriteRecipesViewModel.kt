@@ -19,14 +19,15 @@ class FavoriteRecipesViewModel @Inject constructor(
     private val favItemsList: MutableList<RecipeCell> = mutableListOf()
 
     override fun loadContent() {
-        stateData.value = UiState.Loading
+        setState(UiState.Loading)
         launch {
-            stateData.value = try {
+            val state = try {
                 favItemsList.addAll(repo.getRecipes(RecipesType.Favorite))
                 UiState.Content(favItemsList)
             } catch (e: Exception) {
                 UiState.Error(errorHandler.getErrorMessage(e.message))
             }
+            setState(state)
         }
     }
 }

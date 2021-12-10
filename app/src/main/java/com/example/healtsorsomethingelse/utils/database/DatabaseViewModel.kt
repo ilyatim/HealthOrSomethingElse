@@ -20,43 +20,16 @@ import java.security.spec.ECField
 import javax.inject.Inject
 
 @HiltViewModel
-class DatabaseViewModel @Inject constructor(private val repo: DatabaseRepository): BaseViewModel() {
+class DatabaseViewModel @Inject constructor(
+    private val repo: DatabaseRepository
+): BaseViewModel<UiState, Actions>(UiState.Idle) {
+
     private val TAG: String = "DatabaseViewModelTag"
-
-    private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
-    val state: StateFlow<UiState>
-        get() = _state
-
-    private val actions: Channel<Actions> = Channel(Channel.UNLIMITED)
-
     private var height: Int = 0
-
-    init {
-        handleActions()
-    }
-
-    fun sendAction(action: Actions) {
-        launch {
-            actions.send(action)
-        }
-    }
-
-    private fun handleActions() {
-        launch {
-            actions.consumeAsFlow().collect {
-                when (it) {
-                    Actions.LoadContent -> {
-                        loadContent()
-                    }
-                    is Actions.SetBarHeight -> height = it.height
-                }
-            }
-        }
-    }
 
     private fun loadContent() {
         CoroutineScope(Dispatchers.IO).launch {
-            _state.value = try {
+            val state = try {
                 UiState.Content(repo.getContent(), height)
             } catch (e: GoogleNotFountException) {
                 Log.d(TAG, "google not found exception")
@@ -65,6 +38,14 @@ class DatabaseViewModel @Inject constructor(private val repo: DatabaseRepository
                 Log.d(TAG, "exception - ${e.message}")
                 UiState.Error(e.message ?: "Unknown message")
             }
+
+        }
+    }
+
+    override fun collectAction(action: Actions) {
+        when (action) {
+            Actions.LoadContent -> loadContent()
+            is Actions.SetBarHeight -> height = action.height
         }
     }
 }

@@ -14,14 +14,15 @@ class AllRecipesViewModel @Inject constructor(repo: FoodRepository) : BaseFoodVi
     private val allItemsList: MutableList<RecipeCell> = mutableListOf()
 
     override fun loadContent() {
-        stateData.value = UiState.Loading
+        setState(UiState.Loading)
         launch {
-            stateData.value = try {
+            val state = try {
                 allItemsList.addAll(repo.getRecipes(RecipesType.All))
                 UiState.Content(allItemsList)
             } catch (e: Exception) {
                 UiState.Error(e.message)
             }
+            setState(state)
         }
     }
 }

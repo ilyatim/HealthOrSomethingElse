@@ -61,7 +61,7 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
 
     private fun handleUiState() {
         launch {
-            viewModel.state.collect {
+            viewModel.getUiState().collect {
                 if (_binding == null) return@collect
                 when (it) {
                     DialogUiState.Idle -> initLoading()
@@ -145,7 +145,7 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
     }
 
     private fun initLoading() {
-        viewModel.sendIntent(DialogAction.LoadData(recipeId))
+        viewModel.sendAction(DialogAction.LoadData(recipeId))
     }
 
     override fun onDestroyView() {

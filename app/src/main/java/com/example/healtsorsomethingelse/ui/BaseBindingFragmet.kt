@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 import com.example.healtsorsomethingelse.utils.BaseViewModel
 import com.example.healtsorsomethingelse.utils.BindingInflater
 
-abstract class BaseBindingFragment<T : ViewBinding>(
-) : Fragment() {
-
+abstract class BaseBindingFragment<T : ViewBinding>() : Fragment() {
     protected abstract val bindingInflater: BindingInflater<T>
-    //protected abstract val viewModel: BaseViewModel
 
     private var _binding: T? = null
     protected val binding: T

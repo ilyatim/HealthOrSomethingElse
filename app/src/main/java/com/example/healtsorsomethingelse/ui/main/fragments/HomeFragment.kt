@@ -9,10 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.healtsorsomethingelse.R
-import com.example.healtsorsomethingelse.data.home.HomeIntent
+import com.example.healtsorsomethingelse.data.home.Action
 import com.example.healtsorsomethingelse.data.home.Statistics
 import com.example.healtsorsomethingelse.data.home.UiState
 import com.example.healtsorsomethingelse.databinding.HomeFragmentBinding
@@ -24,13 +23,8 @@ import com.example.healtsorsomethingelse.ui.settings.SettingsActivity
 import com.example.healtsorsomethingelse.ui.workout.WorkoutActivity
 import com.example.healtsorsomethingelse.utils.BaseFragment
 import com.example.healtsorsomethingelse.utils.home.HomeFragmentViewModel
-import com.google.android.material.transition.MaterialSharedAxis
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.FragmentScoped
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
@@ -98,7 +92,7 @@ class HomeFragment : BaseFragment() {
 
     private fun handleUiState() {
         lifecycleScope.launchWhenStarted {
-            viewModel.state.collect {
+            viewModel.getUiState().collect {
                 when (it) {
                     UiState.Idle -> {}
                     UiState.Loading -> handleLoading()
@@ -109,7 +103,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onResume() {
-        viewModel.sendIntent(HomeIntent.InitLoading)
+        viewModel.sendAction(Action.InitLoading)
         super.onResume()
     }
 

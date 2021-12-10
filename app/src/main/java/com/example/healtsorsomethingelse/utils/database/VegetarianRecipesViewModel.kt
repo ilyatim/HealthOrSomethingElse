@@ -9,19 +9,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class VegetarianRecipesViewModel @Inject constructor(repo: FoodRepository) : BaseFoodViewModel(repo) {
+class VegetarianRecipesViewModel @Inject constructor(
+    repo: FoodRepository
+) : BaseFoodViewModel(repo) {
 
     private val vegItemsList: MutableList<RecipeCell> = mutableListOf()
 
     override fun loadContent() {
-        stateData.value = UiState.Loading
+        setState(UiState.Loading)
         launch {
-            stateData.value = try {
+            val state = try {
                 vegItemsList.addAll(repo.getRecipes(RecipesType.Vegetarian))
                 UiState.Content(vegItemsList)
             } catch (e: Exception) {
                 UiState.Error(e.message)
             }
+            setState(state)
         }
     }
 }

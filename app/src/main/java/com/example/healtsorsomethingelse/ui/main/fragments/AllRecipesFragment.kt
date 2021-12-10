@@ -58,7 +58,7 @@ class AllRecipesFragment : BaseFragment() {
 
     private fun handleUiState() {
         launch {
-            viewModel.state.collect {
+            viewModel.getUiState().collect {
                 when (it) {
                     UiState.Idle -> {
                         initLoading()

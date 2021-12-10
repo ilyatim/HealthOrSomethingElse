@@ -6,6 +6,8 @@ import com.example.healtsorsomethingelse.data.profile.UiAction
 import com.example.healtsorsomethingelse.data.profile.UiState
 import com.example.healtsorsomethingelse.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,36 +18,11 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileFragmentViewModel @Inject constructor(private val repo: ProfileRepository) : BaseViewModel() {
+class ProfileFragmentViewModel @Inject constructor(
+    private val repo: ProfileRepository
+) : BaseViewModel<UiState, UiAction>(UiState.Idle) {
 
     private lateinit var profileData: ProfileData
-
-    private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
-    val state: StateFlow<UiState>
-        get() = _state
-
-    private val action: Channel<UiAction> = Channel(Channel.UNLIMITED)
-
-    init {
-        handleIntent()
-    }
-
-    fun sendAction(action: UiAction) {
-        launch { this@ProfileFragmentViewModel.action.send(action) }
-    }
-
-    private fun handleIntent() {
-        launch {
-            action.consumeAsFlow().collect {
-                when (it) {
-                    is UiAction.CompletePurposes -> completePurpose(it.purpose, it.listPosition)
-                    is UiAction.DismissPurpose -> removePurpose(it.listPosition)
-                    is UiAction.AddNewPurpose -> addNewPurpose(it.purpose)
-                    UiAction.Loading -> initContent()
-                }
-            }
-        }
-    }
 
     private fun addNewPurpose(purpose: String) {
         launch {
@@ -58,13 +35,11 @@ class ProfileFragmentViewModel @Inject constructor(private val repo: ProfileRepo
         profileData = profileData.copy(
             purposes = profileData.purposes.toMutableList().apply { add(purpose) }
         )
-        _state.value = UiState.Content(profileData)
+        setState(UiState.Content(profileData))
     }
 
     private fun completePurpose(purpose: String, listPosition: Int) {
-        launch {
-            repo.savePurposes(purpose)
-        }
+        CoroutineScope(Dispatchers.IO).launch { repo.savePurposes(purpose) }
         removePurpose(listPosition)
     }
 
@@ -72,18 +47,28 @@ class ProfileFragmentViewModel @Inject constructor(private val repo: ProfileRepo
         profileData = profileData.copy(
             purposes = profileData.purposes.toMutableList().apply { removeAt(listPosition) }
         )
-        _state.value = UiState.Content(profileData)
+        setState(UiState.Content(profileData))
     }
 
     private fun initContent() {
-        _state.value = UiState.Loading
+        setState(UiState.Loading)
         launch {
-            _state.value = try {
+            val state = try {
                 profileData = repo.getProfileData()
                 UiState.Content(profileData)
             } catch (e: Exception) {
                 UiState.Error(e.message)
             }
+            setState(state)
+        }
+    }
+
+    override fun collectAction(action: UiAction) {
+        when (action) {
+            is UiAction.CompletePurposes -> completePurpose(action.purpose, action.listPosition)
+            is UiAction.DismissPurpose -> removePurpose(action.listPosition)
+            is UiAction.AddNewPurpose -> addNewPurpose(action.purpose)
+            UiAction.Loading -> initContent()
         }
     }
 }

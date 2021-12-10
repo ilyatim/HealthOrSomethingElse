@@ -106,7 +106,7 @@ class ProfileFragment : BaseFragment() {
 
     private fun handleUiState() {
         lifecycleScope.launchWhenStarted {
-            viewModel.state.collect {
+            viewModel.getUiState().collect {
                 when (it) {
                     UiState.Idle -> viewModel.sendAction(UiAction.Loading)
                     UiState.Loading -> handleLoading()

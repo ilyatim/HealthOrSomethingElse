@@ -1,6 +1,5 @@
 package com.example.healtsorsomethingelse.data
 
-sealed class BaseUiState {
-    abstract class UiState : BaseUiState()
+abstract class BaseUiState {
     object Idle : BaseUiState()
 }

@@ -48,7 +48,7 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
      */
     private fun observeUiState() {
         launch {
-            viewModel.state.collect {
+            viewModel.getUiState().collect {
                 when (it) {
                     UiState.Idle -> initLoading()
                     UiState.Loading -> handleLoading()

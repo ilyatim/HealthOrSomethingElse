@@ -2,10 +2,11 @@ package com.example.healtsorsomethingelse.utils.database
 
 import com.example.healtsorsomethingelse.utils.BaseViewModel
 
-/*@HiltViewModel*/
-class FoodViewModel /*@Inject constructor*/(/*private val repo: FoodRepository*/) : BaseViewModel() {
+/*
+@HiltViewModel
+class FoodViewModel @Inject constructor(private val repo: FoodRepository) : BaseViewModel() {
 
-    /*private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
+    private val _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
     val state: StateFlow<UiState>
         get() = _state
 
@@ -34,5 +35,5 @@ class FoodViewModel /*@Inject constructor*/(/*private val repo: FoodRepository*/
         launch {
             _state.value = UiState.Content(repo.getRecipes(type))
         }
-    }*/
-}
+    }
+}*/

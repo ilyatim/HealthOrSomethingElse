@@ -1,6 +1,8 @@
 package com.example.healtsorsomethingelse.data.database.recipes
 
-sealed class UiState {
+import com.example.healtsorsomethingelse.data.BaseUiState
+
+sealed class UiState : BaseUiState() {
     object Idle : UiState()
     object Loading : UiState()
     data class Content(val items: List<RecipeCell>) : UiState()

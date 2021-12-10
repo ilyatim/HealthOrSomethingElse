@@ -1,6 +1,8 @@
 package com.example.healtsorsomethingelse.data.database.mainScreen
 
-sealed class UiState {
+import com.example.healtsorsomethingelse.data.BaseUiState
+
+sealed class UiState : BaseUiState() {
     object Idle : UiState()
     object Loading : UiState()
     data class Content(val content: List<UserDatabaseContent>, val height: Int) : UiState()

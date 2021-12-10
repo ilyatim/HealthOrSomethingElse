@@ -14,44 +14,25 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BottomDialogViewModel @Inject constructor(): BaseViewModel() {
-    @Inject
-    lateinit var repo: DialogRepository
-    private val actions: Channel<DialogAction> = Channel(Channel.UNLIMITED)
-
-    private val _state: MutableStateFlow<DialogUiState> = MutableStateFlow(DialogUiState.Idle)
-    val state: StateFlow<DialogUiState>
-        get() = _state
-
-    init {
-        handleIntent()
-    }
-
-    fun sendIntent(action: DialogAction) {
-        launch {
-            actions.send(action)
-        }
-    }
-
-    private fun handleIntent() {
-        launch {
-            actions.consumeAsFlow().collect {
-                when (it) {
-                    is DialogAction.LoadData -> initLoading(it.id)
-                }
-            }
-        }
-    }
+class BottomDialogViewModel @Inject constructor(
+    private val repo: DialogRepository
+): BaseViewModel<DialogUiState, DialogAction>(DialogUiState.Idle) {
 
     private fun initLoading(id: Int) {
-        _state.value = DialogUiState.Loading
+        setState(DialogUiState.Loading)
         launch {
-            _state.value = try {
+            val state = try {
                 DialogUiState.Content(repo.getRecipeByID(id))
             } catch (e: Exception) {
                 DialogUiState.Error(e.message)
             }
+            setState(state)
         }
     }
 
+    override fun collectAction(action: DialogAction) {
+        when (action) {
+            is DialogAction.LoadData -> initLoading(action.id)
+        }
+    }
 }

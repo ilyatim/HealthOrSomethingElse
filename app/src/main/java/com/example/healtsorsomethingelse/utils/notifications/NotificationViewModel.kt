@@ -6,6 +6,7 @@ import com.example.healtsorsomethingelse.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,51 +20,22 @@ import javax.inject.Inject
 class NotificationViewModel @Inject constructor(
     private val repository: NotificationRepository,
     private val repositoryHelper: NotificationRepositoryHelper
-) : BaseViewModel() {
+) : BaseViewModel<UiState, Actions>(UiState.Idle) {
 
-    //@Inject lateinit var repository: NotificationRepository
-    //@Inject lateinit var repositoryHelper: NotificationRepositoryHelper
-
-    private var _state: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
-    val state: StateFlow<UiState>
-        get() = _state
-
-    private val actions: Channel<Actions> = Channel(Channel.UNLIMITED)
     private val notifications: MutableList<UserNotification> = mutableListOf()
-
-    init {
-        handleActions()
-    }
-
-    fun sendAction(action: Actions) {
-        launch {
-            this@NotificationViewModel.actions.send(action)
-        }
-    }
-
-    private fun handleActions() {
-        launch {
-            actions.consumeAsFlow().collect {
-                when (it) {
-                    Load -> initLoading()
-                    is RemoveNotification -> removeNotification(it.id)
-                }
-            }
-        }
-    }
 
     private fun removeNotification(id: String) {
         this@NotificationViewModel.notifications.removeIf { it.id == id }
         val notifications: MutableList<Notifications> = mutableListOf()
         notifications.addAll(this@NotificationViewModel.notifications)
         repositoryHelper.addDateToNotification(notifications)
-        _state.value = UiState.Content(notifications)
+        setState(UiState.Content(notifications))
     }
 
     private fun initLoading() {
-        _state.value = UiState.Loading
-        launch {
-            _state.value = try {
+        setState(UiState.Loading)
+        CoroutineScope(Dispatchers.IO).launch {
+            val state = try {
                 this@NotificationViewModel.notifications.clear()
                 this@NotificationViewModel.notifications.addAll(repository.getUserNotification().toMutableList())
                 val notifications: MutableList<Notifications> = mutableListOf()
@@ -73,6 +45,14 @@ class NotificationViewModel @Inject constructor(
             } catch (e: Exception) {
                 UiState.Error(repository.getErrorMessage(e.message))
             }
+            setState(state)
+        }
+    }
+
+    override fun collectAction(action: Actions) {
+        when (action) {
+            Load -> initLoading()
+            is RemoveNotification -> removeNotification(action.id)
         }
     }
 }

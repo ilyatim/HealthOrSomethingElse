@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.collect
 class DatabaseFragment : BaseBindingFragment<DatabaseFragmentBinding>() {
 
     override val bindingInflater: BindingInflater<DatabaseFragmentBinding>
-        get() = BindingInflater { layoutInflater, container, attachToParent ->
+        get() = BindingInflater { layoutInflater, container, _ ->
             DatabaseFragmentBinding.inflate(layoutInflater, container, false)
         }
 
@@ -86,7 +86,7 @@ class DatabaseFragment : BaseBindingFragment<DatabaseFragmentBinding>() {
 
     private fun handleUiState() {
         lifecycleScope.launchWhenStarted {
-            viewModel.state.collect {
+            viewModel.getUiState().collect {
                 when (it) {
                     UiState.Idle -> { viewModel.sendAction(Actions.LoadContent) }
                     UiState.Loading -> { handleLoading() }
