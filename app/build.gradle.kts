@@ -1,3 +1,6 @@
+//typealias and = com.example.dependencies.Android
+//typealias dep = com.example.dependencies.Dependencies
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
