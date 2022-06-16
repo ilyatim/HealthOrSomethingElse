@@ -1,1 +1,1 @@
-rootProject.name = "Dependecies"
+rootProject.name = "Dependencies"

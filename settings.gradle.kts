@@ -1,3 +1,3 @@
 rootProject.name = "HealtsOrSomethingElse"
-include("app")
+include(":app")
 includeBuild("app/plugins/dependencies")
