@@ -46,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":core")))
     //fileTree(dir: "libs", include: ["*.jar"])
     dep.hilt.apply {
         implementation(hiltAndroid)

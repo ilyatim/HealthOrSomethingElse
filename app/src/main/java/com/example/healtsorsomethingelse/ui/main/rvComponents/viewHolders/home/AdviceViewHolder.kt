@@ -2,9 +2,9 @@ package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.example.core.ui.AbsViewHolder
 import com.example.healtsorsomethingelse.data.home.Statistics
 import com.example.healtsorsomethingelse.databinding.ItemAdviceBinding
-import com.example.healtsorsomethingelse.utils.AbsViewHolder
 
 class AdviceViewHolder(
     layoutInflater: LayoutInflater,
