@@ -10,6 +10,7 @@ object Dependencies {
     val retrofit = Retrofit
     val test = Test
     val ui = Ui
+    val androidXUi = AndroidXUi
     val lifecycle = Lifecycle
     val other = Other
     val core = Core

@@ -1,6 +1,6 @@
 buildscript {
-
-    val hiltVersion = "2.40.1"
+    //Basic versions
+    val hiltVersion = "2.42"
     val kotlinVersion = "1.6.21"
     val gradleVersion = "7.2.0"
 
