@@ -5,6 +5,8 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("dependencies")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -40,14 +42,32 @@ android {
 dependencies {
     dep.core.apply {
         implementation(androidCoreKtx)
+        implementation(fragment)
+        implementation(fragmentKtx)
         implementation(appCompat)
+        implementation(kotlin)
+        implementation(kotlinCoroutinesCore)
+        implementation(kotlinCoroutinesAndroid)
     }
     dep.ui.apply {
         implementation(material)
+    }
+    dep.lifecycle.apply {
+        implementation(viewModel)
+        //implementation(liveData)
+    }
+    dep.androidXUi.apply {
+        implementation(recyclerView)
     }
     dep.test.apply {
         testImplementation(junit)
         androidTestImplementation(junitAndroid)
         androidTestImplementation(espressoCore)
+    }
+    dep.hilt.apply {
+        implementation(hiltAndroid)
+        kapt(daggerHiltAndroidCompiler)
+        kaptTest(daggerHiltAndroidCompiler)
+        kaptAndroidTest(daggerHiltAndroidCompiler)
     }
 }

@@ -7,26 +7,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.core.ui.AbsMultipleAdapter
+import com.example.core.ui.AbsViewHolder
+import com.example.core.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.data.notification.NotificationTopic
 import com.example.healtsorsomethingelse.data.notification.Notifications
 import com.example.healtsorsomethingelse.data.notification.UserNotification
 import com.example.healtsorsomethingelse.ui.notification.viewHolders.TopicNotificationViewHolder
 import com.example.healtsorsomethingelse.ui.notification.viewHolders.UserNotificationViewHolder
-import com.example.healtsorsomethingelse.utils.AbsViewHolder
-import com.example.healtsorsomethingelse.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.utils.notifications.OnSwipeCallback
 import com.example.healtsorsomethingelse.utils.notifications.UserNotificationSimpleCallback
 
 class NotificationAdapter(
     private val layoutInflater: LayoutInflater,
-    private val list: MutableList<Notifications>,
+    list: MutableList<Notifications>,
     private val callback: OnSwipeCallback,
     private val onClickCallback: OnClickCallback
-) : RecyclerView.Adapter<AbsViewHolder<Notifications>>() {
+) : AbsMultipleAdapter<Notifications, AbsViewHolder<Notifications>, NotificationAdapter.ViewType>(
+    list
+) {
 
-    private lateinit var diffUtils: DiffUtilImpl<Notifications>
     private val viewTypeValues = ViewType.values()
-    private val Notifications.viewType: ViewType
+    override val Notifications.viewType: ViewType
         get() = when (this) {
             is NotificationTopic -> ViewType.TOPIC
             is UserNotification -> ViewType.USER
@@ -38,19 +40,6 @@ class NotificationAdapter(
         val itemTouchHelper = ItemTouchHelper(itemTouchListener)
         itemTouchHelper.attachToRecyclerView(recyclerView)
         super.onAttachedToRecyclerView(recyclerView)
-    }
-
-    fun updateList(newList: List<Notifications>) {
-        diffUtils = DiffUtilImpl(list, newList)
-        val diffUtilsResult = DiffUtil.calculateDiff(diffUtils)
-        diffUtilsResult.dispatchUpdatesTo(this)
-
-        list.clear()
-        list.addAll(newList)
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return list[position].viewType.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder<Notifications> {
@@ -71,11 +60,10 @@ class NotificationAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: AbsViewHolder<Notifications>, position: Int) {
-        holder.bind(list[position])
-    }
-
-    override fun getItemCount(): Int = list.size
+    override fun getDiffUtils(
+        oldList: List<Notifications>,
+        newList: List<Notifications>,
+    ): DiffUtil.Callback = DiffUtilImpl(oldList, newList)
 
     enum class ViewType {
         TOPIC,
@@ -94,10 +82,6 @@ class NotificationAdapter(
         }
     }
 }
-
-/*abstract class AbsNotificationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    abstract fun bind(cell: Notifications)
-}*/
 
 fun interface OnClickCallback {
     fun onNotificationClick(notificationId: String, view: View)

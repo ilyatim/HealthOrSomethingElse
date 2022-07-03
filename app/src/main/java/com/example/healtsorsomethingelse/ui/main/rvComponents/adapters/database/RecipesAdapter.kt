@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.core.ui.AbsAdapter
+import com.example.core.ui.AbsBindingViewHolder
+import com.example.core.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.R
 import com.example.healtsorsomethingelse.data.database.recipes.RecipeCell
 import com.example.healtsorsomethingelse.databinding.ItemRecipeBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.click
-import com.example.healtsorsomethingelse.utils.DiffUtilImpl
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -20,19 +22,8 @@ import java.util.*
 class RecipesAdapter(
     private val layoutInflater: LayoutInflater,
     private val listener: OnRecipeItemListener,
-    private val items: MutableList<RecipeCell>
-) : RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder>() {
-
-    private lateinit var diffUtil: DiffUtilImpl<RecipeCell>
-
-    fun updateList(newList: List<RecipeCell>) {
-        diffUtil = DiffUtilImpl(items, newList)
-        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
-        diffUtilResult.dispatchUpdatesTo(this)
-
-        items.clear()
-        items.addAll(newList)
-    }
+    list: MutableList<RecipeCell>
+) : AbsAdapter<RecipeCell, RecipesViewHolder>(list) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipesViewHolder {
         return RecipesViewHolder(
@@ -42,50 +33,52 @@ class RecipesAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
-        holder.bind(items[position])
+    override fun getDiffUtils(
+        oldList: List<RecipeCell>,
+        newList: List<RecipeCell>,
+    ): DiffUtil.Callback {
+        return DiffUtilImpl(oldList, newList)
+    }
+}
+
+class RecipesViewHolder(
+    layoutInflater: LayoutInflater,
+    parent: ViewGroup,
+    private val listener: OnRecipeItemListener,
+) : AbsBindingViewHolder<RecipeCell, ItemRecipeBinding>(
+    ItemRecipeBinding.inflate(
+        layoutInflater,
+        parent,
+        false
+    )
+) {
+    override fun bind(cell: RecipeCell) = withBinding {
+        Glide.with(root)
+            .load(cell.imageUrl)
+            .placeholder(R.color.colorLightGreen)
+            .centerCrop()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            //.centerInside()
+            /*.transform(RoundedCorners(20))*/
+            .into(imageView)
+
+        likeTextView.text = cell.likes.toString()
+        categoryTextView.text = cell.category
+        nameTextView.text = cell.name
+        timeTextView.text = getActuallyCookingTime(cell.cookingTime)
+        numberOfPortion.text = cell.portion.toString()
+
+        root.click()
+            .onEach { listener.onRecipeClick(cell.id) }
+            .launchIn(MainScope())
+        /*binding.root.setOnClickListener {
+            this.listener.onRecipeClick(item.id)
+        }*/
     }
 
-    override fun getItemCount(): Int = items.size
-
-    inner class RecipesViewHolder(
-        layoutInflater: LayoutInflater,
-        parent: ViewGroup,
-        private val listener: OnRecipeItemListener,
-        private val binding: ItemRecipeBinding =
-            ItemRecipeBinding.inflate(
-                layoutInflater,
-                parent,
-                false
-            )
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: RecipeCell) {
-            Glide.with(binding.root)
-                .load(item.imageUrl)
-                .placeholder(R.color.colorLightGreen)
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                //.centerInside()
-                /*.transform(RoundedCorners(20))*/
-                .into(binding.imageView)
-            binding.likeTextView.text = item.likes.toString()
-            binding.categoryTextView.text = item.category
-            binding.nameTextView.text = item.name
-            binding.timeTextView.text = getActuallyCookingTime(item.cookingTime)
-            binding.numberOfPortion.text = item.portion.toString()
-
-            binding.root.click()
-                .onEach { this.listener.onRecipeClick(item.id) }
-                .launchIn(MainScope())
-            /*binding.root.setOnClickListener {
-                this.listener.onRecipeClick(item.id)
-            }*/
-        }
-
-        private fun getActuallyCookingTime(value: Long): String {
-            val sdf = SimpleDateFormat("hh:mm", Locale.getDefault())
-            return sdf.format(Date(value))
-        }
+    private fun getActuallyCookingTime(value: Long): String {
+        val sdf = SimpleDateFormat("hh:mm", Locale.getDefault())
+        return sdf.format(Date(value))
     }
 }
 

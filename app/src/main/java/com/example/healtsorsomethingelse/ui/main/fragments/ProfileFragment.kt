@@ -131,7 +131,7 @@ class ProfileFragment : BaseFragment() {
         binding.progressBar.gone()
 
         adapter?.updateList(content.purposes) ?: run {
-            adapter = Adapter(layoutInflater, content.purposes.toMutableList(), purposeListener)
+            adapter = Adapter(layoutInflater, purposeListener, content.purposes.toMutableList())
             (binding.purposesLayout.recyclerView.adapter as ConcatAdapter).addAdapter(0, adapter!!)
             binding.purposesLayout.recyclerView.scrollToPosition(0)
         }

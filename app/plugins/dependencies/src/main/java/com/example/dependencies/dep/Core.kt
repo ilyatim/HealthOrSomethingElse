@@ -50,4 +50,28 @@ object Core {
      * @see [https://mvnrepository.com/artifact/androidx.navigation/navigation-fragment-ktx]
      */
     const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navigationVersion}"
+
+    /**
+     * Kotlin Standard Library for JVM
+     * @see [https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib]
+     */
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
+
+    /**
+     * Coroutines support libraries for Kotlin
+     * @see [https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core]
+     */
+    const val kotlinCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}"
+
+    /**
+     * Coroutines support libraries for Kotlin
+     * @see [https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android]
+     */
+    const val kotlinCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesVersion}"
+
+    /**
+     * Coroutines support libraries for Kotlin
+     * @see [https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm]
+     */
+    const val kotlinCoroutinesCoreJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${Versions.coroutinesVersion}"
 }

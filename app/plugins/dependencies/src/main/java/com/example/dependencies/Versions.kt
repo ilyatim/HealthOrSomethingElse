@@ -12,7 +12,9 @@ object Versions {
     //Navigation
     const val navigationVersion = "2.3.5"
     //kotlin
-    const val kotlinVersion = "1.6.21"
+    const val kotlinVersion = "1.7.0"
+    //coroutines
+    const val coroutinesVersion = "1.6.3"
     //gradle
     const val gradleVersion = "7.2.0"
     //retrofit

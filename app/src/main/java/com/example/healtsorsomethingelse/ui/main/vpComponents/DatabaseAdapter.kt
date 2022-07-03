@@ -3,26 +3,27 @@ package com.example.healtsorsomethingelse.ui.main.vpComponents
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
+import com.example.core.ui.AbsMultipleAdapter
+import com.example.core.ui.AbsViewHolder
+import com.example.core.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.data.database.mainScreen.UserDatabaseContent
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.database.ChapterViewHolder
 import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.database.SubListViewHolder
-import com.example.healtsorsomethingelse.utils.AbsViewHolder
-import com.example.healtsorsomethingelse.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.utils.UiUtils.setHolderBottomMargin
 import com.example.healtsorsomethingelse.utils.UiUtils.setHolderTopMargin
 
 class DatabaseAdapter(
     private val layoutInflater: LayoutInflater,
-    private val content: MutableList<UserDatabaseContent>,
+    list: MutableList<UserDatabaseContent>,
     private val listener: DatabaseListener,
-) : RecyclerView.Adapter<AbsViewHolder<UserDatabaseContent>>() {
+) : AbsMultipleAdapter<UserDatabaseContent, AbsViewHolder<UserDatabaseContent>, DatabaseAdapter.ViewType>(
+    list
+) {
 
     private var topMargin: Int = 180
 
-    private lateinit var diffUtilImpl: DiffUtilImpl<UserDatabaseContent>
     private val viewTypeValues = ViewType.values()
-    private val UserDatabaseContent.viewType: ViewType
+    override val UserDatabaseContent.viewType: ViewType
         get() = when (this) {
             is UserDatabaseContent.Block -> ViewType.CHAPTER
             is UserDatabaseContent.ContentList -> ViewType.SUBRECYCLER
@@ -30,15 +31,6 @@ class DatabaseAdapter(
 
     fun setTopMargin(margin: Int) {
         this.topMargin = margin
-    }
-
-    fun updateList(newList: List<UserDatabaseContent>) {
-        diffUtilImpl = DiffUtilImpl(content, newList)
-        val diffUtilsResult = DiffUtil.calculateDiff(diffUtilImpl)
-        diffUtilsResult.dispatchUpdatesTo(this)
-
-        content.clear()
-        content.addAll(newList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbsViewHolder<UserDatabaseContent> {
@@ -67,13 +59,13 @@ class DatabaseAdapter(
             setHolderTopMargin(holder, topMargin)
         } else {
             //Если идет 2 раза подряд блоки, делаем отступы между ними минимальными
-            if (content[position] is UserDatabaseContent.Block
-                && content[position - 1] is UserDatabaseContent.Block
+            if (list[position] is UserDatabaseContent.Block
+                && list[position - 1] is UserDatabaseContent.Block
             ) {
                 setHolderTopMargin(holder, 0)
             }
             //Если позиция элемента последняя, делаем отступ снизу
-            if (position == content.lastIndex) {
+            if (position == list.lastIndex) {
                 if (holder is ChapterViewHolder) {
                     //По неведомой причине, последний элемент может иметь отступ сверху около 181
                     //Ставим отступ 0, чтобы избежать этой ситуации
@@ -85,21 +77,18 @@ class DatabaseAdapter(
             }
         }
 
-        holder.bind(content[position])
+        holder.bind(list[position])
     }
-
-
-
-    override fun getItemViewType(position: Int): Int {
-        return content[position].viewType.ordinal
-    }
-
-    override fun getItemCount(): Int = content.size
 
     enum class ViewType {
         SUBRECYCLER,
         CHAPTER,
     }
+
+    override fun getDiffUtils(
+        oldList: List<UserDatabaseContent>,
+        newList: List<UserDatabaseContent>,
+    ): DiffUtil.Callback = DiffUtilImpl(oldList, newList)
 }
 
 interface DatabaseListener {

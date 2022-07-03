@@ -4,6 +4,7 @@ typealias dep = com.example.dependencies.Dependencies
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
     id("dependencies")
@@ -46,7 +47,7 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":core")))
+    implementation(project(":core"))
     //fileTree(dir: "libs", include: ["*.jar"])
     dep.hilt.apply {
         implementation(hiltAndroid)
@@ -91,5 +92,6 @@ dependencies {
         implementation(fragmentKtx)
         implementation(navigationUiKtx)
         implementation(navigationFragmentKtx)
+        implementation(kotlin)
     }
 }

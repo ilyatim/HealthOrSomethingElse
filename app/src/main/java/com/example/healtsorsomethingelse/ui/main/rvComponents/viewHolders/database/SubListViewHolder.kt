@@ -1,22 +1,16 @@
 package com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.database
 
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.marginStart
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.OrientationHelper
-import androidx.recyclerview.widget.RecyclerView
+import com.example.core.ui.AbsBindingViewHolder
 import com.example.healtsorsomethingelse.data.database.mainScreen.UserDatabaseContent
 import com.example.healtsorsomethingelse.databinding.ItemDatabaseSublistBinding
 import com.example.healtsorsomethingelse.di.ConstManagerInterface
 import com.example.healtsorsomethingelse.ui.main.rvComponents.adapters.database.HorizontalSublistAdapter
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseListener
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseViewHolder
-import com.example.healtsorsomethingelse.utils.AbsViewHolder
 import com.example.healtsorsomethingelse.utils.GravitySnapHelper
 import com.example.healtsorsomethingelse.utils.database.StateHandler
 import dagger.hilt.EntryPoints
@@ -25,13 +19,13 @@ class SubListViewHolder(
     private val layoutInflater: LayoutInflater,
     parent: ViewGroup,
     private val listener: DatabaseListener,
-    private val binding: ItemDatabaseSublistBinding =
-        ItemDatabaseSublistBinding.inflate(
-            layoutInflater,
-            parent,
-            false
-        )
-) : AbsViewHolder<UserDatabaseContent>(binding.root), DatabaseViewHolder {
+) : AbsBindingViewHolder<UserDatabaseContent, ItemDatabaseSublistBinding>(
+    ItemDatabaseSublistBinding.inflate(
+        layoutInflater,
+        parent,
+        false
+    )
+), DatabaseViewHolder {
 
     private var adapter: HorizontalSublistAdapter
     //Object that store adapter position

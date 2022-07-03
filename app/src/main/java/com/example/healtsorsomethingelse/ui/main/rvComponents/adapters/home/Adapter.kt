@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.example.core.ui.AbsAdapter
+import com.example.core.ui.AbsMultipleAdapter
 import com.example.core.ui.AbsViewHolder
 import com.example.core.utils.DiffUtilImpl
 import com.example.healtsorsomethingelse.data.home.Statistics
@@ -15,7 +16,7 @@ import com.example.healtsorsomethingelse.ui.main.rvComponents.viewHolders.home.W
 class Adapter(
     private val layoutInflater: LayoutInflater,
     list: MutableList<Statistics>
-) : AbsAdapter<Statistics, AbsViewHolder<Statistics>, Adapter.ViewType>(list) {
+) : AbsMultipleAdapter<Statistics, AbsViewHolder<Statistics>, Adapter.ViewType>(list) {
 
     private val viewTypeValues = ViewType.values()
 
