@@ -1,26 +1,23 @@
 package com.example.healtsorsomethingelse.utils.profile
 
+import com.example.core.utils.BaseViewModel
 import com.example.healtsorsomethingelse.data.profile.ProfileData
 import com.example.healtsorsomethingelse.data.profile.ProfileRepository
 import com.example.healtsorsomethingelse.data.profile.UiAction
 import com.example.healtsorsomethingelse.data.profile.UiState
-import com.example.healtsorsomethingelse.utils.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileFragmentViewModel @Inject constructor(
     private val repo: ProfileRepository
-) : BaseViewModel<UiState, UiAction>(UiState.Idle) {
+) : BaseViewModel<UiState, UiAction, Unit>() {
+    override val uiState: MutableStateFlow<UiState>
+        get() = MutableStateFlow(UiState.Idle)
 
     private lateinit var profileData: ProfileData
 

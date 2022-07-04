@@ -37,7 +37,7 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
     private lateinit var adapter: NotificationAdapter
     private val viewModel by viewModels<NotificationViewModel>()
     private val swipeCallback = OnSwipeCallback { pos, id ->
-        viewModel.sendAction(RemoveNotification(id))
+        viewModel.applyAction(RemoveNotification(id))
     }
     private val onClickCallback = OnClickCallback { id, view ->
         //NotificationInfoActivity.startActivity(this, id, view)
@@ -132,7 +132,7 @@ class NotificationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
     }
 
     private fun initLoading() {
-        viewModel.sendAction(Load)
+        viewModel.applyAction(Load)
     }
 
     private fun setupActionBar() {

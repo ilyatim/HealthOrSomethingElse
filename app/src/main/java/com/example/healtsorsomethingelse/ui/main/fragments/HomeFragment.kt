@@ -103,7 +103,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onResume() {
-        viewModel.sendAction(Action.InitLoading)
+        viewModel.applyAction(Action.InitLoading)
         super.onResume()
     }
 

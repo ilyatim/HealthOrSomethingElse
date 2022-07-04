@@ -72,7 +72,7 @@ class ProfileFragment : BaseFragment() {
             setDoneButtonState(null)
             //Send intent to save new purpose if it not empty
             if (inputText.isNotEmpty()) {
-                viewModel.sendAction(UiAction.AddNewPurpose(inputText))
+                viewModel.applyAction(UiAction.AddNewPurpose(inputText))
             }
             //Remove listener's from button and edit text
             view.setOnClickListener(null)
@@ -96,11 +96,11 @@ class ProfileFragment : BaseFragment() {
 
     private val purposeListener = object : PurposesListener {
         override fun onCompleteClick(value: String, adapterPosition: Int) {
-            viewModel.sendAction(UiAction.CompletePurposes(value, adapterPosition))
+            viewModel.applyAction(UiAction.CompletePurposes(value, adapterPosition))
         }
 
         override fun onDismissClick(adapterPosition: Int) {
-            viewModel.sendAction(UiAction.DismissPurpose(adapterPosition))
+            viewModel.applyAction(UiAction.DismissPurpose(adapterPosition))
         }
     }
 
@@ -108,7 +108,7 @@ class ProfileFragment : BaseFragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.getUiState().collect {
                 when (it) {
-                    UiState.Idle -> viewModel.sendAction(UiAction.Loading)
+                    UiState.Idle -> viewModel.applyAction(UiAction.Loading)
                     UiState.Loading -> handleLoading()
                     is UiState.Content -> fetchContent(it.content)
                     is UiState.Error -> fetchError(it.message)

@@ -145,7 +145,7 @@ class RecipeBottomSheetDialog : BottomSheetDialogFragment(), CoroutineScope by M
     }
 
     private fun initLoading() {
-        viewModel.sendAction(DialogAction.LoadData(recipeId))
+        viewModel.applyAction(DialogAction.LoadData(recipeId))
     }
 
     override fun onDestroyView() {

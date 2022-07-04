@@ -1,38 +1,30 @@
 package com.example.healtsorsomethingelse.ui.main.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.core.ui.AbsBindingFragment
+import com.example.core.ui.AbsFragment
+import com.example.core.ui.ViewInflater
 import com.example.healtsorsomethingelse.data.database.mainScreen.Actions
 import com.example.healtsorsomethingelse.data.database.mainScreen.UiState
 import com.example.healtsorsomethingelse.data.database.mainScreen.UserDatabaseContent
 import com.example.healtsorsomethingelse.databinding.DatabaseFragmentBinding
-import com.example.healtsorsomethingelse.databinding.HomeFragmentBinding
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.gone
 import com.example.healtsorsomethingelse.extensions.ViewExtensions.visible
-import com.example.healtsorsomethingelse.ui.BaseBindingFragment
 import com.example.healtsorsomethingelse.ui.DialogHelper
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseAdapter
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseListener
-import com.example.healtsorsomethingelse.utils.BindingInflater
 import com.example.healtsorsomethingelse.utils.database.DatabaseViewModel
 import com.example.healtsorsomethingelse.utils.throttleFirst
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.collect
 
-class DatabaseFragment : BaseBindingFragment<DatabaseFragmentBinding>() {
+class DatabaseFragment : AbsFragment<DatabaseFragmentBinding, UiState, Actions, Unit, DatabaseViewModel>() {
 
-    override val bindingInflater: BindingInflater<DatabaseFragmentBinding>
-        get() = BindingInflater { layoutInflater, container, _ ->
-            DatabaseFragmentBinding.inflate(layoutInflater, container, false)
-        }
+    override val viewModel: DatabaseViewModel by activityViewModels()
 
-    private val viewModel: DatabaseViewModel by activityViewModels()
     private var adapter: DatabaseAdapter? = null
 
     private val buttonClickHandler: (Int) -> Unit = throttleFirst(
@@ -73,7 +65,7 @@ class DatabaseFragment : BaseBindingFragment<DatabaseFragmentBinding>() {
     private fun setViewLayoutListener() {
         binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                viewModel.sendAction(Actions.SetBarHeight(binding.searchView.height + 30))
+                viewModel.applyAction(Actions.SetBarHeight(binding.searchView.height + 30))
                 binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
             }
         })
@@ -88,7 +80,7 @@ class DatabaseFragment : BaseBindingFragment<DatabaseFragmentBinding>() {
         lifecycleScope.launchWhenStarted {
             viewModel.getUiState().collect {
                 when (it) {
-                    UiState.Idle -> { viewModel.sendAction(Actions.LoadContent) }
+                    UiState.Idle -> { viewModel.applyAction(Actions.LoadContent) }
                     UiState.Loading -> { handleLoading() }
                     is UiState.Content -> {
                         stopLoading()
@@ -129,5 +121,20 @@ class DatabaseFragment : BaseBindingFragment<DatabaseFragmentBinding>() {
         adapter = null
         //_binding = null
     }
+
+    override fun collectUiState(state: UiState) {
+        TODO("Not yet implemented")
+    }
+
+    override fun collectUiEvent(event: Unit) {
+        TODO("Not yet implemented")
+    }
+
+    override val viewInflater: ViewInflater<DatabaseFragmentBinding>
+        get() = ViewInflater { layoutInflater, container, _ ->
+            DatabaseFragmentBinding.inflate(layoutInflater, container, false)
+        }
+    override val TAG: String
+        get() = TODO("Not yet implemented")
 }
 

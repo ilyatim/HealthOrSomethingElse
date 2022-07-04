@@ -53,7 +53,7 @@ abstract class AbsBindingFragment<V: ViewBinding>(
     abstract val viewInflater: ViewInflater<V>
 
     private var _binding: V? = null
-    private val binding: V
+    protected val binding: V
         get() = requireNotNull(_binding) {
             "require binding not null"
         }

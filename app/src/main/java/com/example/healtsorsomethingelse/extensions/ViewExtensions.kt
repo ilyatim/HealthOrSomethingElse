@@ -28,7 +28,7 @@ object ViewExtensions {
     @ExperimentalCoroutinesApi
     fun View.click(): Flow<Unit> = callbackFlow {
         setOnClickListener {
-            offer(Unit)
+            trySend(Unit)
         }
         awaitClose { setOnClickListener(null) }
     }

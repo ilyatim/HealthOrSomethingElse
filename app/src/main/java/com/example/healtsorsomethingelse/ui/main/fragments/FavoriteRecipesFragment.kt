@@ -95,7 +95,7 @@ class FavoriteRecipesFragment : BaseFragment() {
     }
 
     private fun initLoading() {
-        viewModel.sendAction(UiAction.Loading)
+        viewModel.applyAction(UiAction.Loading)
     }
 
     private fun handleLoading() {

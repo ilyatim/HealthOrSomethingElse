@@ -108,7 +108,7 @@ class VegetarianRecipesFragment : BaseFragment() {
     }
 
     private fun initLoading() {
-        viewModel.sendAction(UiAction.Loading)
+        viewModel.applyAction(UiAction.Loading)
     }
     companion object {
         fun newInstance() = VegetarianRecipesFragment()

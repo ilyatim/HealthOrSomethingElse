@@ -1,7 +1,5 @@
 package com.example.healtsorsomethingelse.utils.database
 
-import com.example.healtsorsomethingelse.utils.BaseViewModel
-
 /*
 @HiltViewModel
 class FoodViewModel @Inject constructor(private val repo: FoodRepository) : BaseViewModel() {
