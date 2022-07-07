@@ -41,7 +41,7 @@ abstract class AbsFragment<V: ViewBinding, T, K, E, VM: BaseViewModel<T, K, E>>(
      * Collect ui event from view model
      * @param event ui event
      */
-    abstract fun collectUiEvent(event: E)
+    open fun collectUiEvent(event: E) {}
 }
 
 /**

@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.core.ui.AbsBindingFragment
 import com.example.core.ui.AbsFragment
 import com.example.core.ui.ViewInflater
+import com.example.core.utils.throttleFirst
 import com.example.healtsorsomethingelse.data.database.mainScreen.Actions
 import com.example.healtsorsomethingelse.data.database.mainScreen.UiState
 import com.example.healtsorsomethingelse.data.database.mainScreen.UserDatabaseContent
@@ -18,10 +19,15 @@ import com.example.healtsorsomethingelse.ui.DialogHelper
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseAdapter
 import com.example.healtsorsomethingelse.ui.main.vpComponents.DatabaseListener
 import com.example.healtsorsomethingelse.utils.database.DatabaseViewModel
-import com.example.healtsorsomethingelse.utils.throttleFirst
 import kotlinx.coroutines.MainScope
 
 class DatabaseFragment : AbsFragment<DatabaseFragmentBinding, UiState, Actions, Unit, DatabaseViewModel>() {
+    override val viewInflater: ViewInflater<DatabaseFragmentBinding>
+        get() = ViewInflater { layoutInflater, container, _ ->
+            DatabaseFragmentBinding.inflate(layoutInflater, container, false)
+        }
+    override val TAG: String
+        get() = TODO("Not yet implemented")
 
     override val viewModel: DatabaseViewModel by activityViewModels()
 
@@ -48,12 +54,7 @@ class DatabaseFragment : AbsFragment<DatabaseFragmentBinding, UiState, Actions, 
     }
 
     private fun showBottomSheetDialog(itemId: Int) {
-        DialogHelper.showBottomSheetDialogFragment(activity!!.supportFragmentManager, itemId)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        handleUiState()
+        DialogHelper.showBottomSheetDialogFragment(requireActivity().supportFragmentManager, itemId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,37 +64,19 @@ class DatabaseFragment : AbsFragment<DatabaseFragmentBinding, UiState, Actions, 
     }
 
     private fun setViewLayoutListener() {
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                viewModel.applyAction(Actions.SetBarHeight(binding.searchView.height + 30))
-                binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(
+            object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    viewModel.applyAction(Actions.SetBarHeight(binding.searchView.height + 30))
+                    binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
             }
-        })
+        )
     }
 
     private fun setupVoiceSearch() {
         /*val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))*/
-    }
-
-    private fun handleUiState() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.getUiState().collect {
-                when (it) {
-                    UiState.Idle -> { viewModel.applyAction(Actions.LoadContent) }
-                    UiState.Loading -> { handleLoading() }
-                    is UiState.Content -> {
-                        stopLoading()
-                        fetchContent(it.content, it.height)
-                    }
-                    is UiState.Error -> {
-                        binding.errorMessage.text = it.message
-                        binding.recyclerView.gone()
-                        binding.progressBar.gone()
-                    }
-                }
-            }
-        }
     }
 
     private fun stopLoading() {
@@ -116,25 +99,24 @@ class DatabaseFragment : AbsFragment<DatabaseFragmentBinding, UiState, Actions, 
         binding.progressBar.visible()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
         adapter = null
-        //_binding = null
+        super.onDestroy()
     }
 
-    override fun collectUiState(state: UiState) {
-        TODO("Not yet implemented")
-    }
-
-    override fun collectUiEvent(event: Unit) {
-        TODO("Not yet implemented")
-    }
-
-    override val viewInflater: ViewInflater<DatabaseFragmentBinding>
-        get() = ViewInflater { layoutInflater, container, _ ->
-            DatabaseFragmentBinding.inflate(layoutInflater, container, false)
+    override fun collectUiState(state: UiState) = when (state) {
+        is UiState.Content -> {
+            stopLoading()
+            fetchContent(state.content, state.height)
         }
-    override val TAG: String
-        get() = TODO("Not yet implemented")
+        is UiState.Error -> {
+            binding.errorMessage.text = state.message
+            binding.recyclerView.gone()
+            binding.progressBar.gone()
+        }
+        UiState.Idle -> viewModel.applyAction(Actions.LoadContent)
+        UiState.Loading -> handleLoading()
+    }
+
 }
 

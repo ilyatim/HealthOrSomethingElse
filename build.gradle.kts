@@ -1,3 +1,7 @@
+plugins {
+    id("name.remal.check-dependency-updates") version "1.5.0"
+}
+
 buildscript {
     //Basic versions
     val hiltVersion = "2.42"

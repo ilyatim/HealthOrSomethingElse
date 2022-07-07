@@ -1,10 +1,9 @@
-package com.example.healtsorsomethingelse.utils
+package com.example.core.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 /**
  * Test case
